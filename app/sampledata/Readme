@@ -1,0 +1,87 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+******************{ Anas Taleeb - 1203051 }******************
+*) Activity
+    1- MainActivity
+    2- MainSign
+    3- ViewItem
+    4- Setting
+    5- Order
+    6- Love
+    7- Cart
+    8- FinishOrder
+
+*)Decortator
+    1- GridSpacingItemDecoration --> for display 2 row items in recycle view
+
+
+*) Adapter
+    1- Category Adapter
+    2- Items Adapter
+
+*) Model
+    1- Category
+    2- Item
+
+*) drawable
+    1-bac_btn2.xml
+    2-btn_main_back
+    3-button_bac.xml
+    4-cat_bac.xml
+    5-circle_shape.xml
+    6-home.xml
+    7-item_btn_bac.xml
+    8-location.xml
+    9-logo.xml
+    10-notification.xml
+    11-outline_person_24.xml
+    12-outline_shopping_bag_24.xml
+    13-search_bac.xml
+    14-arrow.xml
+    15-minus_bac.xml
+
+*) font
+    monadi.ttf
+
+*) layout
+    1- activity_main.xml
+    2- activity_main_sign.xml
+    3- activity_view_item.xml
+    4- category.xml
+    5- item.xml
+    6- activity_order.xml
+    7- activity_setting.xml
+    8- activity_cart.xml
+    9- activity_love.xml
+    10-activity_order
+
+*)values
+    *)dimen.xml --> for spacing in item recycle view
+
+    *) String.xml
+        <string name="app_des">تطبيق طبي يساعد على ايجاد ما تحتاجه من علاج و أدوية بطريقة سهلة</string>
+        <string name="hello">مرحبا أنس</string>
+        <string name="location">رام الله، بيت عور الفوقا</string>
+        <string name="search"> ابحث عن الدواء او المنتجات الأخرى</string>
+
+
+    *) color.xml
+        <color name="green1">#00C9B7</color>
+        <color name="green2">#569D93</color>
+        <color name="lightgreen">#ECFDFA</color>
+        <color name="whitedark">#E8F3F1</color>
+        <color name="silver">#919191</color>
+        <color name="silver_minus">#c4c4c4</color>
+
+*) build.gradel
+    update it by :
+
+     dependencies {
+         implementation 'com.etebarian:meow-bottom-navigation:1.2.0'
+     }
+
+     buildFeatures {
+            viewBinding true
+     }
+
+=========================================================
+

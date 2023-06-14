@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">صيدليتي</string>
+    <string name="login">تسجيل  الدخول</string>
+    <string name="sinup">انشاء حساب</string>
+    <string name="app_des">تطبيق طبي يساعد على ايجاد ما تحتاجه من علاج و أدوية بطريقة سهلة</string>
+    <string name="hello">مرحبا أنس</string>
+    <string name="location">رام الله، بيت عور الفوقا</string>
+    <string name="search"> ابحث عن الدواء او المنتجات الأخرى</string>
+    <string name="finish_order_title">تمت عملية الشراء</string>
+    <string name="finish_order_dis">سيصلك اشعار عندما يتم تسليم المنتجات لك</string>
+    <string name="finish">تهانينا</string>
+    <string name="finish1">تم تأكيد طلبك بنجاح</string>
+    <string name="back_to_main">العودة الى الصفحة الرئيسية</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="cat">الأقسام</string>
+    <string name="items">المنتجات الشائعة</string>
+    <string name="des">الوصف :</string>
+    <string name="item_name">بانادول</string>
+    <string name="item_num">10 أقراص</string>
+    <string name="item_price">60 شيكل</string>
+    <string name="num">10</string>
+    <string name="discreption">لعلاج البرد والرشخ والزكام - 20 قرص</string>
+</resources>

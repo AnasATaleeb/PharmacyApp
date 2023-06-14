@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cat_layout"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    tools:textAlignment="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cat_bac">
+
+            <ImageView
+                android:id="@+id/item_pic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/panadolextra" />
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/monadi"
+                android:text="العنوان"
+                android:textColor="@color/green2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_pic"
+                tools:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/des_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/monadi"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="الوصف"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/item_title"
+                tools:layout_editor_absoluteX="121dp"
+                tools:textAlignment="center"
+                tools:textSize="8dp" />
+
+            <TextView
+                android:id="@+id/cost_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/monadi"
+                android:text="السعر"
+                android:textColor="@color/green1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/des_item"
+                tools:textSize="10dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button"
+                android:layout_width="158dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/item_btn_bac"
+                android:fontFamily="@font/monadi"
+                android:text="أضف الى العربة"
+                android:textColor="@color/whitedark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cost_item"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
