@@ -20,4 +20,10 @@
     <string name="item_price">60 شيكل</string>
     <string name="num">10</string>
     <string name="discreption">لعلاج البرد والرشخ والزكام - 20 قرص</string>
+    <string name="profile">الحساب الشخصي</string>
+    <string name="name">الاسم : </string>
+    <string name="phone_number">رقم الهاتف : </string>
+    <string name="locatn">الموقع : </string>
+    <string name="email">الايميل : </string>
+    <string name="user">anas_tb</string>
 </resources>

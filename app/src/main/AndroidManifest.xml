@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Pharmacy"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Profile"
+            android:exported="false" />
+        <activity
             android:name=".Activity.AllItems"
             android:exported="false" />
         <activity

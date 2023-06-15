@@ -18,6 +18,7 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityMainBinding;
 import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     TextView allCategory;
     TextView allitms;
 
+    ShapeableImageView pofile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         allCategory = findViewById(R.id.all_cat);
         allitms = findViewById(R.id.all_itms);
+        pofile = findViewById(R.id.profile_img);
+
+        pofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this,Profile.class);
+                startActivity(intent);
+            }
+        });
 
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override

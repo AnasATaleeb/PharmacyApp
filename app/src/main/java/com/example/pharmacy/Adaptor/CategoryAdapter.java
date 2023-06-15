@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pharmacy.Activity.Categories;
 import com.example.pharmacy.Activity.MainSign;
 import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.CategoryBinding;
@@ -48,7 +49,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MainSign.class);
+                Intent intent = new Intent(context, Categories.class);
                 context.startActivity(intent);
             }
         });
