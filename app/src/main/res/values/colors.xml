@@ -13,4 +13,6 @@
     <color name="whitedark">#E8F3F1</color>
     <color name="silver">#919191</color>
     <color name="silver_minus">#c4c4c4</color>
+    <color name="colorPrimary">#526D82</color>
+    <color name="dark">#494747</color>
 </resources>
