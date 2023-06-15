@@ -9,14 +9,17 @@
     6- Love
     7- Cart
     8- FinishOrder
+    9- AllItems
+    10-Categories
+    11-Profile
 
 *)Decortator
     1- GridSpacingItemDecoration --> for display 2 row items in recycle view
 
-
 *) Adapter
     1- Category Adapter
     2- Items Adapter
+    3-LoveAdapter
 
 *) Model
     1- Category
@@ -38,6 +41,9 @@
     13-search_bac.xml
     14-arrow.xml
     15-minus_bac.xml
+    .
+    .
+    .
 
 *) font
     monadi.ttf
@@ -52,7 +58,13 @@
     7- activity_setting.xml
     8- activity_cart.xml
     9- activity_love.xml
-    10-activity_order
+    10-activity_order.xml
+    11-activity_all_items.xml
+    12-activity_categories.xml
+    13-activity_finis_order.xml
+    14-activity_profile.xml
+    15-love_item.xml
+    16-order_item.xml
 
 *)values
     *)dimen.xml --> for spacing in item recycle view

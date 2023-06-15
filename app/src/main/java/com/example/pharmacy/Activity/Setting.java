@@ -2,11 +2,14 @@ package com.example.pharmacy.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -22,16 +25,58 @@ public class Setting extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
     Intent intent;
 
+    CardView user,setting,love,cart;
     Switch nightModeSwitch ;
     private boolean isUserInteracting = false;
     private static final String STATE_USER_INTERACTING = "userInteracting";
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         getSupportActionBar().hide();
         bottomNavigationSetUp();
+
+        setting = findViewById(R.id.setting_card);
+        user = findViewById(R.id.user_card);
+        love = findViewById(R.id.love_card);
+        cart = findViewById(R.id.cart_card);
+
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this,Setting.class);
+                startActivity(intent);
+            }
+        });
+
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this,Profile.class);
+                startActivity(intent);
+            }
+        });
+
+        love.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this,Love.class);
+                startActivity(intent);
+            }
+        });
+
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this,Cart.class);
+                startActivity(intent);
+            }
+        });
+
+
         nightModeSwitch = findViewById(R.id.switch2);
 
         SharedPreferences sharedPref = getSharedPreferences("nightModePref", MODE_PRIVATE);
