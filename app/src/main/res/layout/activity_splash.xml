@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center"
+    android:backgroundTint="@color/whitedark"
     >
 
     <com.airbnb.lottie.LottieAnimationView
@@ -22,7 +23,7 @@
         app:lottie_cacheComposition="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/pharmacy_anim"
-        app:lottie_speed="0.8" />
+        app:lottie_speed="1" />
 
     <TextView
         android:id="@+id/label"
