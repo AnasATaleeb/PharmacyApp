@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Adaptor.CategoryAdapter;
 import com.example.pharmacy.Adaptor.ItemsAdapter;
+import com.example.pharmacy.Adaptor.ItemsAdapterDoctor;
 import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
 import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityMainBinding;
@@ -172,7 +173,7 @@ public class MainActivityDoctor extends AppCompatActivity {
 
 
         // Set your adapter and data to the RecyclerView
-        adapter = new ItemsAdapter(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
+        adapter = new ItemsAdapterDoctor(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
         recyclerView.setAdapter(adapter);
     }
 }
