@@ -1,5 +1,6 @@
 package com.example.pharmacy.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.example.pharmacy.Adaptor.ItemsAdapterDoctor;
 import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
 import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityMainBinding;
+import com.example.pharmacy.databinding.ActivityMainDoctorBinding;
 import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -29,7 +31,7 @@ import kotlin.jvm.functions.Function1;
 public class MainActivityDoctor extends AppCompatActivity {
 
     MeowBottomNavigation bottomNavigation;
-    private ActivityMainBinding binding;
+    private @NonNull ActivityMainDoctorBinding binding;
     private ArrayList<Category> categories;
     private ArrayList<Item> items;
     Intent intent;
@@ -42,7 +44,7 @@ public class MainActivityDoctor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainDoctorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 

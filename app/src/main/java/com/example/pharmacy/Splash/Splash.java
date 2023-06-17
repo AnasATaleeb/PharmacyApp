@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pharmacy.Activity.MainActivity;
+import com.example.pharmacy.Activity.MainActivityDoctor;
 import com.example.pharmacy.R;
 
 public class Splash extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class Splash extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent =  new Intent(Splash.this, MainActivity.class);
+                Intent intent =  new Intent(Splash.this, MainActivityDoctor.class);
                 startActivity(intent);
                 finish();
             }

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Pharmacy"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivityDoctor"
+            android:name=".Activity.MainActivityDoctor"
             android:exported="false" />
         <activity
             android:name=".Activity.Profile"
