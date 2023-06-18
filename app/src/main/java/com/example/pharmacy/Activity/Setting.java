@@ -111,7 +111,7 @@ public class Setting extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottomNavigation);
         bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.outline_person_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.cart));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.outline_shopping_bag_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.home));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.love));
         bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.logistics));
         bottomNavigation.show(5, true);

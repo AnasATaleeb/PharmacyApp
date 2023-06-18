@@ -1,5 +1,6 @@
 package com.example.pharmacy.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,9 +14,11 @@ import android.widget.TextView;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Adaptor.CategoryAdapter;
 import com.example.pharmacy.Adaptor.ItemsAdapter;
+import com.example.pharmacy.Adaptor.ItemsAdapterDoctor;
 import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
 import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityMainBinding;
+import com.example.pharmacy.databinding.ActivityMainDoctorBinding;
 import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -25,10 +28,10 @@ import java.util.ArrayList;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityDoctor extends AppCompatActivity {
 
     MeowBottomNavigation bottomNavigation;
-    private ActivityMainBinding binding;
+    private @NonNull ActivityMainDoctorBinding binding;
     private ArrayList<Category> categories;
     private ArrayList<Item> items;
     Intent intent;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainDoctorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         pofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,Profile.class);
+                intent = new Intent(MainActivityDoctor.this,Profile.class);
                 startActivity(intent);
             }
         });
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,Categories.class);
+                intent = new Intent(MainActivityDoctor.this,Categories.class);
                 startActivity(intent);
             }
         });
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         allitms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,AllItems.class);
+                intent = new Intent(MainActivityDoctor.this,AllItems.class);
                 startActivity(intent);
             }
         });
@@ -94,27 +97,27 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (model.getId()) {
                     case 1:
-                        intent = new Intent(MainActivity.this, Cart.class);
+                        intent = new Intent(MainActivityDoctor.this, Cart.class);
                         startActivity(intent);
                         break;
 
                     case 2:
-                        intent = new Intent(MainActivity.this, Love.class);
+                        intent = new Intent(MainActivityDoctor.this, Love.class);
                         startActivity(intent);
                         break;
 
                     case 3:
-                        intent = new Intent(MainActivity.this, MainActivity.class);
+                        intent = new Intent(MainActivityDoctor.this, MainActivity.class);
                         startActivity(intent);
                         break;
 
                     case 4:
-                        intent = new Intent(MainActivity.this, Order.class);
+                        intent = new Intent(MainActivityDoctor.this, Order.class);
                         startActivity(intent);
                         break;
 
                     case 5:
-                        Intent intent = new Intent(MainActivity.this, Setting.class);
+                        Intent intent = new Intent(MainActivityDoctor.this, Setting.class);
                         startActivity(intent);
                         break;
                 }
@@ -172,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Set your adapter and data to the RecyclerView
-        adapter = new ItemsAdapter(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
+        adapter = new ItemsAdapterDoctor(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
         recyclerView.setAdapter(adapter);
     }
 }
