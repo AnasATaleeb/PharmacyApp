@@ -1,10 +1,12 @@
 package com.example.pharmacy.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -14,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.pharmacy.R;
 
 public class Login extends AppCompatActivity {
-    private Animation slideDownAnimation;
     private TextView login_title;
     private EditText editEmail, editPassword;
     private Button btnLogin;
@@ -22,8 +23,10 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
+        loadAnimation();
         // Call init() function to initialize all the variables
         init();
 
@@ -36,9 +39,13 @@ public class Login extends AppCompatActivity {
 
     private void loadAnimation(){
         // to start the animation for the label
-        slideDownAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_animation);
         login_title = findViewById(R.id.login_title);
+        ImageView login_img = findViewById(R.id.login_img);
+
+        Animation slideDownAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_down);
         login_title.setAnimation(slideDownAnimation);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_animation);
+        login_img.setAnimation(fadeIn);
     }
     private void init() {
         editEmail = findViewById(R.id.editEmail);
@@ -53,6 +60,9 @@ public class Login extends AppCompatActivity {
             String password = editPassword.getText().toString();
             //todo Call login() function to login the user
             login();
+            Intent intent = new Intent(Login.this,MainActivityDoctor.class);
+            startActivity(intent);
+            finish();
         });
     }
 

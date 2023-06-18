@@ -45,10 +45,10 @@
             android:exported="false" />
         <activity
             android:name=".Activity.MainSign"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="false"/>
         <activity
             android:name=".Activity.Login"
             android:exported="false" />
@@ -57,7 +57,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

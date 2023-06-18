@@ -7,58 +7,63 @@
     tools:context=".Activity.Login">
 
     <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/monadi"
-        android:text="اسم المستخدم :"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
-
-    <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/monadi"
         android:text="كلمة المرور :"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/editPassword"
-        app:layout_constraintEnd_toEndOf="@+id/textView28"
-        app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/editPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/editEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/monadi"
+        android:text="اسم المستخدم :"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/editEmail"
+        app:layout_constraintTop_toBottomOf="@+id/login_img" />
 
     <EditText
         android:id="@+id/editEmail"
-        android:layout_width="227dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/cat_bac"
+        android:fontFamily="@font/monadi"
         android:hint="اسم المستخدم او البريد الالكتروني"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/textView28"
-        app:layout_constraintEnd_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/textView28" />
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editPassword"
-        android:layout_width="227dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/cat_bac"
         android:ems="10"
+        android:fontFamily="@font/monadi"
         android:hint="كلمة المرور"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/editEmail"
-        app:layout_constraintStart_toStartOf="@+id/editEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView30"
+        app:layout_constraintTop_toBottomOf="@+id/textView30"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
         android:layout_width="227dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_bac"
         android:fontFamily="@font/monadi"
         android:text="تسجيل الدخول"
         android:textColor="@color/whitedark"
@@ -67,7 +72,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword"
-        tools:background="@drawable/button_bac"
         tools:elevation="10dp" />
 
     <Switch
@@ -84,12 +88,12 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/login_img"
         android:layout_width="220dp"
         android:layout_height="220dp"
-        android:layout_marginTop="50dp"
-        android:elevation="10dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="شعار لتسجيل الدخول"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +104,7 @@
         android:id="@+id/login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/monadi"
         android:text="أهلا بعودتك ! 😊"
         android:textColor="@color/green2"
