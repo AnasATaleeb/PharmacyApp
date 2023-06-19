@@ -176,36 +176,47 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginEnd="-20dp"
                         android:fontFamily="@font/monadi"
                         android:text="@string/app_name"
                         android:textColor="@color/whitedark"
                         android:textSize="24dp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView12"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:id="@+id/imageView12"
                         android:layout_width="200dp"
-                        android:layout_height="120dp"
-                        android:layout_marginStart="-5dp"
+                        android:layout_height="130dp"
+                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/p" />
+                        app:srcCompat="@drawable/telemedicine" />
 
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginTop="-25dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="@font/monadi"
-                        android:text="ع تلفوني"
+                        android:text="تلفوني"
                         android:textColor="@color/whitedark"
                         android:textSize="24dp"
+                        app:layout_constraintEnd_toStartOf="@+id/textView31"
+                        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="32dp"
+                        android:text=" ̨؏ "
+                        android:textColor="@android:color/holo_red_dark"
                         app:layout_constraintEnd_toEndOf="@+id/textView4"
-                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView4"
+                        tools:textSize="34sp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
