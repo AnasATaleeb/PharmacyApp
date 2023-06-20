@@ -5,4 +5,8 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="spinner_style">
+        <item name="android:background">@drawable/background_spinner</item>
+        <item name="background">@drawable/border_spinner</item>
+    </style>
 </resources>

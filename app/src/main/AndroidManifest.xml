@@ -65,6 +65,15 @@
             android:name=".Activity.Login"
             android:exported="false" />
         <activity
+            android:name=".Activity.Shipment"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Payment"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Conformation"
+            android:exported="false" />
+        <activity
             android:name=".Splash.Splash"
             android:exported="true">
             <intent-filter>
