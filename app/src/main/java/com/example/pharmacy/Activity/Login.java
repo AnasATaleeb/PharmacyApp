@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pharmacy.Activity.DeliveryActivities.MainDelivery;
+import com.example.pharmacy.Activity.DoctorActivities.MainActivityDoctor;
 import com.example.pharmacy.R;
 
 public class Login extends AppCompatActivity {
@@ -60,7 +62,7 @@ public class Login extends AppCompatActivity {
             String password = editPassword.getText().toString();
             //todo Call login() function to login the user
             login();
-            Intent intent = new Intent(Login.this,MainActivityDoctor.class);
+            Intent intent = new Intent(Login.this, MainActivityDoctor.class);
             startActivity(intent);
             finish();
         });

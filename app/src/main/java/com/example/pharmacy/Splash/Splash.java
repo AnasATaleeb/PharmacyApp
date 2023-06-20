@@ -3,7 +3,6 @@ package com.example.pharmacy.Splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -11,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.pharmacy.Activity.MainActivity;
-import com.example.pharmacy.Activity.MainActivityDoctor;
 import com.example.pharmacy.Activity.MainSign;
 import com.example.pharmacy.R;
 

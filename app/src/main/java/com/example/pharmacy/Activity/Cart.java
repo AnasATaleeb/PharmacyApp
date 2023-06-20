@@ -56,7 +56,7 @@ public class Cart extends AppCompatActivity {
                         break;
 
                     case 4:
-                        intent = new Intent(Cart.this, Order.class);
+                        intent = new Intent(Cart.this, OrderActivity.class);
                         startActivity(intent);
                         break;
 

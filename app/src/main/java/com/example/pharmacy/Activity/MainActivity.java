@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        intent = new Intent(MainActivity.this, Order.class);
+                        intent = new Intent(MainActivity.this, OrderActivity.class);
                         startActivity(intent);
                         break;
 

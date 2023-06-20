@@ -1,4 +1,4 @@
-package com.example.pharmacy.Activity;
+package com.example.pharmacy.Activity.DoctorActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +12,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.pharmacy.Activity.AllItems;
+import com.example.pharmacy.Activity.Cart;
+import com.example.pharmacy.Activity.Categories;
+import com.example.pharmacy.Activity.Love;
+import com.example.pharmacy.Activity.MainActivity;
+import com.example.pharmacy.Activity.OrderActivity;
+import com.example.pharmacy.Activity.Profile;
+import com.example.pharmacy.Activity.Setting;
 import com.example.pharmacy.Adaptor.CategoryAdapter;
-import com.example.pharmacy.Adaptor.ItemsAdapter;
 import com.example.pharmacy.Adaptor.ItemsAdapterDoctor;
 import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
 import com.example.pharmacy.R;
-import com.example.pharmacy.databinding.ActivityMainBinding;
 import com.example.pharmacy.databinding.ActivityMainDoctorBinding;
 import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
@@ -55,7 +61,7 @@ public class MainActivityDoctor extends AppCompatActivity {
         pofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivityDoctor.this,Profile.class);
+                intent = new Intent(MainActivityDoctor.this, Profile.class);
                 startActivity(intent);
             }
         });
@@ -63,7 +69,7 @@ public class MainActivityDoctor extends AppCompatActivity {
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivityDoctor.this,Categories.class);
+                intent = new Intent(MainActivityDoctor.this, Categories.class);
                 startActivity(intent);
             }
         });
@@ -71,7 +77,7 @@ public class MainActivityDoctor extends AppCompatActivity {
         allitms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivityDoctor.this,AllItems.class);
+                intent = new Intent(MainActivityDoctor.this, AllItems.class);
                 startActivity(intent);
             }
         });
@@ -83,12 +89,10 @@ public class MainActivityDoctor extends AppCompatActivity {
 
     private void bottomNavigationSetUp() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
-        bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.outline_person_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.cart));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.home));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.love));
-        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.logistics));
-        bottomNavigation.show(3, true);
+        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.outline_person_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.home));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.tracking));
+        bottomNavigation.show(2, true);
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -97,27 +101,17 @@ public class MainActivityDoctor extends AppCompatActivity {
 
                 switch (model.getId()) {
                     case 1:
-                        intent = new Intent(MainActivityDoctor.this, Cart.class);
+                        intent = new Intent(MainActivityDoctor.this, SettingDoctors.class);
                         startActivity(intent);
                         break;
 
                     case 2:
-                        intent = new Intent(MainActivityDoctor.this, Love.class);
+                        intent = new Intent(MainActivityDoctor.this, MainActivityDoctor.class);
                         startActivity(intent);
                         break;
 
                     case 3:
-                        intent = new Intent(MainActivityDoctor.this, MainActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case 4:
-                        intent = new Intent(MainActivityDoctor.this, Order.class);
-                        startActivity(intent);
-                        break;
-
-                    case 5:
-                        Intent intent = new Intent(MainActivityDoctor.this, Setting.class);
+                        intent = new Intent(MainActivityDoctor.this, OrderStatus.class);
                         startActivity(intent);
                         break;
                 }

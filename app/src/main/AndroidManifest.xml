@@ -14,7 +14,19 @@
         android:theme="@style/Theme.Pharmacy"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.MainActivityDoctor"
+            android:name=".Activity.DoctorActivities.OrderStatus"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DoctorActivities.SettingDoctors"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeliveryActivities.SettingDelivery"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeliveryActivities.MainDelivery"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DoctorActivities.MainActivityDoctor"
             android:exported="false" />
         <activity
             android:name=".Activity.Profile"
@@ -35,7 +47,7 @@
             android:name=".Activity.Love"
             android:exported="false" />
         <activity
-            android:name=".Activity.Order"
+            android:name=".Activity.OrderActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.Setting"
@@ -48,7 +60,7 @@
             android:exported="true" />
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Activity.Login"
             android:exported="false" />
@@ -57,6 +69,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

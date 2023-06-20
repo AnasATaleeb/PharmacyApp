@@ -11,7 +11,7 @@ import com.example.pharmacy.R;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-public class Order extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity {
 
     MeowBottomNavigation bottomNavigation;
     Intent intent;
@@ -40,27 +40,27 @@ public class Order extends AppCompatActivity {
 
                 switch (model.getId()) {
                     case 1:
-                        intent = new Intent(Order.this, Cart.class);
+                        intent = new Intent(OrderActivity.this, Cart.class);
                         startActivity(intent);
                         break;
 
                     case 2:
-                        intent = new Intent(Order.this, Love.class);
+                        intent = new Intent(OrderActivity.this, Love.class);
                         startActivity(intent);
                         break;
 
                     case 3:
-                        intent = new Intent(Order.this, MainActivity.class);
+                        intent = new Intent(OrderActivity.this, MainActivity.class);
                         startActivity(intent);
                         break;
 
                     case 4:
-                        intent = new Intent(Order.this, Order.class);
+                        intent = new Intent(OrderActivity.this, OrderActivity.class);
                         startActivity(intent);
                         break;
 
                     case 5:
-                        Intent intent = new Intent(Order.this, Setting.class);
+                        Intent intent = new Intent(OrderActivity.this, Setting.class);
                         startActivity(intent);
                         break;
                 }
