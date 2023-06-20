@@ -132,7 +132,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
-                    android:background="@drawable/bac_btn2"
+                    android:background="@drawable/gradient_color"
                     app:layout_constraintEnd_toEndOf="@+id/search"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/search"

@@ -311,7 +311,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@drawable/bac_btn2"
+        android:background="@drawable/gradient_color"
         android:drawableEnd="@drawable/baseline_logout_24"
         android:fontFamily="@font/monadi"
         android:text="تسجيل الخروج"
