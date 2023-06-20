@@ -20,6 +20,7 @@ public class Shipment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_shipment);
+        getSupportActionBar().hide();
 
         // 1. Initialize the UI components
         init();
@@ -46,6 +47,8 @@ public class Shipment extends AppCompatActivity {
                 return;
             }
             Intent intent = new Intent(Shipment.this, Payment.class);
+            startActivity(intent);
+
         });
     }
 }

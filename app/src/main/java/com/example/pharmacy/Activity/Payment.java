@@ -17,6 +17,7 @@ public class Payment extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_payment);
+        getSupportActionBar().hide();
 
         // intilize the button
         btn = findViewById(R.id.btn_next);
@@ -24,6 +25,7 @@ public class Payment extends AppCompatActivity {
         // set on click listener
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(Payment.this, MainActivity.class);
+            startActivity(intent);
         });
     }
 

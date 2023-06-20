@@ -7,11 +7,22 @@
     tools:context=".Activity.Conformation"
     >
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bac_main"
+        android:elevation="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/monadi"
         android:text="الدفع"
         android:textColor="@color/green2"
@@ -147,13 +158,15 @@
         android:id="@+id/btn_next"
         android:layout_width="245dp"
         android:layout_height="46dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/gradient_color"
         android:fontFamily="@font/monadi"
         android:text="التـالـي"
         android:textColor="@color/whitedark"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="501dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:textSize="18sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

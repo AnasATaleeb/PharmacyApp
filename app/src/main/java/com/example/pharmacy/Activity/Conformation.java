@@ -15,6 +15,7 @@ private Button btn;
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_confirmation);
+        getSupportActionBar().hide();
 
         // intilize the button
         btn = findViewById(R.id.btn_next);
@@ -22,7 +23,8 @@ private Button btn;
         // set on click listener
         btn.setOnClickListener(v -> {
             //todo anas
-            Intent intent = new Intent(Conformation.this, MainActivity.class);
+            Intent intent = new Intent(Conformation.this, FinishOrder.class);
+            startActivity(intent);
             finish();
         });
     }
