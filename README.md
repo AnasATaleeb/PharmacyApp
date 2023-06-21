@@ -8,4 +8,6 @@ We present an innovative mobile application designed to assist individuals in lo
 https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/511990e4-67b5-4487-aee4-62c78e0aa1b1
 
 ## Database Design
-
+<p align="center">
+   <img src="https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/5633880a-ab15-4472-89af-fba0d29e02d0" alt="5"><br>
+</p>
