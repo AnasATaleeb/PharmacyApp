@@ -9,5 +9,5 @@ https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/511990e4-67b5-4487-a
 
 ## Database Design
 <p align="center">
-   <img src="https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/5633880a-ab15-4472-89af-fba0d29e02d0" alt="5"><br>
+   <img src="https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/17e4bea5-7a86-41a2-b5a0-a120fec8e3d5" alt="5"><br>
 </p>
