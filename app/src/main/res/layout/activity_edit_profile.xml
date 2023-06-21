@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/editText_name"
+        android:layout_width="312dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/border_item_cardview"
+        android:gravity="center|right"
+        android:hint="الاسم"
+        android:padding="10dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:fontFamily="@font/monadi" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/editText_phone"
+        android:layout_width="312dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/border_item_cardview"
+        android:fontFamily="@font/monadi"
+        android:gravity="center|right"
+        android:hint="رقم الهاتف"
+        android:padding="10dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_password"
+        app:layout_constraintEnd_toEndOf="@+id/editText_email"
+        app:layout_constraintStart_toStartOf="@+id/editText_email" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/editText_email"
+        android:layout_width="312dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/border_item_cardview"
+        android:fontFamily="@font/monadi"
+        android:gravity="center|right"
+        android:hint="البريد الالكتروني"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_phone"
+        app:layout_constraintEnd_toEndOf="@+id/editText_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText_name"
+        tools:textSize="14sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/editText_password"
+        android:layout_width="312dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/border_item_cardview"
+        android:fontFamily="@font/monadi"
+        android:gravity="center|right"
+        android:hint="كلمة المرور"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_adress"
+        app:layout_constraintEnd_toEndOf="@+id/editText_phone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText_phone"
+        tools:textSize="14sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/editText_adress"
+        android:layout_width="312dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="162dp"
+        android:background="@drawable/border_item_cardview"
+        android:fontFamily="@font/monadi"
+        android:gravity="center|right"
+        android:padding="10dp"
+        android:text="العنوان"
+        android:textColor="@color/dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editText_password"
+        app:layout_constraintStart_toStartOf="@+id/editText_password"
+        app:layout_constraintTop_toBottomOf="@+id/iv_backArrow"
+        tools:textSize="14sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/btn_save"
+        android:layout_width="245dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/gradient_color"
+        android:fontFamily="@font/monadi"
+        android:text="حفظ"
+        android:textColor="@color/whitedark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:layout_marginBottom="26dp"
+        android:fontFamily="@font/monadi"
+        android:text="تعديل الحساب"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/profile_img"
+        app:layout_constraintEnd_toEndOf="@+id/profile_img"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/profile_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="103dp"
+        android:background="@drawable/round_button"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_img"
+        app:layout_constraintStart_toStartOf="@+id/profile_img"
+        app:layout_constraintTop_toTopOf="@+id/profile_img"
+        app:layout_constraintVertical_bias="0.118"
+        app:srcCompat="@drawable/photo_32" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_img"
+        android:layout_width="129dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="519dp"
+
+        android:src="@drawable/anas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        app:shapeAppearanceOverlay="@style/circular"
+        app:strokeColor="@color/whitedark"
+        app:strokeWidth="1dp"
+        tools:elevation="2dp" />
+
+    <ImageView
+        android:id="@+id/iv_backArrow"
+        android:layout_width="39dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="457dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_adress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

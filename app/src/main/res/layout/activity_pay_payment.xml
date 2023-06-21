@@ -6,33 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Payment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/bac_main"
-        android:elevation="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="440dp"
         android:fontFamily="@font/monadi"
         android:text="الدفع"
         android:textColor="@color/green2"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/tv_backArrow"
         android:layout_width="19dp"
         android:layout_height="0dp"
         android:layout_marginStart="130dp"
@@ -45,6 +37,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/back_arrow" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="412dp"
+        android:layout_height="21dp"
+        android:layout_marginBottom="212dp"
+        android:background="@drawable/bac_main"
+        android:elevation="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewShip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -171,18 +177,17 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="245dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="82dp"
-        android:layout_marginEnd="84dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="184dp"
         android:background="@drawable/gradient_color"
         android:fontFamily="@font/monadi"
-
         android:text="التـالـي"
         android:textColor="@color/whitedark"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView"
+        app:layout_constraintTop_toBottomOf="@+id/textView32"
         tools:textSize="18sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

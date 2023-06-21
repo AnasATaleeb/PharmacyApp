@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/tv_backArrow"
         android:layout_width="19dp"
         android:layout_height="0dp"
         android:layout_marginStart="130dp"
@@ -171,13 +171,14 @@
         app:layout_constraintEnd_toEndOf="@+id/edit_postal" />
 
     <EditText
-        android:hint="الرمز البريدي"
         android:id="@+id/edit_postal"
         android:layout_width="343dp"
         android:layout_height="0dp"
         android:layout_marginBottom="295dp"
         android:background="@drawable/border_spinner"
         android:ems="10"
+        android:fontFamily="@font/monadi"
+        android:hint="الرمز البريدي"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/spinner_city"
