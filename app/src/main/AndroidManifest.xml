@@ -68,6 +68,9 @@
             android:name=".Activity.Shipment"
             android:exported="false" />
         <activity
+            android:name=".Activity.EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Payment"
             android:exported="false" />
         <activity
