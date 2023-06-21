@@ -1,5 +1,7 @@
 package com.example.pharmacy.model;
 
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 
 public class Order {
@@ -52,5 +54,13 @@ public class Order {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

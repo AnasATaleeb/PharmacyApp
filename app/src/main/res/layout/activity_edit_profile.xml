@@ -5,6 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bac_main"
+        android:elevation="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editText_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -33,6 +44,7 @@
         android:fontFamily="@font/monadi"
         android:gravity="center|right"
         android:hint="رقم الهاتف"
+        android:inputType="number"
         android:padding="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/editText_email"
@@ -50,6 +62,7 @@
         android:fontFamily="@font/monadi"
         android:gravity="center|right"
         android:hint="البريد الالكتروني"
+        android:inputType="textEmailAddress"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="@+id/editText_name"
         app:layout_constraintHorizontal_bias="0.0"
@@ -68,6 +81,7 @@
         android:fontFamily="@font/monadi"
         android:gravity="center|right"
         android:hint="كلمة المرور"
+        android:inputType="textPassword"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="@+id/editText_phone"
         app:layout_constraintHorizontal_bias="0.0"
@@ -113,7 +127,7 @@
         android:id="@+id/textView40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="26dp"
         android:fontFamily="@font/monadi"
         android:text="تعديل الحساب"
@@ -123,7 +137,7 @@
         app:layout_constraintEnd_toEndOf="@+id/profile_img"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/profile_img"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="0.297" />
 
     <ImageButton
@@ -161,12 +175,12 @@
         android:id="@+id/iv_backArrow"
         android:layout_width="39dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="457dp"
         app:layout_constraintBottom_toTopOf="@+id/editText_adress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:srcCompat="@drawable/arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

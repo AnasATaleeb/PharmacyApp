@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
             String password = editPassword.getText().toString();
             //todo Call login() function to login the user
             login();
-            Intent intent = new Intent(Login.this, EditProfile.class);
+            Intent intent = new Intent(Login.this, Conformation.class);
             startActivity(intent);
             finish();
         });

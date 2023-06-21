@@ -7,8 +7,9 @@ public class Item {
     private String title;
     private String discreption;
     private int pic;
-
     private double price;
+
+    private int quantity;
 
     public static final ArrayList<Item> categories = new ArrayList<>();
 
@@ -18,6 +19,14 @@ public class Item {
         this.discreption = discreption;
         this.pic = pic;
         this.price = price;
+    }
+
+    public Item(String title, String discreption, int pic, double price, int quantity) {
+        this.title = title;
+        this.discreption = discreption;
+        this.pic = pic;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public static ArrayList<Item> getCategory() {
@@ -54,5 +63,13 @@ public class Item {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
