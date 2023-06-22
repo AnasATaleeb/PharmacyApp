@@ -13,13 +13,8 @@ import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.AllItems;
-import com.example.pharmacy.Activity.Cart;
 import com.example.pharmacy.Activity.Categories;
-import com.example.pharmacy.Activity.Love;
-import com.example.pharmacy.Activity.MainActivity;
-import com.example.pharmacy.Activity.OrderActivity;
 import com.example.pharmacy.Activity.Profile;
-import com.example.pharmacy.Activity.Setting;
 import com.example.pharmacy.Adaptor.CategoryAdapter;
 import com.example.pharmacy.Adaptor.ItemsAdapterDoctor;
 import com.example.pharmacy.Decorator.GridSpacingItemDecoration;

@@ -1,28 +1,16 @@
-package com.example.pharmacy.Activity;
+package com.example.pharmacy.Activity.Customer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pharmacy.Activity.DeliveryActivities.MainDelivery;
-import com.example.pharmacy.Adaptor.CategoryAdapter;
 import com.example.pharmacy.Adaptor.ConformationItemAdapter;
-import com.example.pharmacy.Adaptor.ItemsAdapter;
-import com.example.pharmacy.Adaptor.OrderAdapter;
-import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
 import com.example.pharmacy.R;
-import com.example.pharmacy.databinding.ActivityMainBinding;
 import com.example.pharmacy.databinding.ActivityPayConfirmationBinding;
-import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
 

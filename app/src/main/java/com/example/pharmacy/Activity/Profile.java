@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.pharmacy.Activity.Customer.MainActivity;
 import com.example.pharmacy.R;
 
 public class Profile extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class Profile extends AppCompatActivity {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile.this,MainActivity.class);
+                Intent intent = new Intent(Profile.this, MainActivity.class);
                 startActivity(intent);
             }
         });

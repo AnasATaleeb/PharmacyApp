@@ -1,4 +1,4 @@
-package com.example.pharmacy.Activity;
+package com.example.pharmacy.Activity.Customer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Switch;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.R;
 
 import kotlin.Unit;

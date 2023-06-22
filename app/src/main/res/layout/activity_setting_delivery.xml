@@ -5,7 +5,7 @@
     android:id="@+id/s"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Setting">
+    tools:context=".Activity.Customer.Setting">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

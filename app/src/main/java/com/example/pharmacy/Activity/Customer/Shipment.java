@@ -1,4 +1,4 @@
-package com.example.pharmacy.Activity;
+package com.example.pharmacy.Activity.Customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,9 +43,9 @@ public class Shipment extends AppCompatActivity {
                 address.setError("Please enter your address");
                 return;
             }
-            if (spinner.getSelectedItem().toString().equals("Select City")) {
-                return;
-            }
+//            if (spinner.getSelectedItem().toString().equals("Select City")) {
+                //return;
+     //       }
             Intent intent = new Intent(Shipment.this, Payment.class);
             startActivity(intent);
 

@@ -1,4 +1,4 @@
-package com.example.pharmacy.Activity;
+package com.example.pharmacy.Activity.Customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ public class Payment extends AppCompatActivity {
 
         // set on click listener
         btn.setOnClickListener(v -> {
-            Intent intent = new Intent(Payment.this, MainActivity.class);
+            Intent intent = new Intent(Payment.this, Conformation.class);
             startActivity(intent);
         });
     }

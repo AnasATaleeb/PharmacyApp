@@ -1,7 +1,6 @@
 package com.example.pharmacy.Adaptor;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,6 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
-import com.example.pharmacy.Activity.Love;
-import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Item;
 

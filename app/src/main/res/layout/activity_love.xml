@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whitedark"
-    tools:context=".Activity.Love">
+    tools:context=".Activity.Customer.Love">
 
     <ListView
         android:id="@+id/love_list"

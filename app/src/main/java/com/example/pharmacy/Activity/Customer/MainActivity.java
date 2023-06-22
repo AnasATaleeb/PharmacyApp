@@ -1,4 +1,4 @@
-package com.example.pharmacy.Activity;
+package com.example.pharmacy.Activity.Customer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.pharmacy.Activity.AllItems;
+import com.example.pharmacy.Activity.Categories;
+import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.Adaptor.CategoryAdapter;
 import com.example.pharmacy.Adaptor.ItemsAdapter;
 import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         pofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,Profile.class);
+                intent = new Intent(MainActivity.this, Profile.class);
                 startActivity(intent);
             }
         });
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,Categories.class);
+                intent = new Intent(MainActivity.this, Categories.class);
                 startActivity(intent);
             }
         });
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         allitms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,AllItems.class);
+                intent = new Intent(MainActivity.this, AllItems.class);
                 startActivity(intent);
             }
         });

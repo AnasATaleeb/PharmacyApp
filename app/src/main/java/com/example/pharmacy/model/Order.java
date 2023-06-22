@@ -12,6 +12,10 @@ public class Order {
 
     private String name;
 
+    private String location;
+
+    private String status;
+
     public Order() {
 
     }
@@ -22,6 +26,32 @@ public class Order {
         this.patientId = patientId;
         this.items = items;
         this.totalPrice = totalPrice;
+    }
+
+    public Order(int orderId, int patientId, ArrayList<Item> items, double totalPrice, String name, String location, String status) {
+        this.orderId = orderId;
+        this.patientId = patientId;
+        this.items = items;
+        this.totalPrice = totalPrice;
+        this.name = name;
+        this.location = location;
+        this.status = status;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getOrderId() {
