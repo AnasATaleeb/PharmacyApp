@@ -1,6 +1,7 @@
 package com.example.pharmacy.Adaptor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +10,23 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 
 import com.example.pharmacy.R;
-import com.example.pharmacy.model.Item;
+import com.example.pharmacy.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoveAdapter extends ArrayAdapter<Item> {
+public class OrderStateAdapter extends ArrayAdapter<Order> {
     private Context ct;
-    private ArrayList<Item> arr = new ArrayList<>();
+    private ArrayList<Order> arr = new ArrayList<>();
 
-    public LoveAdapter(@NonNull Context context, int resource, @NonNull List<Item> list){
+    public OrderStateAdapter(@NonNull Context context, int resource, @NonNull List<Order> list){
         super(context,resource,list);
         this.ct = context;
         this.arr= new ArrayList<>(list);
+    }
+
+    public OrderStateAdapter(@NonNull Context context, int resource) {
+        super(context, resource);
     }
 
     @NonNull
@@ -32,7 +37,7 @@ public class LoveAdapter extends ArrayAdapter<Item> {
             convertView = inflater.inflate(R.layout.love_item,null);
         }
         if (arr.size()>0){
-            Item item = arr.get(position);
+            Order item = arr.get(position);
 
         }
         return convertView;

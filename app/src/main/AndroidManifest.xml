@@ -14,7 +14,25 @@
         android:theme="@style/Theme.Pharmacy"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.MainActivityDoctor"
+            android:name=".Activity.Customer.ViewOrderDetailsCus"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DoctorActivities.ViewOrderDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DoctorActivities.OrderStatus"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DoctorActivities.SettingDoctors"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeliveryActivities.SettingDelivery"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeliveryActivities.MainDelivery"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DoctorActivities.MainActivityDoctor"
             android:exported="false" />
         <activity
             android:name=".Activity.Profile"
@@ -26,19 +44,19 @@
             android:name=".Activity.Categories"
             android:exported="false" />
         <activity
-            android:name=".Activity.FinishOrder"
+            android:name=".Activity.Customer.FinishOrder"
             android:exported="false" />
         <activity
-            android:name=".Activity.Cart"
+            android:name=".Activity.Customer.Cart"
             android:exported="false" />
         <activity
-            android:name=".Activity.Love"
+            android:name=".Activity.Customer.Love"
             android:exported="false" />
         <activity
-            android:name=".Activity.Order"
+            android:name=".Activity.Customer.OrderActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Setting"
+            android:name=".Activity.Customer.Setting"
             android:exported="false" />
         <activity
             android:name=".Activity.ViewItem"
@@ -47,16 +65,29 @@
             android:name=".Activity.MainSign"
             android:exported="true" />
         <activity
-            android:name=".Activity.MainActivity"
-            android:exported="false"/>
+            android:name=".Activity.Customer.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.Login"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Customer.Shipment"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Customer.Payment"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Customer.Conformation"
             android:exported="false" />
         <activity
             android:name=".Splash.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

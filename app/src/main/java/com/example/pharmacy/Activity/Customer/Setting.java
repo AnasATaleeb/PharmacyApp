@@ -1,4 +1,4 @@
-package com.example.pharmacy.Activity;
+package com.example.pharmacy.Activity.Customer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -7,16 +7,13 @@ import androidx.cardview.widget.CardView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.R;
-
-import java.util.Objects;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -55,7 +52,7 @@ public class Setting extends AppCompatActivity {
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(Setting.this,Profile.class);
+                intent = new Intent(Setting.this, Profile.class);
                 startActivity(intent);
             }
         });
@@ -63,7 +60,7 @@ public class Setting extends AppCompatActivity {
         love.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(Setting.this,Love.class);
+                intent = new Intent(Setting.this, Love.class);
                 startActivity(intent);
             }
         });
@@ -71,7 +68,7 @@ public class Setting extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(Setting.this,Cart.class);
+                intent = new Intent(Setting.this, Cart.class);
                 startActivity(intent);
             }
         });
@@ -138,7 +135,7 @@ public class Setting extends AppCompatActivity {
                         break;
 
                     case 4:
-                        intent = new Intent(Setting.this, Order.class);
+                        intent = new Intent(Setting.this, OrderActivity.class);
                         startActivity(intent);
                         break;
 

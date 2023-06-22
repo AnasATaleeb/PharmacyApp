@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.pharmacy.Activity.Customer.MainActivity;
 import com.example.pharmacy.R;
 
 public class ViewItem extends AppCompatActivity {
