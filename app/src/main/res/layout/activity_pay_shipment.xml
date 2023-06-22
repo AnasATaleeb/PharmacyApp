@@ -7,6 +7,107 @@
     tools:context=".Activity.Customer.Shipment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView32">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/accept" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/monadi"
+            android:text="الشحن"
+            android:textColor="@color/green2"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView8"
+            app:layout_constraintStart_toEndOf="@+id/imageView17"
+            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView21"
+            app:layout_constraintEnd_toStartOf="@+id/imageView21"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView21"
+            app:srcCompat="@drawable/accept_gray" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/monadi"
+            android:text="تأكيد الطلب"
+            android:textColor="@color/silver"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView22"
+            app:layout_constraintStart_toStartOf="@+id/imageView22"
+            app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+
+        <ImageView
+            android:id="@+id/imageView21"
+            android:layout_width="80dp"
+            android:layout_height="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView20"
+            app:layout_constraintEnd_toStartOf="@+id/imageView20"
+            app:layout_constraintTop_toTopOf="@+id/imageView20"
+            app:srcCompat="@drawable/silver_line" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/monadi"
+            android:text="الدفع"
+            android:textColor="@color/silver"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView17"
+            app:layout_constraintStart_toEndOf="@+id/imageView21"
+            app:layout_constraintTop_toBottomOf="@+id/imageView20" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="80dp"
+            android:layout_height="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+            app:layout_constraintEnd_toStartOf="@+id/imageView8"
+            app:layout_constraintTop_toTopOf="@+id/imageView8"
+            app:srcCompat="@drawable/green2_line" />
+
+        <ImageView
+            android:id="@+id/imageView20"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+            app:layout_constraintEnd_toStartOf="@+id/imageView17"
+            app:layout_constraintTop_toTopOf="@+id/imageView17"
+            app:srcCompat="@drawable/accept_gray" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -23,13 +124,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="322dp"
         android:fontFamily="@font/monadi"
         android:text="الدفع"
         android:textColor="@color/green2"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/edit_postal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,153 +137,52 @@
         android:id="@+id/tv_backArrow"
         android:layout_width="19dp"
         android:layout_height="0dp"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="164dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView37"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView32"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/back_arrow" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="35dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="87dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView37"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/accept" />
-
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="13dp"
-        android:fontFamily="@font/monadi"
-        android:text="الشحن"
-        android:textColor="@color/green2"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView35"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
-    <ImageView
-        android:id="@+id/imageView22"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView21"
-        app:layout_constraintEnd_toStartOf="@+id/imageView21"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView21"
-        app:srcCompat="@drawable/accept_gray" />
-
-    <TextView
-        android:id="@+id/textView36"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/monadi"
-        android:text="تأكيد الطلب"
-        android:textColor="@color/silver"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView22" />
-
-    <ImageView
-        android:id="@+id/imageView21"
-        android:layout_width="80dp"
-        android:layout_height="3dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView20"
-        app:layout_constraintEnd_toStartOf="@+id/imageView20"
-        app:layout_constraintTop_toTopOf="@+id/imageView20"
-        app:srcCompat="@drawable/silver_line" />
-
-    <TextView
-        android:id="@+id/textView35"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:fontFamily="@font/monadi"
-        android:text="الدفع"
-        android:textColor="@color/silver"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView33"
-        app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintTop_toBottomOf="@+id/imageView20" />
-
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="80dp"
-        android:layout_height="3dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintEnd_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:srcCompat="@drawable/green2_line" />
-
-    <ImageView
-        android:id="@+id/imageView20"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView17"
-        app:layout_constraintEnd_toStartOf="@+id/imageView17"
-        app:layout_constraintTop_toTopOf="@+id/imageView17"
-        app:srcCompat="@drawable/accept_gray" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView32"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/back_arrow" />
 
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="481dp"
         android:fontFamily="@font/monadi"
         android:text="عنوان الدفع"
         android:textColor="@color/dark"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
     <TextView
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/monadi"
         android:text="الرمز البريدي"
         android:textColor="@color/dark"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/edit_postal"
-        app:layout_constraintEnd_toEndOf="@+id/edit_postal" />
+        app:layout_constraintEnd_toEndOf="@+id/spinner_city"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_city" />
 
     <EditText
         android:id="@+id/edit_postal"
         android:layout_width="343dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="295dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/border_spinner"
         android:ems="10"
         android:fontFamily="@font/monadi"
         android:hint="الرمز البريدي"
         android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/spinner_city"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/spinner_city"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+        app:layout_constraintEnd_toEndOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
     <Spinner
         android:id="@+id/spinner_city"
@@ -204,7 +202,7 @@
         android:id="@+id/btn_next"
         android:layout_width="245dp"
         android:layout_height="46dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/gradient_color"
         android:fontFamily="@font/monadi"
         android:text="التـالـي"
