@@ -113,12 +113,14 @@ public class Login extends AppCompatActivity {
             mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    Log.v("login", "login success");
+                    Toast toast = Toast.makeText(Login.this, "Login stored Success", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d("login", "login Fail");
+                    Toast toast = Toast.makeText(Login.this, "Login stored Failed!", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             });
 
