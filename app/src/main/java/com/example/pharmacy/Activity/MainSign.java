@@ -37,7 +37,8 @@ public class MainSign extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainSign.this, Register.class);
+                startActivity(intent);
             }
         });
 
