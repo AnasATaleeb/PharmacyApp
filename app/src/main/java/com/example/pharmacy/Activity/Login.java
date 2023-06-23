@@ -102,7 +102,8 @@ public class Login extends AppCompatActivity {
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this, text, duration);
             toast.show();
-        }else {
+            return;
+        }
             String email = editEmail.getText().toString();
             String password = editPassword.getText().toString();
             Map<String, Object> dataToSave = new HashMap<>();
@@ -112,7 +113,7 @@ public class Login extends AppCompatActivity {
             mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    Log.d("login", "login success");
+                    Log.v("login", "login success");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -120,8 +121,6 @@ public class Login extends AppCompatActivity {
                     Log.d("login", "login Fail");
                 }
             });
-
-        }
 
     }
 
