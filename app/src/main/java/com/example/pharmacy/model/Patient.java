@@ -26,6 +26,13 @@ public class Patient {
         this.image = image;
     }
 
+    public Patient(String name, String phoneNumber, String email, String location) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.location = location;
+    }
+
     public Patient(String name, String phoneNumber, String email, String location, ImageView image, ArrayList<Item> favorateList, ArrayList<Item> cartList, ArrayList<Order> orderList) {
         this.name = name;
         this.phoneNumber = phoneNumber;

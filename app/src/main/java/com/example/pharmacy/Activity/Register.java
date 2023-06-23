@@ -102,7 +102,7 @@ public class Register extends AppCompatActivity {
         else if (value.equals("عميل")){
             ImageView image = (ImageView) userImg;
             Patient patient = new Patient(userName.getText().toString(), userPhone.getText().toString(),
-                    userEmail.getText().toString(),userLocation.getText().toString(), image);
+                    userEmail.getText().toString(),userLocation.getText().toString());
 
             String email =userEmail.getText().toString();
             String password =userPassword.getText().toString();
@@ -112,6 +112,7 @@ public class Register extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(Register.this, text, duration);
                 toast.show();
+
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -120,32 +121,32 @@ public class Register extends AppCompatActivity {
                             int duration = Toast.LENGTH_SHORT;
                             Toast toast = Toast.makeText(Register.this, text, duration);
                             toast.show();
+
+                            Map<String, Object> dataToSave = new HashMap<>();
+                            dataToSave.put("Customer",patient);
+
+                            mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    Intent intent = new Intent(Register.this,MainSign.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast toast = Toast.makeText(Register.this, "خطأ في انشاء الحساب 😥", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            });
                         }else{
                             CharSequence text = "الايميل مسجل بحساب موجود بالفعل حاول بحساب آخر 🥰";
                             int duration = Toast.LENGTH_LONG;
                             Toast toast = Toast.makeText(Register.this, text, duration);
                             toast.show();
                         }
-                    }
-                });
-
-                Map<String, Object> dataToSave = new HashMap<>();
-                dataToSave.put("patient",patient);
-
-                mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
-                        toast.show();
-                        Intent intent = new Intent(Register.this,MainSign.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast toast = Toast.makeText(Register.this, "خطأ في انشاء الحساب 😥", Toast.LENGTH_SHORT);
-                        toast.show();
                     }
                 });
 
