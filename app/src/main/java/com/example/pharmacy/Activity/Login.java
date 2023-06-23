@@ -50,6 +50,12 @@ public class Login extends AppCompatActivity {
         // Call init() function to initialize all the variables
         init();
 
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email","");
+        String password = sharedPreferences.getString("password","");
+
+        editEmail.setText(email.toString());
+        editPassword.setText(password.toString());
         // Call setOnClickListeners() function to set all the onClickListeners
         setOnClickListeners();
 
@@ -78,7 +84,6 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             String mail = editEmail.getText().toString();
             String password = editPassword.getText().toString();
-            //todo Call login() function to login the user
             login();
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
@@ -87,16 +92,12 @@ public class Login extends AppCompatActivity {
     }
 
     private void checkRememberMe() {
-        //todo Check if the user has checked the remember me switch
         if(swRememberMe.isChecked()) {
-            //todo Call saveUser() function to save the user data
             saveUser();
         }
     }
 
-    //todo Create login() function to login the user
     private void login() {
-        //todo Check if the user has checked the remember me switch
         if(editEmail.getText().toString().isEmpty()|| editPassword.getText().toString().isEmpty()){
             CharSequence text = "You should enter email and password!";
             int duration = Toast.LENGTH_SHORT;
@@ -123,24 +124,17 @@ public class Login extends AppCompatActivity {
                     toast.show();
                 }
             });
+        checkRememberMe();
 
     }
 
-    //todo Create saveUser() function to save the user data
     private void saveUser() {
-        //todo Create an object of the User class
-        //todo Set the user data to the object
-        //todo Convert the object to a JSON string
-        //todo Save the JSON string to the shared preferences
         Gson gson = new Gson();
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        // editor.putString("sets", gson.toJson(   ));
-        // editor.commit();
-
-        //String s = sharedPreferences.getString("sets",null);
-
-        //list = gson.fromJson(s,SetModel[].class);
+        editor.putString("email", gson.toJson(editEmail.getText().toString()));
+        editor.putString("password", gson.toJson(editEmail.getText().toString()));
+        editor.commit();
     }
 
 }
