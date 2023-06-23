@@ -60,8 +60,10 @@ public class Login extends AppCompatActivity {
         String email = sharedPreferences.getString("myPharmacyEmail","");
         String password = sharedPreferences.getString("myPharmacyPassword","");
 
-        editEmail.setText(email.substring(1,email.length()-1));
-        editPassword.setText(password.substring(1,password.length()-1));
+        if(!email.isEmpty() || !password.isEmpty()) {
+            editEmail.setText(email.substring(1, email.length() - 1));
+            editPassword.setText(password.substring(1, password.length() - 1));
+        }
         // Call setOnClickListeners() function to set all the onClickListeners
         setOnClickListeners();
 
