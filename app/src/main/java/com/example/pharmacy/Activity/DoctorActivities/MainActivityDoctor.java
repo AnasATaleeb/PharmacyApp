@@ -51,7 +51,7 @@ public class MainActivityDoctor extends AppCompatActivity {
 
         allCategory = findViewById(R.id.all_cat);
         allitms = findViewById(R.id.all_itms);
-        pofile = findViewById(R.id.profile_img);
+        pofile = findViewById(R.id.userImg);
 
         pofile.setOnClickListener(new View.OnClickListener() {
             @Override

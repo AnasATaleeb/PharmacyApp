@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_img"
+        app:layout_constraintTop_toBottomOf="@+id/userImg"
         tools:fontFamily="@font/monadi"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -133,10 +133,10 @@
         android:text="تعديل الحساب"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/profile_img"
-        app:layout_constraintEnd_toEndOf="@+id/profile_img"
+        app:layout_constraintBottom_toTopOf="@+id/userImg"
+        app:layout_constraintEnd_toEndOf="@+id/userImg"
         app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/profile_img"
+        app:layout_constraintStart_toStartOf="@+id/userImg"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="0.297" />
 
@@ -147,15 +147,15 @@
         android:layout_marginStart="100dp"
         android:background="@drawable/round_button"
         android:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_img"
-        app:layout_constraintStart_toStartOf="@+id/profile_img"
-        app:layout_constraintTop_toTopOf="@+id/profile_img"
+        app:layout_constraintBottom_toBottomOf="@+id/userImg"
+        app:layout_constraintStart_toStartOf="@+id/userImg"
+        app:layout_constraintTop_toTopOf="@+id/userImg"
         app:layout_constraintVertical_bias="0.118"
         app:srcCompat="@drawable/photo_32"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profile_img"
+        android:id="@+id/userImg"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginBottom="519dp"

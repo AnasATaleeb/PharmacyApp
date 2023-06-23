@@ -2,52 +2,63 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/con"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Activity.Register"
+    tools:ignore="ExtraText">
 
     <TextView
         android:id="@+id/register_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/monadi"
         android:text="إنشاء حساب"
-        android:textStyle="bold"
         android:textColor="@color/green2"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/register_img"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/userImg"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+
+        android:layout_marginTop="8dp"
+        android:src="@drawable/user1"
+        app:layout_constraintEnd_toEndOf="@+id/register_title"
+        app:layout_constraintStart_toStartOf="@+id/register_title"
+        app:layout_constraintTop_toBottomOf="@+id/register_title"
+        app:shapeAppearanceOverlay="@style/circular"
+        app:strokeColor="@color/whitedark"
+        app:strokeWidth="1dp"
+        tools:elevation="2dp" />
+
     <ImageView
         android:id="@+id/register_img"
-        android:layout_width="195dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginTop="-20dp"
         android:contentDescription="شعار لتسجيل الدخول"
         android:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/userImg"
+        app:layout_constraintStart_toEndOf="@+id/userImg"
         app:layout_constraintTop_toBottomOf="@+id/register_title"
-        app:srcCompat="@drawable/registration" />
+        app:srcCompat="@drawable/photo_32" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="الاسم"
         app:counterEnabled="true"
         app:counterMaxLength="20"
@@ -55,14 +66,13 @@
         app:endIconMode="custom"
         app:helperText="مطلوب*"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_img">
+        app:layout_constraintTop_toBottomOf="@+id/userImg">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText"
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="20" />
@@ -74,25 +84,24 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="البريد الإلكتروني"
         app:counterEnabled="true"
         app:endIconDrawable="@drawable/email"
         app:endIconMode="custom"
         app:helperText="مطلوب*"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -100,25 +109,24 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="رقم الهاتف"
         app:counterEnabled="true"
         app:endIconDrawable="@drawable/phone"
         app:endIconMode="custom"
         app:helperText="مطلوب*"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone"/>
+            android:inputType="phone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,26 +135,25 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:hint="كلمة المرور"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="الموقع"
         app:counterEnabled="true"
-        app:endIconDrawable="@drawable/padlock"
+        app:endIconDrawable="@drawable/location"
         app:endIconMode="custom"
         app:helperText="مطلوب*"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -154,46 +161,80 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="5dp"
-        android:hint="تأكيد كلمة المرور"
+        android:layout_marginEnd="16dp"
+        android:hint="كلمة المرور"
         app:counterEnabled="true"
         app:endIconDrawable="@drawable/padlock"
         app:endIconMode="custom"
         app:helperText="مطلوب*"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_bac"
         android:fontFamily="@font/monadi"
         android:text="إنشاء الحساب"
         android:textColor="@color/whitedark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         tools:elevation="10dp" />
 
-     />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+
+        <RadioButton
+            android:id="@+id/rdDelivary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/monadi"
+            android:text="موظف توصيل"
+            android:padding="2dp"
+            android:textColor="@color/green2" />
+
+        <RadioButton
+            android:id="@+id/rdPatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/monadi"
+            android:text="عميل"
+            android:padding="2dp"
+            android:textColor="@color/green2" />
+
+        <RadioButton
+            android:id="@+id/rdDoctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/monadi"
+            android:text="دكتور"
+            android:padding="2dp"
+            android:textColor="@color/green2" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

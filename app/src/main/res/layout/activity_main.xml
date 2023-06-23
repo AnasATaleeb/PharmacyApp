@@ -64,11 +64,11 @@
                         android:text="@string/hello"
                         android:textColor="@color/lightgreen"
                         android:textSize="12sp"
-                        app:layout_constraintEnd_toStartOf="@+id/profile_img"
-                        app:layout_constraintTop_toTopOf="@+id/profile_img" />
+                        app:layout_constraintEnd_toStartOf="@+id/userImg"
+                        app:layout_constraintTop_toTopOf="@+id/userImg" />
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/profile_img"
+                        android:id="@+id/userImg"
                         android:layout_width="50dp"
 
                         android:layout_height="50dp"
