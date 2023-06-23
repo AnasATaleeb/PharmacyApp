@@ -97,7 +97,7 @@ public class Register extends AppCompatActivity {
             toast.show();
         }
         if(value.equals("دكتور")){
-
+            //TODO:
         }
         else if (value.equals("عميل")){
             ImageView image = (ImageView) userImg;
@@ -160,7 +160,7 @@ public class Register extends AppCompatActivity {
 
         }
         else if (value.equals("موظف توصيل")) {
-
+            //TODO:
         }
     }
 

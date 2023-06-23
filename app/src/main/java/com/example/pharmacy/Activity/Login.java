@@ -46,9 +46,6 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private ProgressBar progressBar;
-
-    DocumentReference mDocRef = FirebaseFirestore.getInstance().document("pharmacy/patient");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +57,11 @@ public class Login extends AppCompatActivity {
         init();
 
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        String email = sharedPreferences.getString("email","");
-        String password = sharedPreferences.getString("password","");
+        String email = sharedPreferences.getString("myPharmacyEmail","");
+        String password = sharedPreferences.getString("myPharmacyPassword","");
 
-        editEmail.setText(email.toString());
-        editPassword.setText(password.toString());
+        editEmail.setText(email.substring(1,email.length()-1));
+        editPassword.setText(password.substring(1,password.length()-1));
         // Call setOnClickListeners() function to set all the onClickListeners
         setOnClickListeners();
 
@@ -91,8 +88,6 @@ public class Login extends AppCompatActivity {
 
     private void setOnClickListeners() {
         btnLogin.setOnClickListener(v -> {
-            String mail = editEmail.getText().toString();
-            String password = editPassword.getText().toString();
             login();
         });
     }
@@ -105,34 +100,12 @@ public class Login extends AppCompatActivity {
 
     private void login() {
         if(editEmail.getText().toString().isEmpty()|| editPassword.getText().toString().isEmpty()){
-            CharSequence text = "You should enter email and password!";
+            CharSequence text = "يجب ادخال الايميل وكلمة المرور 🤗";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this, text, duration);
             toast.show();
             return;
         }
-        /*
-        String email = editEmail.getText().toString();
-        String password = editPassword.getText().toString();
-        Map<String, Object> dataToSave = new HashMap<>();
-        dataToSave.put("email",email);
-        dataToSave.put("password",password);
-
-        mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast toast = Toast.makeText(Login.this, "Login stored Success", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast toast = Toast.makeText(Login.this, "Login stored Failed!", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-         */
 
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
@@ -163,8 +136,8 @@ public class Login extends AppCompatActivity {
         Gson gson = new Gson();
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("email", gson.toJson(editEmail.getText().toString()));
-        editor.putString("password", gson.toJson(editEmail.getText().toString()));
+        editor.putString("myPharmacyEmail", gson.toJson(editEmail.getText()));
+        editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText()));
         editor.commit();
     }
 
