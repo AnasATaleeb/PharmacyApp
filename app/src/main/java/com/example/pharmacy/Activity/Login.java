@@ -1,7 +1,10 @@
 package com.example.pharmacy.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -9,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,12 +22,24 @@ import com.example.pharmacy.Activity.Customer.MainActivity;
 import com.example.pharmacy.Activity.DeliveryActivities.MainDelivery;
 import com.example.pharmacy.Activity.DoctorActivities.MainActivityDoctor;
 import com.example.pharmacy.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
     private TextView login_title;
     private EditText editEmail, editPassword;
     private Button btnLogin;
     private Switch swRememberMe;
+    SharedPreferences sharedPreferences;
+
+    DocumentReference mDocRef = FirebaseFirestore.getInstance().document("pharmacy/patient");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +50,12 @@ public class Login extends AppCompatActivity {
         // Call init() function to initialize all the variables
         init();
 
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email","");
+        String password = sharedPreferences.getString("password","");
+
+        editEmail.setText(email.toString());
+        editPassword.setText(password.toString());
         // Call setOnClickListeners() function to set all the onClickListeners
         setOnClickListeners();
 
@@ -61,7 +84,6 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             String mail = editEmail.getText().toString();
             String password = editPassword.getText().toString();
-            //todo Call login() function to login the user
             login();
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
@@ -70,27 +92,49 @@ public class Login extends AppCompatActivity {
     }
 
     private void checkRememberMe() {
-        //todo Check if the user has checked the remember me switch
         if(swRememberMe.isChecked()) {
-            //todo Call saveUser() function to save the user data
             saveUser();
         }
     }
 
-    //todo Create login() function to login the user
     private void login() {
-        //todo Check if the user has entered the email and password
-        //todo Check if the user has entered a valid email
-        //todo Check if the user has entered a valid password
-        //todo Check if the user has checked the remember me switch
+        if(editEmail.getText().toString().isEmpty()|| editPassword.getText().toString().isEmpty()){
+            CharSequence text = "You should enter email and password!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+            return;
+        }
+            String email = editEmail.getText().toString();
+            String password = editPassword.getText().toString();
+            Map<String, Object> dataToSave = new HashMap<>();
+            dataToSave.put("email",email);
+            dataToSave.put("password",password);
+
+            mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast toast = Toast.makeText(Login.this, "Login stored Success", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast toast = Toast.makeText(Login.this, "Login stored Failed!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            });
+        checkRememberMe();
+
     }
 
-    //todo Create saveUser() function to save the user data
     private void saveUser() {
-        //todo Create an object of the User class
-        //todo Set the user data to the object
-        //todo Convert the object to a JSON string
-        //todo Save the JSON string to the shared preferences
+        Gson gson = new Gson();
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", gson.toJson(editEmail.getText().toString()));
+        editor.putString("password", gson.toJson(editEmail.getText().toString()));
+        editor.commit();
     }
 
 }
