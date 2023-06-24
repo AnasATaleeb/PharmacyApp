@@ -33,6 +33,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.BitSet;
 import java.util.HashMap;
@@ -42,6 +45,7 @@ public class Register extends AppCompatActivity {
 
     private static final int CHOOSE_IMAGE =101;
     Uri uriImg;
+    String profileUrl;
     private ShapeableImageView userImg;
     private TextInputEditText userName;
     private TextInputEditText userEmail;
@@ -99,15 +103,27 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    private void uploadImg(){
+        StorageReference imgRef = FirebaseStorage.getInstance().getReference("profilepic/"+ System.currentTimeMillis() +".jpg");
+        imgRef.putFile(uriImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.v("sa","Upload Success");
+                profileUrl= taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.v("sa","Upload Fail");
+            }
+        });
+    }
+
     private void getImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
-    }
-
-    private void uploadImg(){
-
     }
 
     private void registerUser() {
@@ -148,6 +164,7 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    //TODO: remove doctor radio
     private void addDoctor() {
 
         ImageView image = (ImageView) userImg;
@@ -173,7 +190,7 @@ public class Register extends AppCompatActivity {
                         toast.show();
 
                         Map<String, Doctor> dataToSave = new HashMap<>();
-                        dataToSave.put("Customer",doctor);
+                        dataToSave.put("Doctor",doctor);
 
                         db.collection("Doctor").add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
