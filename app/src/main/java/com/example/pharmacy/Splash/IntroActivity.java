@@ -32,7 +32,7 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_activity);
-
+        getSupportActionBar().hide();
         //Hooks
         viewPager = findViewById(R.id.slider);
         viewPager.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
