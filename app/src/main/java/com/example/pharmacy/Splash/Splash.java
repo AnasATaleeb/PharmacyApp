@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pharmacy.Activity.Customer.searchItem;
 import com.example.pharmacy.Activity.MainSign;
 import com.example.pharmacy.R;
 
@@ -32,7 +33,7 @@ public class Splash extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent =  new Intent(Splash.this, IntroActivity.class);
+                Intent intent =  new Intent(Splash.this, searchItem.class);
                 startActivity(intent);
                 finish();
             }
