@@ -28,4 +28,21 @@
     <string name="user">anas_tb</string>
 
     <string name="user_name">أنس طليب</string>
+
+    <!--Titles for intro-->
+    <string name="first_slide_title">عرض وشراء الأدوية عبر الإنترنت</string>
+    <string name="second_slide_title">توفير الرعاية الطبية والصحية</string>
+    <string name="third_slide_title">خدمة توصيل سريعة وخصومات لامتناهية</string>
+
+    <!--Descriptions-->
+    <string name="first_slide_desc">ابحث عن اسم الدواء الذي تريد أو احصل على العلاج الخاص بك عن طريق تصوير الروشيتة</string>
+    <string name="second_slide_desc">احصل على الدواء الذي تريده واشتره بكل سهولة وأمان بضغطة زر</string>
+    <string name="third_slide_desc">
+توصيل سريع للأدوية وخصومات مجزية على الأسعار. هذه الخدمة توفر لك الراحة والتوفير في الوقت والجهد، مع إمكانية شراء الأدوية بكل سهولة وأمان من مكانك واستلامها في وقت قصير.</string>
+
+    <!--Buttons-->
+    <string name="skip_btn">Skip</string>
+    <string name="next_btn">Next</string>
+    <string name="let_get_started">Lets Get Started</string>
+
 </resources>
