@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.pharmacy.Activity.Customer.MainActivity;
 import com.example.pharmacy.Activity.Login;
+import com.example.pharmacy.Activity.MainSign;
 import com.example.pharmacy.R;
 
 public class IntroActivity extends AppCompatActivity {
@@ -51,7 +51,7 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     public void skip(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainSign.class));
         finish();
     }
 
