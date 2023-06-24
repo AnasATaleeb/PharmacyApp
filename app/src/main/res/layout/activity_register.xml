@@ -153,7 +153,7 @@
             android:id="@+id/userLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textLongMessage" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -186,24 +186,24 @@
         android:id="@+id/btnRegister"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button_bac"
         android:fontFamily="@font/monadi"
         android:text="إنشاء الحساب"
         android:textColor="@color/whitedark"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         tools:elevation="10dp" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
@@ -214,8 +214,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/monadi"
-            android:text="موظف توصيل"
             android:padding="2dp"
+            android:text="موظف توصيل"
             android:textColor="@color/green2" />
 
         <RadioButton
@@ -223,8 +223,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/monadi"
-            android:text="عميل"
             android:padding="2dp"
+            android:text="عميل"
             android:textColor="@color/green2" />
 
         <RadioButton
@@ -232,9 +232,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/monadi"
-            android:text="دكتور"
             android:padding="2dp"
+            android:text="دكتور"
             android:textColor="@color/green2" />
     </RadioGroup>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

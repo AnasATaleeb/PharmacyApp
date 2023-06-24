@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +23,12 @@ import com.example.pharmacy.Activity.Customer.MainActivity;
 import com.example.pharmacy.Activity.DeliveryActivities.MainDelivery;
 import com.example.pharmacy.Activity.DoctorActivities.MainActivityDoctor;
 import com.example.pharmacy.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
@@ -39,23 +44,26 @@ public class Login extends AppCompatActivity {
     private Switch swRememberMe;
     SharedPreferences sharedPreferences;
 
-    DocumentReference mDocRef = FirebaseFirestore.getInstance().document("pharmacy/patient");
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
-
+        mAuth = FirebaseAuth.getInstance();
         loadAnimation();
         // Call init() function to initialize all the variables
         init();
 
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        String email = sharedPreferences.getString("email","");
-        String password = sharedPreferences.getString("password","");
+        String email = sharedPreferences.getString("myPharmacyEmail","");
+        String password = sharedPreferences.getString("myPharmacyPassword","");
 
-        editEmail.setText(email.toString());
-        editPassword.setText(password.toString());
+        if(!email.isEmpty() || !password.isEmpty()) {
+            editEmail.setText(email.substring(1, email.length() - 1));
+            editPassword.setText(password.substring(1, password.length() - 1));
+        }
         // Call setOnClickListeners() function to set all the onClickListeners
         setOnClickListeners();
 
@@ -82,12 +90,7 @@ public class Login extends AppCompatActivity {
 
     private void setOnClickListeners() {
         btnLogin.setOnClickListener(v -> {
-            String mail = editEmail.getText().toString();
-            String password = editPassword.getText().toString();
             login();
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            startActivity(intent);
-            finish();
         });
     }
 
@@ -99,31 +102,34 @@ public class Login extends AppCompatActivity {
 
     private void login() {
         if(editEmail.getText().toString().isEmpty()|| editPassword.getText().toString().isEmpty()){
-            CharSequence text = "You should enter email and password!";
+            CharSequence text = "يجب ادخال الايميل وكلمة المرور 🤗";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this, text, duration);
             toast.show();
             return;
         }
-            String email = editEmail.getText().toString();
-            String password = editPassword.getText().toString();
-            Map<String, Object> dataToSave = new HashMap<>();
-            dataToSave.put("email",email);
-            dataToSave.put("password",password);
 
-            mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast toast = Toast.makeText(Login.this, "Login stored Success", Toast.LENGTH_SHORT);
+        String email = editEmail.getText().toString();
+        String password = editPassword.getText().toString();
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    CharSequence text = "تم تسجيل الدخول بنجاح 🥳";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(Login.this, text, duration);
+                    toast.show();
+                    Intent intent = new Intent(Login.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    CharSequence text = "هنالك خطأ في تسجيل الدخول تأكد من البريد وكلمة المرور";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(Login.this, text, duration);
                     toast.show();
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast toast = Toast.makeText(Login.this, "Login stored Failed!", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            });
+            }
+        });
         checkRememberMe();
 
     }
@@ -132,8 +138,8 @@ public class Login extends AppCompatActivity {
         Gson gson = new Gson();
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("email", gson.toJson(editEmail.getText().toString()));
-        editor.putString("password", gson.toJson(editEmail.getText().toString()));
+        editor.putString("myPharmacyEmail", gson.toJson(editEmail.getText()));
+        editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText()));
         editor.commit();
     }
 

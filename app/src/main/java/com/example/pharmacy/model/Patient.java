@@ -1,16 +1,16 @@
 package com.example.pharmacy.model;
 
 import android.media.Image;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 public class Patient {
-    private int id;
     private String name;
     private String phoneNumber;
     private String email;
     private String location;
-    private Image image;
+    private ImageView image;
 
     private ArrayList<Item> favorateList;
 
@@ -18,8 +18,7 @@ public class Patient {
 
     private ArrayList<Order> orderList;
 
-    public Patient(int id, String name, String phoneNumber, String email, String location, Image image) {
-        this.id = id;
+    public Patient(String name, String phoneNumber, String email, String location, ImageView image) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -27,8 +26,14 @@ public class Patient {
         this.image = image;
     }
 
-    public Patient(int id, String name, String phoneNumber, String email, String location, Image image, ArrayList<Item> favorateList, ArrayList<Item> cartList, ArrayList<Order> orderList) {
-        this.id = id;
+    public Patient(String name, String phoneNumber, String email, String location) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.location = location;
+    }
+
+    public Patient(String name, String phoneNumber, String email, String location, ImageView image, ArrayList<Item> favorateList, ArrayList<Item> cartList, ArrayList<Order> orderList) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -37,14 +42,6 @@ public class Patient {
         this.favorateList = favorateList;
         this.cartList = cartList;
         this.orderList = orderList;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -79,11 +76,11 @@ public class Patient {
         this.location = location;
     }
 
-    public Image getImage() {
+    public ImageView getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(ImageView image) {
         this.image = image;
     }
 
