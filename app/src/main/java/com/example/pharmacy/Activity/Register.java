@@ -1,10 +1,14 @@
 package com.example.pharmacy.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -30,17 +34,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
+    private static final int CHOOSE_IMAGE =101;
+    Uri uriImg;
     private ShapeableImageView userImg;
     private TextInputEditText userName;
     private TextInputEditText userEmail;
     private TextInputEditText userPhone;
     private TextInputEditText userLocation;
     private TextInputEditText userPassword;
+
+    private ImageView regesterImg;
 
     private RadioGroup group;
 
@@ -67,6 +76,37 @@ public class Register extends AppCompatActivity {
                 registerUser();
             }
         });
+
+        regesterImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getImage();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            uriImg = data.getData();
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriImg);
+                userImg.setImageBitmap(bitmap);
+            }catch (Exception e){
+
+            }
+        }
+    }
+
+    private void getImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
+    }
+
+    private void uploadImg(){
 
     }
 
@@ -300,6 +340,7 @@ public class Register extends AppCompatActivity {
         userPassword = findViewById(R.id.userPassword);
         register = findViewById(R.id.btnRegister);
         group = findViewById(R.id.radioGroup);
+        regesterImg = findViewById(R.id.register_img);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
     }
