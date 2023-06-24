@@ -155,4 +155,5 @@ public class Login extends AppCompatActivity {
         editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText()));
         editor.apply();
     }
+
 }
