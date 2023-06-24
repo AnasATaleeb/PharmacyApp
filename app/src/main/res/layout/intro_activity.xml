@@ -5,42 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="20dp"
+
     tools:context=".Splash.IntroActivity"
     >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bac_main"
+        android:elevation="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:id="@+id/skip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chainUseRtl="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="skip"
+            android:src="@drawable/skip_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/slider"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        android:layout_height="500dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-       >
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
     </androidx.viewpager.widget.ViewPager>
-
-    <Button
-        android:id="@+id/skip_btn"
-        android:layout_width="42dp"
-        android:layout_height="47dp"
-        android:background="#00000000"
-        android:drawableEnd="@drawable/skip_icon"
-        android:drawableRight="@drawable/skip_icon"
-        android:onClick="skip"
-        android:padding="10dp"
-        android:rotation="180"
-        android:text="@string/skip_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="373dp"
         android:layout_height="108dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:chainUseRtl="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slider">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/get_started_btn"

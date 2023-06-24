@@ -44,5 +44,14 @@
     <string name="skip_btn">Skip</string>
     <string name="next_btn">Next</string>
     <string name="let_get_started">Lets Get Started</string>
+    <string name="edit_profile_email">البريد الالكتروني</string>
+    <string name="edit_profile_password">كلمة المرور</string>
+    <string name="edit_profile_location">العنوان</string>
+    <string name="edit_profile_savebtn">حفظ</string>
+    <string name="edit_profile_title">تعديل الحساب</string>
+    <string name="a_button_to_add_an_image">a button to add an image</string>
+    <string name="backarrow_icon">backarrow icon</string>
+    <string name="edit_profile_phone">رقم الهاتف</string>
+    <string name="edit_profile_name">الاسم</string>
 
 </resources>
