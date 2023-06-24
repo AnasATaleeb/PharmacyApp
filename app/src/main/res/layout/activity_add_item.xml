@@ -151,7 +151,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnAdd"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bac"
