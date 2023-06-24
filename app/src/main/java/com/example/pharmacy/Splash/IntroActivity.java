@@ -89,17 +89,15 @@ public class IntroActivity extends AppCompatActivity {
             addDots(position);
             currentPos = position;
 
-         /*   if (position == 0) {
+            if (position == 0) {
                 letsGetStarted.setVisibility(View.INVISIBLE);
             } else if (position == 1) {
-                letsGetStarted.setVisibility(View.INVISIBLE);
-            } else if (position == 2) {
                 letsGetStarted.setVisibility(View.INVISIBLE);
             } else {
                 animation = AnimationUtils.loadAnimation(IntroActivity.this, R.anim.fade_in_animation);
                 letsGetStarted.setAnimation(animation);
                 letsGetStarted.setVisibility(View.VISIBLE);
-            }*/
+            }
 
         }
 

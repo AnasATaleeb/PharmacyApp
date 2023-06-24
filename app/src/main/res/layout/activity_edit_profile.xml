@@ -24,7 +24,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/border_item_cardview"
         android:gravity="center|right"
-        android:hint="الاسم"
+        android:hint="@string/edit_profile_name"
         android:padding="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         android:background="@drawable/border_item_cardview"
         android:fontFamily="@font/monadi"
         android:gravity="center|right"
-        android:hint="رقم الهاتف"
+        android:hint="@string/edit_profile_phone"
         android:inputType="number"
         android:padding="10dp"
         android:textSize="14sp"
@@ -61,7 +61,7 @@
         android:background="@drawable/border_item_cardview"
         android:fontFamily="@font/monadi"
         android:gravity="center|right"
-        android:hint="البريد الالكتروني"
+        android:hint="@string/edit_profile_email"
         android:inputType="textEmailAddress"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="@+id/editText_name"
@@ -80,7 +80,7 @@
         android:background="@drawable/border_item_cardview"
         android:fontFamily="@font/monadi"
         android:gravity="center|right"
-        android:hint="كلمة المرور"
+        android:hint="@string/edit_profile_password"
         android:inputType="textPassword"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="@+id/editText_phone"
@@ -99,7 +99,7 @@
         android:background="@drawable/border_item_cardview"
         android:fontFamily="@font/monadi"
         android:gravity="center|right"
-        android:hint="العنوان"
+        android:hint="@string/edit_profile_location"
         android:padding="10dp"
         android:textColor="@color/dark"
         app:layout_constraintEnd_toEndOf="@+id/editText_password"
@@ -115,7 +115,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/gradient_color"
         android:fontFamily="@font/monadi"
-        android:text="حفظ"
+        android:text="@string/edit_profile_savebtn"
         android:textColor="@color/whitedark"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +130,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="26dp"
         android:fontFamily="@font/monadi"
-        android:text="تعديل الحساب"
+        android:text="@string/edit_profile_title"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/userImg"
@@ -152,7 +152,8 @@
         app:layout_constraintTop_toTopOf="@+id/userImg"
         app:layout_constraintVertical_bias="0.118"
         app:srcCompat="@drawable/photo_32"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        android:contentDescription="@string/a_button_to_add_an_image" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/userImg"
@@ -181,6 +182,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editText_adress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:srcCompat="@drawable/arrow" />
+        app:srcCompat="@drawable/arrow"
+        android:contentDescription="@string/backarrow_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
