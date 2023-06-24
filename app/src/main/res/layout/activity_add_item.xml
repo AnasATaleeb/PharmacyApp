@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/userImg"
+        android:id="@+id/addImg"
         android:layout_width="142dp"
         android:layout_height="81dp"
 
@@ -40,15 +40,15 @@
         tools:elevation="2dp" />
 
     <ImageView
-        android:id="@+id/register_img"
+        android:id="@+id/add_img"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:layout_marginStart="8dp"
-        android:contentDescription="شعار لتسجيل الدخول"
+        android:contentDescription="شعار لإضافة منتج"
         android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userImg"
-        app:layout_constraintStart_toEndOf="@+id/userImg"
-        app:layout_constraintTop_toTopOf="@+id/userImg"
+        app:layout_constraintBottom_toBottomOf="@+id/addImg"
+        app:layout_constraintStart_toEndOf="@+id/addImg"
+        app:layout_constraintTop_toTopOf="@+id/addImg"
         app:layout_constraintVertical_bias="0.843"
         app:srcCompat="@drawable/photo_32" />
 
@@ -62,7 +62,7 @@
         android:layout_marginEnd="100dp"
         android:hint="اسم المنتج"
         app:counterEnabled="true"
-        app:counterMaxLength="20"
+        app:counterMaxLength="30"
         app:helperText="مطلوب*"
         app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +165,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/userImg"
+        app:layout_constraintTop_toBottomOf="@+id/addImg"
         tools:elevation="10dp" />
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
