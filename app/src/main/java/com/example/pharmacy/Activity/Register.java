@@ -31,6 +31,8 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -98,7 +100,6 @@ public class Register extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriImg);
                 userImg.setImageBitmap(bitmap);
             }catch (Exception e){
-
             }
         }
     }
@@ -108,15 +109,40 @@ public class Register extends AppCompatActivity {
         imgRef.putFile(uriImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.v("sa","Upload Success");
-                profileUrl= taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+
+                Toast.makeText(getApplicationContext(), "Upload success", Toast.LENGTH_SHORT).show();
+                //profileUrl= taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Toast.makeText(getApplicationContext(),"yahoooooo !!!!!",Toast.LENGTH_SHORT).show();
+                        profileUrl = uri.toString();
+                        updateUserImage();
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.v("sa","Upload Fail");
+                Toast.makeText(getApplicationContext(), "Upload FAilllllllllllll", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void updateUserImage(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!= null && profileUrl!= null){
+            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(userName.getText().toString())
+                    .setPhotoUri(Uri.parse(profileUrl))
+                    .build();
+            user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(),"تم تحديث الحساب والصورة",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     private void getImage() {
@@ -126,7 +152,7 @@ public class Register extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
     }
 
-    private void registerUser() {
+    private void registerUser(){
         if(userPassword.getText().toString().isEmpty() || userEmail.getText().toString().isEmpty()||
         userLocation.getText().toString().isEmpty()|| userPhone.getText().toString().isEmpty()||
         userName.getText().toString().isEmpty()){
@@ -190,11 +216,13 @@ public class Register extends AppCompatActivity {
                         toast.show();
 
                         Map<String, Doctor> dataToSave = new HashMap<>();
-                        dataToSave.put("Doctor",doctor);
+                        dataToSave.put(mAuth.getUid(),doctor);
 
-                        db.collection("Doctor").add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        db.collection("Doctor").document(mAuth.getUid()).collection("name")
+                                .add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
+                                uploadImg();
                                 Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
                                 toast.show();
                                 Intent intent = new Intent(Register.this,MainSign.class);
@@ -251,11 +279,12 @@ public class Register extends AppCompatActivity {
                         toast.show();
 
                         Map<String, Delivery> dataToSave = new HashMap<>();
-                        dataToSave.put("Delivery",delivery);
+                        dataToSave.put(mAuth.getUid(),delivery);
 
                         db.collection("Delivery").add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
+                                uploadImg();
                                 Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
                                 toast.show();
                                 Intent intent = new Intent(Register.this,MainSign.class);
@@ -311,11 +340,12 @@ public class Register extends AppCompatActivity {
                         toast.show();
 
                         Map<String, Object> dataToSave = new HashMap<>();
-                        dataToSave.put("Customer",patient);
+                        dataToSave.put(mAuth.getUid(),patient);
 
                         db.collection("Patient").add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
+                                uploadImg();
                                 Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
                                 toast.show();
                                 Intent intent = new Intent(Register.this,MainSign.class);

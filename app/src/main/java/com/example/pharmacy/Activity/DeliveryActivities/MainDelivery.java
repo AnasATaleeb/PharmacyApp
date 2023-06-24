@@ -7,12 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.Adaptor.OrderAdapter;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Order;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -27,17 +32,24 @@ public class MainDelivery extends AppCompatActivity {
 
     ListView orderList;
 
+    ShapeableImageView pofile;
+    private FirebaseAuth mAuth;
+    private TextView profileHello;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_delivery);
-
+        mAuth = FirebaseAuth.getInstance();
+        pofile = findViewById(R.id.userImg);
+        profileHello = findViewById(R.id.profileHello);
         getSupportActionBar().hide();
         bottomNavigationSetUp();
-
+        loadProfileInformation();
         orderList = findViewById(R.id.delivary_order_list);
         setUpList();
     }
+
 
     private void setUpList() {
         ArrayList<Order> arrayList= new ArrayList<>();
@@ -58,6 +70,20 @@ public class MainDelivery extends AppCompatActivity {
         });
     }
 
+    private void loadProfileInformation(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!= null){
+            if(user.getPhotoUrl() != null){
+                Glide.with(this)
+                        .load(user.getPhotoUrl())
+                        .into(pofile);
+            }
+            if (user.getDisplayName() != null){
+                profileHello.setText( "مرحبا "+user.getDisplayName());
+            }
+
+        }
+    }
     private void bottomNavigationSetUp() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.outline_person_24));

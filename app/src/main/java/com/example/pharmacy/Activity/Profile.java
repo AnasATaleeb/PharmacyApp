@@ -18,7 +18,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getSupportActionBar().hide();
-        cardView = findViewById(R.id.back);
+        cardView = findViewById(R.id.add_Item);
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

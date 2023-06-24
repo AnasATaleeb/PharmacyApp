@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.pharmacy.Activity.Customer.MainActivity;
 import com.example.pharmacy.Activity.DeliveryActivities.MainDelivery;
 import com.example.pharmacy.Activity.DoctorActivities.MainActivityDoctor;
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
@@ -52,16 +54,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Hide the action bar
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Call loadAnimation() function to load the animation for the label
         loadAnimation();
-
-        // Call init() function to initialize all the variables
         init();
 
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
@@ -69,8 +66,8 @@ public class Login extends AppCompatActivity {
         String password = sharedPreferences.getString("myPharmacyPassword","");
 
         if(!email.isEmpty() || !password.isEmpty()) {
-            editEmail.setText(email.substring(1, email.length() - 1));
-            editPassword.setText(password.substring(1, password.length() - 1));
+            editEmail.setText(email);
+            editPassword.setText(password);
         }
 
         // Call setOnClickListeners() function to set all the onClickListeners
@@ -130,7 +127,7 @@ public class Login extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(Login.this, text, duration);
                     toast.show();
-                    Intent intent = new Intent(Login.this,MainActivity.class);
+                    Intent intent = new Intent(Login.this,MainActivityDoctor.class);
                     startActivity(intent);
                     finish();
                 }else{
@@ -151,8 +148,8 @@ public class Login extends AppCompatActivity {
         Gson gson = new Gson();
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("myPharmacyEmail", gson.toJson(editEmail.getText()));
-        editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText()));
+        editor.putString("myPharmacyEmail", gson.toJson(editEmail.getText().toString()));
+        editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText().toString()));
         editor.apply();
     }
 

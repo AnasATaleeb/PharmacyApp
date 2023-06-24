@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.AllItems;
 import com.example.pharmacy.Activity.Categories;
@@ -22,6 +24,8 @@ import com.example.pharmacy.databinding.ActivityMainBinding;
 import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -34,12 +38,16 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ArrayList<Category> categories;
     private ArrayList<Item> items;
+
+    private TextView profileHello;
     Intent intent;
 
     TextView allCategory;
     TextView allitms;
 
     ShapeableImageView pofile;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         allCategory = findViewById(R.id.all_cat);
         allitms = findViewById(R.id.all_itms);
         pofile = findViewById(R.id.userImg);
-
+        profileHello = findViewById(R.id.profileHello);
+        mAuth = FirebaseAuth.getInstance();
+        loadProfileInformation();
         pofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +89,21 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationSetUp();
         categoriesSetUp();
         ItemsSetUp();
+    }
+
+    private void loadProfileInformation(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!= null){
+            if(user.getPhotoUrl() != null){
+                Glide.with(this)
+                        .load(user.getPhotoUrl())
+                        .into(pofile);
+            }
+            if (user.getDisplayName() != null){
+                profileHello.setText( "مرحبا "+user.getDisplayName());
+            }
+
+        }
     }
 
     private void bottomNavigationSetUp() {

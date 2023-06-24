@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -10,15 +11,12 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/telemedicine"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/Theme.Pharmacy"
         tools:targetApi="31">
         <activity
             android:name=".Activity.DoctorActivities.AddItem"
-            android:exported="true">
-
-
-            </activity>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Splash.IntroActivity"
             android:exported="false" />
@@ -96,8 +94,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.MainSign"
-            android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Customer.MainActivity"
             android:exported="false"

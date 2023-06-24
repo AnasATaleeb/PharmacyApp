@@ -7,7 +7,7 @@
     tools:context=".Activity.Profile">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/back"
+        android:id="@+id/add_Item"
         android:layout_width="35dp"
         android:layout_height="35dp"
 

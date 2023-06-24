@@ -2,6 +2,7 @@ package com.example.pharmacy.Activity.DoctorActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.AllItems;
 import com.example.pharmacy.Activity.Categories;
@@ -23,6 +25,8 @@ import com.example.pharmacy.databinding.ActivityMainDoctorBinding;
 import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -35,6 +39,7 @@ public class MainActivityDoctor extends AppCompatActivity {
     private @NonNull ActivityMainDoctorBinding binding;
     private ArrayList<Category> categories;
     private ArrayList<Item> items;
+    private CardView add_Item;
     Intent intent;
 
     TextView allCategory;
@@ -42,16 +47,22 @@ public class MainActivityDoctor extends AppCompatActivity {
 
     ShapeableImageView pofile;
 
+    private TextView profileHello;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainDoctorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
-
+        pofile = findViewById(R.id.userImg);
+        profileHello = findViewById(R.id.profileHello);
+        mAuth = FirebaseAuth.getInstance();
         allCategory = findViewById(R.id.all_cat);
         allitms = findViewById(R.id.all_itms);
         pofile = findViewById(R.id.userImg);
+        add_Item = findViewById(R.id.add_Item);
 
         pofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,9 +88,32 @@ public class MainActivityDoctor extends AppCompatActivity {
             }
         });
 
+        add_Item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivityDoctor.this, AddItem.class);
+                startActivity(intent);
+            }
+        });
+        loadProfileInformation();
         bottomNavigationSetUp();
         categoriesSetUp();
         ItemsSetUp();
+    }
+
+    private void loadProfileInformation(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!= null){
+            if(user.getPhotoUrl() != null){
+                Glide.with(this)
+                        .load(user.getPhotoUrl())
+                        .into(pofile);
+            }
+            if (user.getDisplayName() != null){
+                profileHello.setText( "مرحبا "+user.getDisplayName());
+            }
+
+        }
     }
 
     private void bottomNavigationSetUp() {
