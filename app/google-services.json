@@ -1,48 +1,48 @@
 {
-  "project_info": {
-    "project_number": "1010755750829",
-    "firebase_url": "https://pharmacy-589b4-default-rtdb.firebaseio.com",
-    "project_id": "pharmacy-589b4",
-    "storage_bucket": "pharmacy-589b4.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1010755750829:android:de3695632b65f06616af24",
-        "android_client_info": {
-          "package_name": "com.example.pharmacy"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1010755750829-vto676t79lgarnalcviu4963jlkpp6sk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.pharmacy",
-            "certificate_hash": "41a25de49dae5929baa50cc7ba2d71ba39b85168"
+    "project_info": {
+      "project_number": "1010755750829",
+      "firebase_url": "https://pharmacy-589b4-default-rtdb.firebaseio.com",
+      "project_id": "pharmacy-589b4",
+      "storage_bucket": "pharmacy-589b4.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:1010755750829:android:de3695632b65f06616af24",
+          "android_client_info": {
+            "package_name": "com.example.pharmacy"
           }
         },
-        {
-          "client_id": "1010755750829-qv5qsqlr7ak55tuoe3eee2ni4fig3u9f.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDrW3Wtb1l84vG5MwwPN0MZIqUfy2KBqhs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1010755750829-qv5qsqlr7ak55tuoe3eee2ni4fig3u9f.apps.googleusercontent.com",
-              "client_type": 3
+        "oauth_client": [
+          {
+            "client_id": "1010755750829-vto676t79lgarnalcviu4963jlkpp6sk.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "com.example.pharmacy",
+              "certificate_hash": "41a25de49dae5929baa50cc7ba2d71ba39b85168"
             }
-          ]
+          },
+          {
+            "client_id": "1010755750829-qv5qsqlr7ak55tuoe3eee2ni4fig3u9f.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDrW3Wtb1l84vG5MwwPN0MZIqUfy2KBqhs"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "1010755750829-qv5qsqlr7ak55tuoe3eee2ni4fig3u9f.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
         }
       }
-    }
-  ],
-  "configuration_version": "1"
-}
+    ],
+    "configuration_version": "1"
+  }
