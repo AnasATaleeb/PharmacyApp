@@ -1,6 +1,8 @@
 package com.example.pharmacy.Activity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -48,6 +50,7 @@ public class EditProfile extends AppCompatActivity {
     private void setOnClick(){
         save.setOnClickListener(v -> {
             //todo: save the data
+
         });
         back.setOnClickListener(v -> {
             //todo: go back
@@ -55,5 +58,13 @@ public class EditProfile extends AppCompatActivity {
         image.setOnClickListener(v -> {
             //todo: change the image
         });
+    }
+
+    // to hide the keyboard when the user clicks anywhere on the screen
+    @Override
+    public boolean onTouchEvent(android.view.MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 }

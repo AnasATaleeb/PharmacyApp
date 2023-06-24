@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,10 +50,17 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+
+        // Hide the action bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+        // Call loadAnimation() function to load the animation for the label
         loadAnimation();
+
         // Call init() function to initialize all the variables
         init();
 
@@ -64,6 +72,7 @@ public class Login extends AppCompatActivity {
             editEmail.setText(email.substring(1, email.length() - 1));
             editPassword.setText(password.substring(1, password.length() - 1));
         }
+
         // Call setOnClickListeners() function to set all the onClickListeners
         setOnClickListeners();
 
@@ -76,6 +85,7 @@ public class Login extends AppCompatActivity {
         login_title = findViewById(R.id.login_title);
         ImageView login_img = findViewById(R.id.login_img);
 
+        // to start the animation for the label
         Animation slideDownAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_down);
         login_title.setAnimation(slideDownAnimation);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_animation);
@@ -100,6 +110,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    // to login the user
     private void login() {
         if(editEmail.getText().toString().isEmpty()|| editPassword.getText().toString().isEmpty()){
             CharSequence text = "يجب ادخال الايميل وكلمة المرور 🤗";
@@ -130,17 +141,18 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+        // to check if the user has checked the remember me switch
         checkRememberMe();
 
     }
 
+    // to save the user email and password in the shared preferences
     private void saveUser() {
         Gson gson = new Gson();
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("myPharmacyEmail", gson.toJson(editEmail.getText()));
         editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText()));
-        editor.commit();
+        editor.apply();
     }
-
 }
