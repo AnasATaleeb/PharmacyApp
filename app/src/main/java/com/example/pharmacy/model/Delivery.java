@@ -9,7 +9,7 @@ public class Delivery {
     private String phoneNumber;
     private String email;
     private String location;
-    private ImageView image;
+    private String image;
 
     public Delivery(String name, String phoneNumber, String email, String location) {
         this.name = name;
@@ -18,7 +18,7 @@ public class Delivery {
         this.location = location;
     }
 
-    public Delivery(String name, String phoneNumber, String email, String location, ImageView image) {
+    public Delivery(String name, String phoneNumber, String email, String location, String image) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -58,11 +58,11 @@ public class Delivery {
         this.location = location;
     }
 
-    public ImageView getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(ImageView image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

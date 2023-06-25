@@ -9,10 +9,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.DeliveryActivities.SettingDelivery;
+import com.example.pharmacy.Activity.Login;
 import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.R;
 
@@ -24,6 +26,7 @@ public class SettingDoctors extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
     Intent intent;
 
+    Button logout;
     CardView user,setting,orders;
     Switch nightModeSwitch ;
     private boolean isUserInteracting = false;
@@ -40,7 +43,17 @@ public class SettingDoctors extends AppCompatActivity {
         setting = findViewById(R.id.setting_card);
         user = findViewById(R.id.user_card);
         orders= findViewById(R.id.orders);
+        logout = findViewById(R.id.logout);
 
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(SettingDoctors.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         setting.setOnClickListener(new View.OnClickListener() {
             @Override

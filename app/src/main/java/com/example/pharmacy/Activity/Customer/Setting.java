@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.pharmacy.Activity.Login;
 import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.R;
 
@@ -23,6 +25,7 @@ public class Setting extends AppCompatActivity {
     Intent intent;
 
     CardView user,setting,love,cart;
+    Button logout;
     Switch nightModeSwitch ;
     private boolean isUserInteracting = false;
     private static final String STATE_USER_INTERACTING = "userInteracting";
@@ -39,8 +42,17 @@ public class Setting extends AppCompatActivity {
         user = findViewById(R.id.user_card);
         love = findViewById(R.id.love_card);
         cart = findViewById(R.id.cart_card);
+        logout = findViewById(R.id.logout);
 
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
@@ -15,9 +16,13 @@ import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.Adaptor.OrderAdapter;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Order;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -25,6 +30,8 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
 public class MainDelivery extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     MeowBottomNavigation bottomNavigation;
 
@@ -34,7 +41,7 @@ public class MainDelivery extends AppCompatActivity {
 
     ShapeableImageView pofile;
     private FirebaseAuth mAuth;
-    private TextView profileHello;
+    private TextView profileHello,profileLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class MainDelivery extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         pofile = findViewById(R.id.userImg);
         profileHello = findViewById(R.id.profileHello);
+        profileLoc = findViewById(R.id.userLoc);
         getSupportActionBar().hide();
         bottomNavigationSetUp();
         loadProfileInformation();
@@ -71,6 +79,17 @@ public class MainDelivery extends AppCompatActivity {
     }
 
     private void loadProfileInformation(){
+        DocumentReference docRef = db.collection("Users").document(mAuth.getUid());
+
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    profileLoc.setText(documentSnapshot.getString("location"));
+                }else
+                    Toast.makeText(getApplicationContext(),"خطأ في جلب المعلومات" , Toast.LENGTH_SHORT);
+            }
+        });
         FirebaseUser user = mAuth.getCurrentUser();
         if(user!= null){
             if(user.getPhotoUrl() != null){

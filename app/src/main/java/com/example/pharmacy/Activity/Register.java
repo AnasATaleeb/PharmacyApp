@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -192,11 +193,6 @@ public class Register extends AppCompatActivity {
 
     //TODO: remove doctor radio
     private void addDoctor() {
-
-        ImageView image = (ImageView) userImg;
-        Doctor doctor = new Doctor(userName.getText().toString(), userPhone.getText().toString(),
-                userEmail.getText().toString(),userLocation.getText().toString());
-
         String email =userEmail.getText().toString();
         String password =userPassword.getText().toString();
 
@@ -215,14 +211,21 @@ public class Register extends AppCompatActivity {
                         Toast toast = Toast.makeText(Register.this, text, duration);
                         toast.show();
 
-                        Map<String, Doctor> dataToSave = new HashMap<>();
-                        dataToSave.put(mAuth.getUid(),doctor);
+                        uploadImg();
+                        Doctor doctor = new Doctor(userName.getText().toString(), userPhone.getText().toString(),
+                                userEmail.getText().toString(),userLocation.getText().toString(),profileUrl);
 
-                        db.collection("Doctor").document(mAuth.getUid()).collection("name")
-                                .add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        Map<String, String> dataToSave = new HashMap<>();
+                        dataToSave.put("name",doctor.getName());
+                        dataToSave.put("email",doctor.getEmail());
+                        dataToSave.put("phone",doctor.getPhoneNumber());
+                        dataToSave.put("location",doctor.getLocation());
+                        dataToSave.put("role","doctor");
+
+                        db.collection("Users").document(mAuth.getUid()).
+                                set(dataToSave, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                uploadImg();
+                            public void onSuccess(Object o) {
                                 Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
                                 toast.show();
                                 Intent intent = new Intent(Register.this,MainSign.class);
@@ -232,7 +235,7 @@ public class Register extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.v("ERoooooooooooor:", e.toString());
+                                Log.v("خطأ :", e.toString());
                                 Toast toast = Toast.makeText(Register.this, "خطأ في انشاء الحساب 😥", Toast.LENGTH_SHORT);
                                 toast.show();
                             }
@@ -256,10 +259,6 @@ public class Register extends AppCompatActivity {
     }
 
     private void addDelivery() {
-        ImageView image = (ImageView) userImg;
-        Delivery delivery = new Delivery(userName.getText().toString(), userPhone.getText().toString(),
-                userEmail.getText().toString(),userLocation.getText().toString());
-
         String email =userEmail.getText().toString();
         String password =userPassword.getText().toString();
 
@@ -278,19 +277,27 @@ public class Register extends AppCompatActivity {
                         Toast toast = Toast.makeText(Register.this, text, duration);
                         toast.show();
 
-                        Map<String, Delivery> dataToSave = new HashMap<>();
-                        dataToSave.put(mAuth.getUid(),delivery);
+                        uploadImg();
+                        Delivery delivery = new Delivery(userName.getText().toString(), userPhone.getText().toString(),
+                                userEmail.getText().toString(),userLocation.getText().toString(),profileUrl);
 
-                        db.collection("Delivery").add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                uploadImg();
-                                Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
-                                toast.show();
-                                Intent intent = new Intent(Register.this,MainSign.class);
-                                startActivity(intent);
-                                finish();
-                            }
+                        Map<String, String> dataToSave = new HashMap<>();
+                        dataToSave.put("name",delivery.getName());
+                        dataToSave.put("email",delivery.getEmail());
+                        dataToSave.put("phone",delivery.getPhoneNumber());
+                        dataToSave.put("location",delivery.getLocation());
+                        dataToSave.put("role","delivery");
+
+                        db.collection("Users").document(mAuth.getUid())
+                                .set(dataToSave, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
+                                    @Override
+                                    public void onSuccess(Object o) {
+                                        Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                        Intent intent = new Intent(Register.this,MainSign.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
@@ -317,9 +324,6 @@ public class Register extends AppCompatActivity {
     }
 
     private void addPatient() {
-        ImageView image = (ImageView) userImg;
-        Patient patient = new Patient(userName.getText().toString(), userPhone.getText().toString(),
-                userEmail.getText().toString(),userLocation.getText().toString());
 
         String email =userEmail.getText().toString();
         String password =userPassword.getText().toString();
@@ -339,12 +343,21 @@ public class Register extends AppCompatActivity {
                         Toast toast = Toast.makeText(Register.this, text, duration);
                         toast.show();
 
-                        Map<String, Object> dataToSave = new HashMap<>();
-                        dataToSave.put(mAuth.getUid(),patient);
+                        uploadImg();
+                        Patient patient = new Patient(userName.getText().toString(), userPhone.getText().toString(),
+                                userEmail.getText().toString(),userLocation.getText().toString(),profileUrl);
 
-                        db.collection("Patient").add(dataToSave).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        Map<String, String> dataToSave = new HashMap<>();
+                        dataToSave.put("name",patient.getName());
+                        dataToSave.put("email",patient.getEmail());
+                        dataToSave.put("phone",patient.getPhoneNumber());
+                        dataToSave.put("location",patient.getLocation());
+                        dataToSave.put("role","patient");
+
+                        db.collection("Users").document(mAuth.getUid())
+                                .set(dataToSave,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onSuccess(Object o) {
                                 uploadImg();
                                 Toast toast = Toast.makeText(Register.this, "تم انشاء حسابك بنجاح 🥳", Toast.LENGTH_SHORT);
                                 toast.show();

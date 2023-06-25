@@ -9,10 +9,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.pharmacy.Activity.Customer.Setting;
 import com.example.pharmacy.Activity.DeliveryActivities.MainDelivery;
+import com.example.pharmacy.Activity.Login;
 import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.R;
 
@@ -24,6 +27,8 @@ public class SettingDelivery extends AppCompatActivity {
     Intent intent;
 
     CardView user,setting;
+
+    Button logout;
     Switch nightModeSwitch ;
     private boolean isUserInteracting = false;
     private static final String STATE_USER_INTERACTING = "userInteracting";
@@ -38,7 +43,17 @@ public class SettingDelivery extends AppCompatActivity {
 
         setting = findViewById(R.id.setting_card);
         user = findViewById(R.id.user_card);
+        logout = findViewById(R.id.logout);
 
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(SettingDelivery.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         setting.setOnClickListener(new View.OnClickListener() {
             @Override

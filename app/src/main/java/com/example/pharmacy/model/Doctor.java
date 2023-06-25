@@ -2,6 +2,7 @@ package com.example.pharmacy.model;
 
 import android.widget.ImageView;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Doctor {
@@ -9,7 +10,7 @@ public class Doctor {
     private String phoneNumber;
     private String email;
     private String location;
-    private ImageView image;
+    private String image;
 
     public Doctor(String name, String phoneNumber, String email, String location) {
         this.name = name;
@@ -18,7 +19,7 @@ public class Doctor {
         this.location = location;
     }
 
-    public Doctor(String name, String phoneNumber, String email, String location, ImageView image) {
+    public Doctor(String name, String phoneNumber, String email, String location, String image) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -58,11 +59,11 @@ public class Doctor {
         this.location = location;
     }
 
-    public ImageView getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(ImageView image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }
