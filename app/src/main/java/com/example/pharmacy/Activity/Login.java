@@ -54,11 +54,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Hide the action bar
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        // Call loadAnimation() function to load the animation for the label
         loadAnimation();
+
+        // Call init() function to initialize all the variables
         init();
 
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);

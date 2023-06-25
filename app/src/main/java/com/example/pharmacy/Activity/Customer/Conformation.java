@@ -23,22 +23,22 @@ public class Conformation extends AppCompatActivity {
     private TextView textView44;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPayConfirmationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // hide action bar
         getSupportActionBar().hide();
 
-        SetUp();
         // intilize the button
-        btn = findViewById(R.id.btn_next);
+        initialize();
 
         // set on click listener
-        btn.setOnClickListener(v -> {
-            Intent intent = new Intent(Conformation.this, FinishOrder.class);
-            startActivity(intent);
-            finish();
-        });
+        setOnClick();
+
+        // set up the recycler view
+        SetUp();
     }
 
     private void SetUp() {
@@ -46,17 +46,31 @@ public class Conformation extends AppCompatActivity {
         binding.itemsOder.setLayoutManager(linearLayoutManager);
 
         items = new ArrayList<>();
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,24.5,7));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,23.38,1));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,65.2,132));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,55.1,13));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,89.5,10));
+        items.add(new Item("بانادول", "لعلاج البرد والرشخ والزكام - 20 قرص", R.drawable.panadolextra, 24.5, 7));
+        items.add(new Item("بانادول", "لعلاج البرد والرشخ والزكام - 20 قرص", R.drawable.panadolextra, 23.38, 1));
+        items.add(new Item("بانادول", "لعلاج البرد والرشخ والزكام - 20 قرص", R.drawable.panadolextra, 65.2, 132));
+        items.add(new Item("بانادول", "لعلاج البرد والرشخ والزكام - 20 قرص", R.drawable.panadolextra, 55.1, 13));
+        items.add(new Item("بانادول", "لعلاج البرد والرشخ والزكام - 20 قرص", R.drawable.panadolextra, 89.5, 10));
 
-        Order o = (new Order(1,"طلب رقم #1", 1, items, 67.5));
+        Order o = (new Order(1, "طلب رقم #1", 1, items, 67.5));
 
-        textView44 = findViewById(R.id.textView44);
         textView44.setText("إجمالي الطلب: " + o.getTotalPrice() + " شيكل");
         ConformationItemAdapter adapter = new ConformationItemAdapter(this, o.getItems());
         binding.itemsOder.setAdapter(adapter);
+    }
+
+    // intilize the button
+    private void initialize() {
+        btn = findViewById(R.id.btn_next);
+        textView44 = findViewById(R.id.textView44);
+    }
+
+    // set on click listener
+    private void setOnClick() {
+        btn.setOnClickListener(v -> {
+            Intent intent = new Intent(Conformation.this, FinishOrder.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }
