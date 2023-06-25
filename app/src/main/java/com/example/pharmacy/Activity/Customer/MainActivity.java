@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Category> categories;
     private ArrayList<Item> items;
 
+    private  EditText search;
+
     private TextView profileHello;
     Intent intent;
 
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         allitms = findViewById(R.id.all_itms);
         pofile = findViewById(R.id.userImg);
         profileHello = findViewById(R.id.profileHello);
+        search = findViewById(R.id.search);
         mAuth = FirebaseAuth.getInstance();
         loadProfileInformation();
         pofile.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, AllItems.class);
+                startActivity(intent);
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this,searchItem.class);
                 startActivity(intent);
             }
         });

@@ -16,6 +16,6 @@ public class searchItem extends AppCompatActivity {
         setContentView(R.layout.activity_search_item);
 
         // Hide the action bar
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        getSupportActionBar().hide();
     }
 }
