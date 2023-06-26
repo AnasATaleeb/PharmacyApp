@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Item;
 
@@ -16,6 +19,8 @@ import java.util.List;
 
 public class LoveAdapter extends ArrayAdapter<Item> {
     private Context ct;
+    private TextView love_name;
+    private ImageView love_pic;
     private ArrayList<Item> arr = new ArrayList<>();
 
     public LoveAdapter(@NonNull Context context, int resource, @NonNull List<Item> list){
@@ -33,6 +38,15 @@ public class LoveAdapter extends ArrayAdapter<Item> {
         }
         if (arr.size()>0){
             Item item = arr.get(position);
+
+            love_name = convertView.findViewById(R.id.love_name);
+            love_pic = convertView.findViewById(R.id.love_pic);
+
+            Glide.with(convertView.getContext())
+                    .load(item.getPic())
+                    .into(love_pic);
+
+            love_name.setText(item.getTitle());
 
         }
         return convertView;

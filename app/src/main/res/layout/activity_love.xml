@@ -7,11 +7,25 @@
     android:background="@color/whitedark"
     tools:context=".Activity.Customer.Love">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bac_main"
+        android:elevation="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ListView
         android:id="@+id/love_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_below="@+id/constraintLayout"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="-30dp"
         android:divider="@null" />
 
 

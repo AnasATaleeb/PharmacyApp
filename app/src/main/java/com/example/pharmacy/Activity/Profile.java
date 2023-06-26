@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.pharmacy.Activity.Customer.MainActivity;
+import com.example.pharmacy.Activity.DeliveryActivities.MainDelivery;
+import com.example.pharmacy.Activity.DoctorActivities.MainActivityDoctor;
 import com.example.pharmacy.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -59,8 +61,24 @@ public class Profile extends AppCompatActivity {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile.this, MainActivity.class);
-                startActivity(intent);
+                DocumentReference docRef = db.collection("Users").document(mAuth.getCurrentUser().getUid());
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            if(documentSnapshot.getString("role").equals("doctor")){
+                                Intent intent = new Intent(Profile.this, MainActivityDoctor.class);
+                                startActivity(intent);
+                            } else if (documentSnapshot.getString("role").equals("patient")) {
+                                Intent intent = new Intent(Profile.this,MainActivity.class);
+                                startActivity(intent);
+                            }else if (documentSnapshot.getString("role").equals("delivery")) {
+                                Intent intent = new Intent(Profile.this, MainDelivery.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                });
             }
         });
     }

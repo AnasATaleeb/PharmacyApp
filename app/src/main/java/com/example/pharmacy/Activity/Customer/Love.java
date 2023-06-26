@@ -13,6 +13,15 @@ import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.Adaptor.LoveAdapter;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Item;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 
@@ -21,41 +30,64 @@ import kotlin.jvm.functions.Function1;
 
 public class Love extends AppCompatActivity {
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     MeowBottomNavigation bottomNavigation;
     Intent intent;
 
     ListView loveList;
+    ArrayList<Item> arrayList;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_love);
         getSupportActionBar().hide();
         bottomNavigationSetUp();
-
+        mAuth = FirebaseAuth.getInstance();
         loveList = findViewById(R.id.love_list);
         setUpList();
 
     }
 
     private void setUpList() {
-        ArrayList<Item> arrayList= new ArrayList<>();
-        while (arrayList.size()<10){
-            arrayList.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-        }
-        LoveAdapter adapter = new LoveAdapter(this, 0,arrayList);
-        loveList.setAdapter(adapter);
+        arrayList = new ArrayList<>();
 
+        db.collection("Users").document(mAuth.getUid()).collection("Favorite")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String title = document.getString("name");
+                                String description = document.getString("description");
+                                String pic = document.getString("image");
+                                String price = document.getString("price");
+                                int quantity = Integer.parseInt(document.getString("size"));
+                                String category = document.getString("category");
 
-        loveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // code to execute when a list item is clicked
-                // position indicates the position of the clicked item in the list
-                intent = new Intent(Love.this, ViewItem.class);
-                startActivity(intent);
-            }
-        });
+                                Item item = new Item(title, description, pic, price, quantity, category);
+                                arrayList.add(item);
+                            }
+                            LoveAdapter adapter = new LoveAdapter(Love.this, 0,arrayList);
+                            loveList.setAdapter(adapter);
 
+                            loveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent intent = new Intent(Love.this, ViewItem.class);
+
+                                    Item model = arrayList.get(position);
+                                    if (model != null) {
+                                        String itemJson = new Gson().toJson(model);
+                                        intent.putExtra("item_to_view", itemJson);
+                                    }
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    }
+                });
     }
 
     private void bottomNavigationSetUp() {

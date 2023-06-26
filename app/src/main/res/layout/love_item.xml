@@ -31,11 +31,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/love_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="50dp"
                     android:fontFamily="@font/monadi"
+                    android:maxWidth="150dp"
                     android:text="@string/item_name"
                     android:textColor="@color/green2"
                     android:textSize="18dp"
@@ -47,7 +48,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/love_pic"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="32dp"

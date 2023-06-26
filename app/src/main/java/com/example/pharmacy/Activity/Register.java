@@ -111,21 +111,14 @@ public class Register extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                Toast.makeText(getApplicationContext(), "Upload success", Toast.LENGTH_SHORT).show();
                 //profileUrl= taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                 taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Toast.makeText(getApplicationContext(),"yahoooooo !!!!!",Toast.LENGTH_SHORT).show();
                         profileUrl = uri.toString();
                         updateUserImage();
                     }
                 });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Upload FAilllllllllllll", Toast.LENGTH_SHORT).show();
             }
         });
     }

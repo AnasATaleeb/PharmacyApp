@@ -33,6 +33,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
@@ -48,6 +49,8 @@ public class Login extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -132,9 +135,30 @@ public class Login extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(Login.this, text, duration);
                     toast.show();
-                    Intent intent = new Intent(Login.this,MainActivityDoctor.class);
-                    startActivity(intent);
-                    finish();
+                    DocumentReference docRef = db.collection("Users").document(mAuth.getUid());
+
+                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists()){
+                                if(documentSnapshot.getString("role").equals("doctor")){
+                                    Intent intent = new Intent(Login.this,MainActivityDoctor.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else if (documentSnapshot.getString("role").equals("patient")) {
+                                    Intent intent = new Intent(Login.this,MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else if (documentSnapshot.getString("role").equals("delivery")) {
+                                    Intent intent = new Intent(Login.this,MainDelivery.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }else
+                                Toast.makeText(getApplicationContext(),"خطأ في جلب المعلومات" , Toast.LENGTH_SHORT);
+                        }
+                    });
+
                 }else{
                     CharSequence text = "هنالك خطأ في تسجيل الدخول تأكد من البريد وكلمة المرور";
                     int duration = Toast.LENGTH_LONG;
