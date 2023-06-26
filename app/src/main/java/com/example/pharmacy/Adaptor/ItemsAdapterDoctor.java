@@ -1,8 +1,11 @@
 package com.example.pharmacy.Adaptor;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +45,9 @@ public class ItemsAdapterDoctor extends RecyclerView.Adapter<ItemsAdapterDoctor.
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         final Item model = list.get(position);
-
         holder.binding.itemTitle.setText(model.getTitle());
+        Log.d(TAG,"----------->>>>>"+ model.getPic()+"<<<<<<--------------");
+
         Glide.with(holder.itemView.getContext())
                 .load(model.getPic())
                 .into(holder.binding.itemPic);

@@ -11,6 +11,8 @@ public class Item {
 
     private int quantity;
 
+    private String category;
+
     public static final ArrayList<Item> categories = new ArrayList<>();
 
     public Item(){
@@ -31,8 +33,21 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public static ArrayList<Item> getCategory() {
-        return categories;
+    public Item(String title, String discreption, String pic, String price, int quantity, String category) {
+        this.title = title;
+        this.discreption = discreption;
+        this.pic = pic;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getTitle() {

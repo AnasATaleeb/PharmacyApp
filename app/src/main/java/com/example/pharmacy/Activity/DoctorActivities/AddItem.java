@@ -66,7 +66,6 @@ public class AddItem extends AppCompatActivity {
         dataToSave.put("description",itemDes.getText().toString());
         dataToSave.put("price",itemPrice.getText().toString());
         dataToSave.put("size",itemSize.getText().toString());
-        System.out.println(profileUrl);
         dataToSave.put("image",profileUrl);
 
         db.collection("Items").
