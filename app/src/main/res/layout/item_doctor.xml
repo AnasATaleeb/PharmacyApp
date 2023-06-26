@@ -56,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/monadi"
+                android:maxLines="2"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="الوصف"
@@ -82,7 +83,7 @@
                 tools:textSize="10dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button"
+                android:id="@+id/addToCart"
                 android:layout_width="158dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="2dp"

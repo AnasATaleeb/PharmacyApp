@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import com.example.pharmacy.Activity.Customer.MainActivity;
 import com.example.pharmacy.R;
+import com.example.pharmacy.model.Item;
+import com.google.gson.Gson;
 
 public class ViewItem extends AppCompatActivity {
 
@@ -24,6 +26,9 @@ public class ViewItem extends AppCompatActivity {
         back_btn=findViewById(R.id.backview_btn);
         love_btn = findViewById(R.id.loveview_btn);
 
+        String itemJson = getIntent().getStringExtra("item_to_view");
+        Item item = new Gson().fromJson(itemJson, Item.class);
+
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +42,7 @@ public class ViewItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageView img = findViewById(R.id.love_img);
-
+                    //TODO: add to love list
                     img.setImageDrawable(getDrawable(R.drawable.fill_heart));
                   //  img.setImageDrawable(getDrawable(R.drawable.unfilled_heart));
 

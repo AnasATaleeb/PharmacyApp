@@ -19,6 +19,7 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.databinding.ItemBinding;
 import com.example.pharmacy.model.Item;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,12 @@ public class ItemsAdapterDoctor extends RecyclerView.Adapter<ItemsAdapterDoctor.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewItem.class);
+
+                String itemJson = new Gson().toJson(model);
+                intent.putExtra("item_to_view", itemJson);
+
                 context.startActivity(intent);
+
             }
         });
     }
