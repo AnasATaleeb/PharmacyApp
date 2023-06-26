@@ -49,7 +49,6 @@ public class AddItem extends AppCompatActivity {
         getSupportActionBar().hide();
 
         initialization();
-        insertItem();
 
         add_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +60,7 @@ public class AddItem extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                insertItem();
             }
         });
     }
@@ -82,7 +81,7 @@ public class AddItem extends AppCompatActivity {
                     public void onSuccess(Object o) {
                         Toast toast = Toast.makeText(AddItem.this, "تم اضافة المنتج بنجاح 🥳", Toast.LENGTH_SHORT);
                         toast.show();
-                        Intent intent = new Intent(AddItem.this, MainSign.class);
+                        Intent intent = new Intent(AddItem.this, MainActivityDoctor.class);
                         startActivity(intent);
                         finish();
                     }
