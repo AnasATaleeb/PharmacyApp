@@ -14,6 +14,7 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityCartBinding;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class Cart extends AppCompatActivity {
     Intent intent;
 
     ActivityCartBinding binding;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
