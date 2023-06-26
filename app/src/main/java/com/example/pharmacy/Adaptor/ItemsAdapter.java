@@ -20,6 +20,7 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.databinding.ItemBinding;
 import com.example.pharmacy.model.Item;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -58,6 +59,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.viewHolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewItem.class);
+
+                Item model = list.get(holder.getAdapterPosition());
+                if (model != null) {
+                    String itemJson = new Gson().toJson(model);
+                    intent.putExtra("item_to_view", itemJson);
+                }
+
                 context.startActivity(intent);
             }
         });

@@ -59,11 +59,13 @@ public class ItemsAdapterDoctor extends RecyclerView.Adapter<ItemsAdapterDoctor.
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewItem.class);
 
-                String itemJson = new Gson().toJson(model);
-                intent.putExtra("item_to_view", itemJson);
+                Item model = list.get(holder.getAdapterPosition());
+                if (model != null) {
+                    String itemJson = new Gson().toJson(model);
+                    intent.putExtra("item_to_view", itemJson);
+                }
 
                 context.startActivity(intent);
-
             }
         });
     }

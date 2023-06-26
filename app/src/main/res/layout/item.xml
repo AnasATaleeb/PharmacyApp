@@ -83,7 +83,7 @@
                 tools:textSize="10dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/addToCart"
+                android:id="@+id/button"
                 android:layout_width="158dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="2dp"

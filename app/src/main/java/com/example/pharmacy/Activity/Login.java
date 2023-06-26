@@ -155,7 +155,7 @@ public class Login extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("myPharmacyEmail", gson.toJson(editEmail.getText().toString()));
         editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText().toString()));
-        editor.apply();
+        editor.commit();
     }
 
 }

@@ -141,13 +141,13 @@
         android:id="@+id/minus_btn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="150dp"
         android:background="@drawable/minus_bac"
         android:elevation="50dp"
         app:cardCornerRadius="360dp"
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView15"
         app:layout_constraintTop_toTopOf="@+id/textView15"
         tools:foregroundGravity="center">
 
