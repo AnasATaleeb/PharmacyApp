@@ -1,5 +1,7 @@
 package com.example.pharmacy.Activity.Customer;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,15 +27,23 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityMainBinding;
 import com.example.pharmacy.model.Category;
 import com.example.pharmacy.model.Item;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -108,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationSetUp();
         categoriesSetUp();
         ItemsSetUp();
+        getItemsFromFireStore();
     }
+
 
     private void loadProfileInformation(){
         DocumentReference docRef = db.collection("Users").document(mAuth.getUid());
@@ -221,16 +234,42 @@ public class MainActivity extends AppCompatActivity {
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true));
 
-        items = new ArrayList<>();
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
+        items = getItemsFromFireStore();
 
+        // Use the items list here
+        for (Item item : items) {
+            // Do something with each item
+            Log.d(TAG,  " => " + item.toString());
+
+        }
 
         // Set your adapter and data to the RecyclerView
         adapter = new ItemsAdapter(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
         recyclerView.setAdapter(adapter);
+    }
+
+    private ArrayList<Item> getItemsFromFireStore() {
+        items = new ArrayList<>();
+        db.collection("Items").get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String title = document.getString("title");
+                            String description = document.getString("description");
+                            String pic = document.getString("pic");
+                            String price = document.getString("price");
+                            int quantity = Integer.parseInt(document.getString("size"));
+
+                            items.add(new Item(title, description, pic, price, quantity));
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                        }
+
+
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+        return items;
     }
 }

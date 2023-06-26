@@ -6,22 +6,24 @@ import java.util.ArrayList;
 public class Item {
     private String title;
     private String discreption;
-    private int pic;
-    private double price;
+    private String pic;
+    private String price;
 
     private int quantity;
 
     public static final ArrayList<Item> categories = new ArrayList<>();
 
+    public Item(){
 
-    public Item(String title, String discreption, int pic, double price) {
+    }
+    public Item(String title, String discreption, String pic, String price) {
         this.title = title;
         this.discreption = discreption;
         this.pic = pic;
         this.price = price;
     }
 
-    public Item(String title, String discreption, int pic, double price, int quantity) {
+    public Item(String title, String discreption, String pic, String price, int quantity) {
         this.title = title;
         this.discreption = discreption;
         this.pic = pic;
@@ -41,11 +43,11 @@ public class Item {
         this.title = title;
     }
 
-    public int getPic() {
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(int pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 
@@ -57,11 +59,11 @@ public class Item {
         this.discreption = discreption;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -71,5 +73,16 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "title='" + title + '\'' +
+                ", discreption='" + discreption + '\'' +
+                ", pic='" + pic + '\'' +
+                ", price='" + price + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }

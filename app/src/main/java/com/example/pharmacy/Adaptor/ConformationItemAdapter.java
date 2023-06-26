@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.pharmacy.R;
 import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.databinding.ItemBinding;
@@ -46,8 +47,9 @@ public class ConformationItemAdapter extends RecyclerView.Adapter<ConformationIt
         final Item model = list.get(position);
 
         holder.binding.orderName.setText(model.getTitle());
-        Drawable drawable = ContextCompat.getDrawable(context, model.getPic());
-        holder.binding.orderImg.setImageDrawable(drawable);
+        Glide.with(holder.itemView.getContext())
+                .load(model.getPic())
+                .into(holder.binding.orderImg);
         holder.binding.tvPrice.setText(model.getPrice()+" شيكل");
         holder.binding.tvQuantity2.setText(model.getQuantity()+"");
         holder.itemView.setOnClickListener(new View.OnClickListener() {

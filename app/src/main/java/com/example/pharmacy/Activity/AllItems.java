@@ -1,11 +1,14 @@
 package com.example.pharmacy.Activity;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.pharmacy.Adaptor.ItemsAdapter;
 import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
@@ -13,10 +16,14 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityAllItemsBinding;
 import com.example.pharmacy.databinding.ActivityMainBinding;
 import com.example.pharmacy.model.Item;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
 public class AllItems extends AppCompatActivity {
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     ActivityAllItemsBinding binding;
     private ArrayList<Item> items;
     @Override
@@ -44,16 +51,37 @@ public class AllItems extends AppCompatActivity {
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true));
 
-        items = new ArrayList<>();
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
 
-
+        getItemsFromFireStore();
         // Set your adapter and data to the RecyclerView
         adapter = new ItemsAdapter(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
         recyclerView.setAdapter(adapter);
+    }
+
+    private void getItemsFromFireStore() {
+        items = new ArrayList<>();
+        db.collection("Items").get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String title = document.getString("title");
+                            String description = document.getString("description");
+                            String pic = document.getString("pic");
+                            String price = document.getString("price");
+                            int quantity = document.getLong("quantity").intValue();
+
+                            Item item = new Item(title, description, pic, price, quantity);
+                            items.add(item);
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                        }
+
+                        // Use the items list here
+                        for (Item item : items) {
+                            // Do something with each item
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
     }
 }

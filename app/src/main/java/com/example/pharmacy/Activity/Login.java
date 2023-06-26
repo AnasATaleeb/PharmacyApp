@@ -132,7 +132,7 @@ public class Login extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(Login.this, text, duration);
                     toast.show();
-                    Intent intent = new Intent(Login.this,MainActivityDoctor.class);
+                    Intent intent = new Intent(Login.this,MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else{

@@ -1,8 +1,12 @@
 package com.example.pharmacy.Adaptor;
 
+import static android.content.ContentValues.TAG;
+
+import com.bumptech.glide.Glide;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.pharmacy.R;
 import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.databinding.ItemBinding;
@@ -41,10 +46,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.viewHolder> 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         final Item model = list.get(position);
+        Log.d(TAG, "Yahhhhhooooooooooooooooooooooooooooooooooooooooooooooooo");
 
         holder.binding.itemTitle.setText(model.getTitle());
-        Drawable drawable = ContextCompat.getDrawable(context, model.getPic());
-        holder.binding.itemPic.setImageDrawable(drawable);
+        Glide.with(holder.itemView.getContext())
+                .load(model.getPic())
+                .into(holder.binding.itemPic);
         holder.binding.desItem.setText(model.getDiscreption());
         holder.binding.costItem.setText(model.getPrice()+" شيكل");
         holder.itemView.setOnClickListener(new View.OnClickListener() {

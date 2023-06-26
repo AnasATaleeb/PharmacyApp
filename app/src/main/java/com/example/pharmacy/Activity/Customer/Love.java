@@ -40,7 +40,7 @@ public class Love extends AppCompatActivity {
     private void setUpList() {
         ArrayList<Item> arrayList= new ArrayList<>();
         while (arrayList.size()<10){
-            arrayList.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص",R.drawable.panadolextra ,25.8));
+            arrayList.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"25.8"));
         }
         LoveAdapter adapter = new LoveAdapter(this, 0,arrayList);
         loveList.setAdapter(adapter);
