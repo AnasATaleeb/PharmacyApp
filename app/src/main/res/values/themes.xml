@@ -12,7 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/green2</item>
         <!-- Customize your theme here. -->
-    </style>
+        <item name="boxStrokeColor">@color/green1</item>
 
+    </style>
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/green1</item>
+    </style>
 
 </resources>
