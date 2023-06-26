@@ -9,34 +9,28 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.pharmacy.Activity.MainSign;
-import com.example.pharmacy.Activity.Register;
 import com.example.pharmacy.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class AddItem extends AppCompatActivity {
 
     private static final int CHOOSE_IMAGE =101;
     Uri uriImg;
-    String profileUrl;
+    String profileUrl ="";
     private TextInputEditText itemName,itemDes,itemPrice,itemSize,itemCat;
     private ImageView itemImg,add_img;
     Button btnAdd;
@@ -60,19 +54,19 @@ public class AddItem extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertItem();
+                uploadImg();
             }
         });
     }
 
     private void insertItem() {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         Map<String, String> dataToSave = new HashMap<>();
         dataToSave.put("name",itemName.getText().toString());
         dataToSave.put("category", itemCat.getText().toString());
         dataToSave.put("description",itemDes.getText().toString());
         dataToSave.put("price",itemPrice.getText().toString());
         dataToSave.put("size",itemSize.getText().toString());
+        System.out.println(profileUrl);
         dataToSave.put("image",profileUrl);
 
         db.collection("Items").
@@ -106,7 +100,6 @@ public class AddItem extends AppCompatActivity {
             }
         }
     }
-
     private void getImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -115,7 +108,7 @@ public class AddItem extends AppCompatActivity {
     }
 
     private void uploadImg(){
-        StorageReference imgRef = FirebaseStorage.getInstance().getReference("profilepic/"+ System.currentTimeMillis() +".jpg");
+        StorageReference imgRef = FirebaseStorage.getInstance().getReference("itemPic/"+ System.currentTimeMillis() +".jpg");
         imgRef.putFile(uriImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -127,6 +120,7 @@ public class AddItem extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         Toast.makeText(getApplicationContext(),"تم جلب url",Toast.LENGTH_SHORT).show();
                         profileUrl = uri.toString();
+                        insertItem();
                     }
                 });
             }

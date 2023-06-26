@@ -324,7 +324,6 @@ public class Register extends AppCompatActivity {
     }
 
     private void addPatient() {
-
         String email =userEmail.getText().toString();
         String password =userPassword.getText().toString();
 
