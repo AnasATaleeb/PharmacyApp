@@ -27,7 +27,7 @@
             android:id="@+id/itemCat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+           android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,6 +55,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -77,8 +78,8 @@
 
     <ImageView
         android:id="@+id/add_img"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
+        android:layout_width="59dp"
+        android:layout_height="56dp"
         android:layout_marginStart="-10dp"
         android:contentDescription="شعار لإضافة منتج"
         android:elevation="10dp"
