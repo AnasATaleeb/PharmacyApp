@@ -60,6 +60,36 @@ public class AddItem extends AppCompatActivity {
     }
 
     private void insertItem() {
+        if(itemName.getText().toString().isEmpty()){
+            Toast toast = Toast.makeText(AddItem.this, "ادخل اسم المنتج 😥", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if(itemCat.getText().toString().isEmpty()){
+            Toast toast = Toast.makeText(AddItem.this, "ادخل نوع المنتج 😥", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if(itemDes.getText().toString().isEmpty()){
+            Toast toast = Toast.makeText(AddItem.this, "ادخل وصف المنتج 😥", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if(itemPrice.getText().toString().isEmpty()){
+            Toast toast = Toast.makeText(AddItem.this, "ادخل سعر المنتج 😥", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if(itemSize.getText().toString().isEmpty()){
+            Toast toast = Toast.makeText(AddItem.this, "ادخل حجم المنتج 😥", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if(profileUrl.isEmpty()){
+            Toast toast = Toast.makeText(AddItem.this, "اختر صورة المنتج 😥", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
         Map<String, String> dataToSave = new HashMap<>();
         dataToSave.put("name",itemName.getText().toString());
         dataToSave.put("category", itemCat.getText().toString());
