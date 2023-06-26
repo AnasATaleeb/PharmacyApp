@@ -1,7 +1,5 @@
 package com.example.pharmacy.Activity.Customer;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -17,7 +15,6 @@ import com.example.pharmacy.databinding.ActivityCartBinding;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -28,9 +25,6 @@ import kotlin.jvm.functions.Function1;
 public class Cart extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
     Intent intent;
-
-    ArrayList<Item>items;
-
 
     ActivityCartBinding binding;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -50,7 +44,13 @@ public class Cart extends AppCompatActivity {
         //Log.v("S = ", s);
         //Gson gson = new Gson();
         //Order o = gson.fromJson(s, Order.class);
-        getItemsFromFireStore();
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
+        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
+        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
+        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
+        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.itemsOder.setLayoutManager(linearLayoutManager);
@@ -68,33 +68,6 @@ public class Cart extends AppCompatActivity {
         });
 
 
-    }
-
-    private void getItemsFromFireStore() {
-        items = new ArrayList<>();
-        db.collection("Items").get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String title = document.getString("title");
-                            String description = document.getString("description");
-                            String pic = document.getString("pic");
-                            String price = document.getString("price");
-                            int quantity = document.getLong("quantity").intValue();
-
-                            Item item = new Item(title, description, pic, price, quantity);
-                            items.add(item);
-                            Log.d(TAG, document.getId() + " => " + document.getData());
-                        }
-
-                        // Use the items list here
-                        for (Item item : items) {
-                            // Do something with each item
-                        }
-                    } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                    }
-                });
     }
 
     private void bottomNavigationSetUp() {
