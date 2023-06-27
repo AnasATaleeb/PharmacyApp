@@ -19,6 +19,7 @@ import com.example.pharmacy.databinding.OrderItemBinding;
 import com.example.pharmacy.databinding.ShowItemConformationBinding;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -51,11 +52,17 @@ public class ConformationItemAdapter extends RecyclerView.Adapter<ConformationIt
                 .load(model.getPic())
                 .into(holder.binding.orderImg);
         holder.binding.tvPrice.setText(model.getPrice()+" شيكل");
-        holder.binding.tvQuantity2.setText(model.getQuantity()+"");
+        holder.binding.tvQuantity2.setText(model.getNumberOfItem()+"");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewItem.class);
+
+                Item model = list.get(holder.getAdapterPosition());
+                if (model != null) {
+                    String itemJson = new Gson().toJson(model);
+                    intent.putExtra("item_to_view", itemJson);
+                }
                 context.startActivity(intent);
             }
         });

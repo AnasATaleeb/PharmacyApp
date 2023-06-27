@@ -5,8 +5,6 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 public class Order {
-    private int orderId;
-    private int patientId;
     private ArrayList<Item> items;
     private double totalPrice;
 
@@ -14,27 +12,20 @@ public class Order {
 
     private String location;
 
+    private int postalCode;
+
     private String status;
 
     public Order() {
 
     }
 
-    public Order(int orderId,String name, int patientId, ArrayList<Item> items, double totalPrice) {
-        this.orderId = orderId;
-        this.name = name;
-        this.patientId = patientId;
-        this.items = items;
-        this.totalPrice = totalPrice;
-    }
-
-    public Order(int orderId, int patientId, ArrayList<Item> items, double totalPrice, String name, String location, String status) {
-        this.orderId = orderId;
-        this.patientId = patientId;
+    public Order(ArrayList<Item> items, double totalPrice, String name, String location, int postalCode, String status) {
         this.items = items;
         this.totalPrice = totalPrice;
         this.name = name;
         this.location = location;
+        this.postalCode = postalCode;
         this.status = status;
     }
 
@@ -54,21 +45,7 @@ public class Order {
         this.status = status;
     }
 
-    public int getOrderId() {
-        return orderId;
-    }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
-    }
 
     public ArrayList<Item> getItems() {
         return items;

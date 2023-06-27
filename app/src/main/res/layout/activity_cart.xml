@@ -27,7 +27,7 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView44"
+        app:layout_constraintTop_toBottomOf="@+id/final_price"
         app:srcCompat="@drawable/silver_line_dotted" />
 
     <ImageView
@@ -37,7 +37,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/comfBtn"
         app:srcCompat="@drawable/silver_line_dotted" />
 
     <ImageView
@@ -52,13 +52,13 @@
         app:srcCompat="@drawable/silver_line_dotted" />
 
     <TextView
-        android:id="@+id/textView44"
+        android:id="@+id/final_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/monadi"
         android:gravity="center"
-        android:text=" إجمالي الطلب: 150 شيكل"
+        android:text=" إجمالي الطلب:   شيكل"
         android:textColor="@color/green1"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView26"
@@ -79,6 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/items_oder"
         android:layout_width="match_parent"
@@ -89,9 +90,10 @@
         android:layout_marginBottom="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView45" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView45"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/bottomNavigation"
@@ -111,7 +113,7 @@
         app:mbn_shadowColor="#1f212121" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button2"
+        android:id="@+id/comfBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

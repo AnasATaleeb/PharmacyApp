@@ -174,17 +174,18 @@
     <EditText
         android:id="@+id/edit_postal"
         android:layout_width="343dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/border_spinner"
         android:ems="10"
         android:fontFamily="@font/monadi"
         android:hint="الرمز البريدي"
         android:inputType="numberDecimal"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="@+id/textView38"
         app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
-    <Spinner
+    <EditText
         android:id="@+id/spinner_city"
         style="@style/spinner_style"
         android:layout_width="343dp"
@@ -193,6 +194,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/border_spinner"
+        android:fontFamily="@font/monadi"
+        android:hint="عنوان التوصيل"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"

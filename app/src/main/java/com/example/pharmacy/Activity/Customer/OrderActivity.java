@@ -49,9 +49,9 @@ public class OrderActivity extends AppCompatActivity {
             items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
             items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
             items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-
-            Order o = (new Order(1,"طلب رقم #1", 1, items, 67.5));
-            arrayList.add(o);
+            //TODO:
+            //Order o = (new Order(1,"طلب رقم #1", 1, items, 67.5));
+            //arrayList.add(o);
         }
         OrderAdapter adapter = new OrderAdapter(this, 0,arrayList);
         orderList.setAdapter(adapter);

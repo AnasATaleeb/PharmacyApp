@@ -62,7 +62,8 @@ public class MainDelivery extends AppCompatActivity {
     private void setUpList() {
         ArrayList<Order> arrayList= new ArrayList<>();
         while (arrayList.size()<10){
-            arrayList.add(new Order(1, "طلب رقم "+1,2, new ArrayList<>(),50.5));
+            //TODO
+            //arrayList.add(new Order(1, "طلب رقم "+1,2, new ArrayList<>(),50.5));
         }
         OrderAdapter adapter = new OrderAdapter(this, 0,arrayList);
         orderList.setAdapter(adapter);

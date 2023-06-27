@@ -13,14 +13,17 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityPayConfirmationBinding;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Conformation extends AppCompatActivity {
     private Button btn;
     private ArrayList<Item> items;
     private ActivityPayConfirmationBinding binding;
-    private TextView textView44;
+    private TextView textView44,textViewShip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,23 +49,21 @@ public class Conformation extends AppCompatActivity {
         binding.itemsOder.setLayoutManager(linearLayoutManager);
 
         items = new ArrayList<>();
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-        items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
+        String orderJson = getIntent().getStringExtra("order");
 
-        Order o = (new Order(1, "طلب رقم #1", 1, items, 67.5));
+        Order order =new Gson().fromJson(orderJson, Order.class);
 
-        textView44.setText("إجمالي الطلب: " + o.getTotalPrice() + " شيكل");
-        ConformationItemAdapter adapter = new ConformationItemAdapter(this, o.getItems());
+        textView44.setText("إجمالي الطلب: " + order.getTotalPrice() + " شيكل");
+        textViewShip.setText(order.getLocation());
+        ConformationItemAdapter adapter = new ConformationItemAdapter(this, order.getItems());
         binding.itemsOder.setAdapter(adapter);
     }
 
     // intilize the button
     private void initialize() {
         btn = findViewById(R.id.btn_next);
-        textView44 = findViewById(R.id.textView44);
+        textView44 = findViewById(R.id.final_price);
+        textViewShip = findViewById(R.id.textViewShip);
     }
 
     // set on click listener

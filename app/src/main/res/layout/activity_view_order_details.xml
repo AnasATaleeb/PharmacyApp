@@ -160,7 +160,7 @@
         android:layout_width="370dp"
         android:layout_height="10dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView44"
+        app:layout_constraintBottom_toTopOf="@+id/final_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/silver_line_dotted" />
@@ -177,7 +177,7 @@
         app:srcCompat="@drawable/silver_line_dotted" />
 
     <TextView
-        android:id="@+id/textView44"
+        android:id="@+id/final_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

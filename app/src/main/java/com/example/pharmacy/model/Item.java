@@ -12,6 +12,7 @@ public class Item {
     private int quantity;
 
     private String category;
+    private int  numberOfItem =1;
 
     public static final ArrayList<Item> categories = new ArrayList<>();
 
@@ -40,6 +41,24 @@ public class Item {
         this.price = price;
         this.quantity = quantity;
         this.category = category;
+    }
+
+    public Item(String title, String discreption, String pic, String price, int quantity, String category, int numberOfItem) {
+        this.title = title;
+        this.discreption = discreption;
+        this.pic = pic;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+        this.numberOfItem = numberOfItem;
+    }
+
+    public int getNumberOfItem() {
+        return numberOfItem;
+    }
+
+    public void setNumberOfItem(int numberOfItem) {
+        this.numberOfItem = numberOfItem;
     }
 
     public String getCategory() {

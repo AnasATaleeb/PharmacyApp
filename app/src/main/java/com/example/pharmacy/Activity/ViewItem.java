@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.gson.Gson;
@@ -32,12 +34,14 @@ import java.util.Map;
 public class ViewItem extends AppCompatActivity {
 
     CardView back_btn;
-    CardView love_btn;
+    CardView love_btn,plus_btn,minus_btn;
     ImageView img;
+
+    Button add_tocart;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    TextView view_dis,price_view,item_name,number_pics;
+    TextView view_dis,price_view,item_name,number_pics,drug_num;
     ImageView item_img;
     private FirebaseAuth mAuth;
     @Override
@@ -48,6 +52,7 @@ public class ViewItem extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         back_btn=findViewById(R.id.backview_btn);
         love_btn = findViewById(R.id.loveview_btn);
+        add_tocart = findViewById(R.id.add_tocart);
 
         view_dis = findViewById(R.id.view_dis);
         price_view = findViewById(R.id.price_view);
@@ -55,10 +60,55 @@ public class ViewItem extends AppCompatActivity {
         item_name = findViewById(R.id.item_name);
         number_pics = findViewById(R.id.number_pics);
         img = findViewById(R.id.love_img);
+        drug_num = findViewById(R.id.drug_num);
+        plus_btn = findViewById(R.id.plus_btn);
+        minus_btn = findViewById(R.id.minus_btn);
 
-
+        plus_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drug_num.setText(Integer.parseInt(drug_num.getText()+"") + 1);
+            }
+        });
+        minus_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drug_num.setText(Integer.parseInt(drug_num.getText()+"") - 1);
+            }
+        });
 
         String itemJson = getIntent().getStringExtra("item_to_view");
+
+        add_tocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Item item = new Gson().fromJson(itemJson, Item.class);
+                Map<String, String> dataToSave = new HashMap<>();
+                dataToSave.put("name",item.getTitle());
+                dataToSave.put("category", item.getCategory());
+                dataToSave.put("description",item.getDiscreption());
+                dataToSave.put("price",item.getPrice());
+                dataToSave.put("size",item.getQuantity()+"");
+                dataToSave.put("image",item.getPic());
+                dataToSave.put("numberOfItem",drug_num.getText()+"");
+
+                db.collection("Users").document(mAuth.getUid()).collection("Cart")
+                        .add(dataToSave).addOnSuccessListener(new OnSuccessListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                Toast toast = Toast.makeText(ViewItem.this, "تم اضافة المنتج الى المفضلة 🥳", Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.v("خطأ :", e.toString());
+                                Toast toast = Toast.makeText(ViewItem.this, "خطأ في اضافة المنتج الى المفضلة 😥", Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        });
+            }
+        });
 
         // Check if the itemJson string is not null
         if (itemJson != null && !itemJson.isEmpty()) {
@@ -74,23 +124,26 @@ public class ViewItem extends AppCompatActivity {
                         .load(item.getPic())
                         .into(item_img);
                 //TODO: make heart fill if its in fav list
-                /*
+/*
                 db.collection("Users").document(mAuth.getUid()).collection("Favorite")
                         .whereEqualTo("name",item.getTitle()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    if (task.getResult().size() >1)
-                                        img.setImageDrawable(getDrawable(R.drawable.fill_heart));
-                                    else {
-                                        img.setImageDrawable(getDrawable(R.drawable.unfilled_heart));
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        if (document != null)
+                                            img.setImageDrawable(getDrawable(R.drawable.fill_heart));
+                                        else {
+                                            img.setImageDrawable(getDrawable(R.drawable.unfilled_heart));
 
+                                        }
                                     }
+
                                 }
                             }
                         });
-                        */
 
+*/
             }
         }
 
@@ -106,8 +159,7 @@ public class ViewItem extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                    //TODO: add to love list
-
+                //TODO: add to love list
                 Item item = new Gson().fromJson(itemJson, Item.class);
                 Map<String, String> dataToSave = new HashMap<>();
                 dataToSave.put("name",item.getTitle());

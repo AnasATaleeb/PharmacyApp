@@ -47,8 +47,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.viewHolder> 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         final Item model = list.get(position);
-        Log.d(TAG, "Yahhhhhooooooooooooooooooooooooooooooooooooooooooooooooo");
-
         holder.binding.itemTitle.setText(model.getTitle());
         Glide.with(holder.itemView.getContext())
                 .load(model.getPic())
