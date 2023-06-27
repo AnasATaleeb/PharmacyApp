@@ -5,6 +5,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 public class Order {
+
+    private String key;
     private ArrayList<Item> items;
     private double totalPrice;
 
@@ -28,6 +30,7 @@ public class Order {
         this.postalCode = postalCode;
         this.status = status;
     }
+
 
     public String getLocation() {
         return location;
@@ -69,5 +72,21 @@ public class Order {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
     }
 }

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
@@ -37,10 +38,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
             LayoutInflater inflater = (LayoutInflater) ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.orders_item,null);
         }
-        if (arr.size()>0){
-            Order item = arr.get(position);
 
-        }
         return convertView;
     }
 

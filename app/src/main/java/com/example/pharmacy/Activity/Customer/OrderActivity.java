@@ -14,7 +14,15 @@ import com.example.pharmacy.Adaptor.OrderAdapter;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 
@@ -27,12 +35,15 @@ public class OrderActivity extends AppCompatActivity {
     Intent intent;
     ListView orderList;
 
+    private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        mAuth = FirebaseAuth.getInstance();
         getSupportActionBar().hide();
         bottomNavigationSetUp();
         orderList = findViewById(R.id.list_order_state);
@@ -40,33 +51,67 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void setUpList() {
-        ArrayList<Order> arrayList= new ArrayList<>();
-        while (arrayList.size()<10){
             //TODO: get orders from data base
-            ArrayList<Item> items = new ArrayList<>();
-            items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-            items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-            items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-            items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-            items.add(new Item("بانادول" , "لعلاج البرد والرشخ والزكام - 20 قرص","https://firebasestorage.googleapis.com/v0/b/pharmacy-589b4.appspot.com/o/profilepic%2F1687784328564.jpg?alt=media&token=2659115f-3628-4f94-89a7-5a942fe7123b" ,"24.5",7));
-            //TODO:
-            //Order o = (new Order(1,"طلب رقم #1", 1, items, 67.5));
-            //arrayList.add(o);
-        }
-        OrderAdapter adapter = new OrderAdapter(this, 0,arrayList);
-        orderList.setAdapter(adapter);
+            db.collection("Orders").document("Order").collection(mAuth.getUid())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                ArrayList<Order> arrayList= new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String Otitle = document.getString("name");
+                                    String location = document.getString("location");
+                                    double price = Double.parseDouble(document.getString("price"));
+                                    String status = document.getString("status");
+                                    int postal = Integer.parseInt(document.getString("postal"));
+                                    //get collection "items" into this doc
+                                    db.collection("Orders").document("Order").collection(mAuth.getUid())
+                                            .document(document.getId()).collection("items")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
+                                                    if (subcollectionTask.isSuccessful()) {
+                                                        ArrayList<Item> items = new ArrayList<>();
+                                                        for (QueryDocumentSnapshot subdocument : subcollectionTask.getResult()) {
+                                                            String title = subdocument.getString("name");
+                                                            String description = subdocument.getString("description");
+                                                            String pic = subdocument.getString("image");
+                                                            String price = subdocument.getString("price");
+                                                            int quantity = Integer.parseInt(subdocument.getString("size"));
+                                                            String category = subdocument.getString("category");
+                                                            int numberOfItem = Integer.parseInt(subdocument.getString("numberOfItem"));
+                                                            Item item = new Item(title, description, pic, price, quantity, category,numberOfItem);
+                                                            items.add(item);
+                                                        }
 
-        orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // code to execute when a list item is clicked
-                // position indicates the position of the clicked item in the list
-                intent = new Intent(OrderActivity.this, ViewOrderDetailsCus.class);
-                Gson gson = new Gson();
-                intent.putExtra("order",gson.toJson(arrayList.get(position)));
-                startActivity(intent);
-            }
-        });
+                                                        // Add the 'order' object to the ArrayList
+                                                            Order order = new Order(items,price,Otitle, location, postal, status);
+
+                                                            arrayList.add(order);
+                                                    }
+                                                }
+                                            });
+                                }
+                                OrderAdapter adapter = new OrderAdapter(OrderActivity.this, 0, arrayList);
+                                orderList.setAdapter(adapter);
+                                orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        // code to execute when a list item is clicked
+                                        // position indicates the position of the clicked item in the list
+                                        intent = new Intent(OrderActivity.this, ViewOrderDetailsCus.class);
+                                        Gson gson = new Gson();
+                                        intent.putExtra("order",gson.toJson(arrayList.get(position)));
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+
     }
 
     private void bottomNavigationSetUp() {
