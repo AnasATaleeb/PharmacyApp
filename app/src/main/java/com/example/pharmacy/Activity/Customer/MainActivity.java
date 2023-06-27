@@ -2,11 +2,6 @@ package com.example.pharmacy.Activity.Customer;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Category> categories;
     private ArrayList<Item> items;
 
-    private  EditText search;
+    private EditText search;
 
-    private TextView profileHello,profileLoc;
+    private TextView profileHello, profileLoc;
     Intent intent;
 
     TextView allCategory;
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,searchItem.class);
+                intent = new Intent(MainActivity.this, searchItem.class);
                 startActivity(intent);
             }
         });
@@ -114,27 +114,27 @@ public class MainActivity extends AppCompatActivity {
         getItemsFromFireStore();
     }
 
-    private void loadProfileInformation(){
+    private void loadProfileInformation() {
         DocumentReference docRef = db.collection("Users").document(mAuth.getUid());
 
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.exists()){
+                if (documentSnapshot.exists()) {
                     profileLoc.setText(documentSnapshot.getString("location"));
-                }else
-                    Toast.makeText(getApplicationContext(),"خطأ في جلب المعلومات" , Toast.LENGTH_SHORT);
+                } else
+                    Toast.makeText(getApplicationContext(), "خطأ في جلب المعلومات", Toast.LENGTH_SHORT);
             }
         });
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user!= null){
-            if(user.getPhotoUrl() != null){
+        if (user != null) {
+            if (user.getPhotoUrl() != null) {
                 Glide.with(this)
                         .load(user.getPhotoUrl())
                         .into(pofile);
             }
-            if (user.getDisplayName() != null){
-                profileHello.setText( "مرحبا "+user.getDisplayName());
+            if (user.getDisplayName() != null) {
+                profileHello.setText("مرحبا " + user.getDisplayName());
             }
 
         }
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(
                 R.id.itemsList);
-        RecyclerView.LayoutManager layoutManager ;
+        RecyclerView.LayoutManager layoutManager;
         RecyclerView.Adapter adapter;
 
         // Set the span count to 2 and create a GridLayoutManager
@@ -228,9 +228,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true));
 
         // Set your adapter and data to the RecyclerView
-        adapter = new ItemsAdapter(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
+        adapter = new ItemsAdapter(this, items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
         recyclerView.setAdapter(adapter);
     }
+
     private void getItemsFromFireStore() {
         items = new ArrayList<>();
         db.collection("Items").get()

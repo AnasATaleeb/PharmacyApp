@@ -1,14 +1,15 @@
 package com.example.pharmacy.Activity.Customer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Adaptor.ConformationItemAdapter;
@@ -58,14 +59,18 @@ public class Cart extends AppCompatActivity {
         comfBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(Cart.this,Shipment.class);
+                if (items.size() == 0) {
+                    Toast.makeText(Cart.this, "السلة فارغة ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                intent = new Intent(Cart.this, Shipment.class);
                 String itemJson = new Gson().toJson(items);
                 intent.putExtra("items_order", itemJson);
                 startActivity(intent);
             }
         });
 
-       items = new ArrayList<>();
+        items = new ArrayList<>();
 
         db.collection("Users").document(mAuth.getUid()).collection("Cart")
                 .get()
@@ -81,11 +86,11 @@ public class Cart extends AppCompatActivity {
                                 int quantity = Integer.parseInt(document.getString("size"));
                                 String category = document.getString("category");
                                 int numberOfItem = Integer.parseInt(document.getString("numberOfItem"));
-                                Item item = new Item(title, description, pic, price, quantity, category,numberOfItem);
+                                Item item = new Item(title, description, pic, price, quantity, category, numberOfItem);
 
 
                                 fprice += Double.parseDouble(item.getPrice());
-                                final_price.setText( "اجمالي الطلب : "+fprice+" شيكل");
+                                final_price.setText("اجمالي الطلب : " + fprice + " شيكل");
                                 items.add(item);
                             }
                             ItemsSetUp();
@@ -98,13 +103,13 @@ public class Cart extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.itemsOder.setLayoutManager(linearLayoutManager);
 
-        RecyclerView recyclerView =  binding.itemsOder;
+        RecyclerView recyclerView = binding.itemsOder;
         RecyclerView.Adapter adapter;
 
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // Set your adapter and data to the RecyclerView
-        adapter = new ConformationItemAdapter(this,items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
+        adapter = new ConformationItemAdapter(this, items); // Replace 'YourAdapter' and 'data' with your actual adapter and data
         recyclerView.setAdapter(adapter);
     }
 
@@ -125,21 +130,25 @@ public class Cart extends AppCompatActivity {
                     case 1:
                         intent = new Intent(Cart.this, Cart.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 2:
                         intent = new Intent(Cart.this, Love.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 3:
                         intent = new Intent(Cart.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 4:
                         intent = new Intent(Cart.this, OrderActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 5:

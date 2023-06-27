@@ -1,5 +1,7 @@
 package com.example.pharmacy.Activity.DoctorActivities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -62,6 +64,11 @@ public class AddItem extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+       showConfirmationDialog();
     }
 
     private void insertItem() {
@@ -187,5 +194,31 @@ public class AddItem extends AppCompatActivity {
         return true;
     }
 
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("تأكيد الخروج");
+        builder.setMessage("هل أنت متأكد انك تريد الخروج من هذه الصفحة؟");
 
+        // Set up the positive button
+        builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Close the page (activity)
+                finish();
+            }
+        });
+
+        // Set up the negative button
+        builder.setNegativeButton("لا", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Dismiss the dialog and continue with the current activity
+                dialog.dismiss();
+            }
+        });
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -90,6 +92,11 @@ public class Register extends AppCompatActivity {
                 getImage();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        showConfirmationDialog();
     }
 
     @Override
@@ -396,4 +403,33 @@ public class Register extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
     }
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("تأكيد الخروج");
+        builder.setMessage("هل أنت متأكد انك تريد الخروج من هذه الصفحة؟");
+
+        // Set up the positive button
+        builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Close the page (activity)
+                finish();
+            }
+        });
+
+        // Set up the negative button
+        builder.setNegativeButton("لا", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Dismiss the dialog and continue with the current activity
+                dialog.dismiss();
+            }
+        });
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

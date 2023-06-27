@@ -39,7 +39,7 @@ public class MainDelivery extends AppCompatActivity {
 
     ListView orderList;
 
-    ShapeableImageView pofile;
+    ShapeableImageView profile;
     private FirebaseAuth mAuth;
     private TextView profileHello,profileLoc;
 
@@ -48,7 +48,7 @@ public class MainDelivery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_delivery);
         mAuth = FirebaseAuth.getInstance();
-        pofile = findViewById(R.id.userImg);
+        profile = findViewById(R.id.userImg);
         profileHello = findViewById(R.id.profileHello);
         profileLoc = findViewById(R.id.userLoc);
         getSupportActionBar().hide();
@@ -96,7 +96,7 @@ public class MainDelivery extends AppCompatActivity {
             if(user.getPhotoUrl() != null){
                 Glide.with(this)
                         .load(user.getPhotoUrl())
-                        .into(pofile);
+                        .into(profile);
             }
             if (user.getDisplayName() != null){
                 profileHello.setText( "مرحبا "+user.getDisplayName());

@@ -83,6 +83,7 @@ public class MainActivityDoctor extends AppCompatActivity {
             public void onClick(View v) {
                 intent = new Intent(MainActivityDoctor.this, Profile.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -202,11 +203,13 @@ public class MainActivityDoctor extends AppCompatActivity {
                     case 2:
                         intent = new Intent(MainActivityDoctor.this, MainActivityDoctor.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 3:
                         intent = new Intent(MainActivityDoctor.this, OrderStatus.class);
                         startActivity(intent);
+                        finish();
                         break;
                 }
                 return null;

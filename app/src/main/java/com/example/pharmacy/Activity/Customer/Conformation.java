@@ -31,20 +31,19 @@ public class Conformation extends AppCompatActivity {
     private Button btn;
     private ArrayList<Item> items;
     private ActivityPayConfirmationBinding binding;
-    private TextView textView44,textViewShip;
+    private TextView textView44, textViewShip;
 
     private FirebaseAuth mAuth;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    int size =0;
+    int size = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPayConfirmationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         // hide action bar
         getSupportActionBar().hide();
@@ -66,7 +65,7 @@ public class Conformation extends AppCompatActivity {
         items = new ArrayList<>();
         String orderJson = getIntent().getStringExtra("order");
 
-        Order order =new Gson().fromJson(orderJson, Order.class);
+        Order order = new Gson().fromJson(orderJson, Order.class);
 
         textView44.setText("إجمالي الطلب: " + order.getTotalPrice() + " شيكل");
         textViewShip.setText(order.getLocation());
@@ -88,26 +87,23 @@ public class Conformation extends AppCompatActivity {
             Intent intent = new Intent(Conformation.this, FinishOrder.class);
             String orderJson = getIntent().getStringExtra("order");
 
-            Order order =new Gson().fromJson(orderJson, Order.class);
+            Order order = new Gson().fromJson(orderJson, Order.class);
 
             //TODO: add order in FireStore
             mAuth = FirebaseAuth.getInstance();
 
-
-
-
-            order.setKey(System.currentTimeMillis()+"");
+            order.setKey(System.currentTimeMillis() + "");
 
             Map<String, String> dataToSave = new HashMap<>();
-            dataToSave.put("name",order.getName());
+            dataToSave.put("name", order.getName());
             dataToSave.put("location", order.getLocation());
-            dataToSave.put("status",order.getStatus());
-            dataToSave.put("price",order.getTotalPrice()+"");
-            dataToSave.put("postal", order.getPostalCode()+"");
+            dataToSave.put("status", order.getStatus());
+            dataToSave.put("price", order.getTotalPrice() + "");
+            dataToSave.put("postal", order.getPostalCode() + "");
 
 
             db.collection("Orders").document("Order").collection(mAuth.getUid()).document(order.getKey())
-                    .set(dataToSave,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
+                    .set(dataToSave, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
                             Toast toast = Toast.makeText(Conformation.this, "تم ارسال طلبك 🥳", Toast.LENGTH_LONG);
@@ -124,15 +120,15 @@ public class Conformation extends AppCompatActivity {
 
             ArrayList<Item> items1 = order.getItems();
 
-            for (Item item: items1) {
+            for (Item item : items1) {
                 Map<String, String> data = new HashMap<>();
-                data.put("name",item.getTitle());
+                data.put("name", item.getTitle());
                 data.put("category", item.getCategory());
-                data.put("description",item.getDiscreption());
-                data.put("price",item.getPrice());
-                data.put("size",item.getQuantity()+"");
-                data.put("image",item.getPic());
-                data.put("numberOfItem",item.getNumberOfItem()+"");
+                data.put("description", item.getDiscreption());
+                data.put("price", item.getPrice());
+                data.put("size", item.getQuantity() + "");
+                data.put("image", item.getPic());
+                data.put("numberOfItem", item.getNumberOfItem() + "");
                 db.collection("Orders").document("Order").collection(mAuth.getUid()).document(order.getKey()).collection("items")
                         .add(data).addOnSuccessListener(new OnSuccessListener() {
                             @Override
@@ -148,8 +144,6 @@ public class Conformation extends AppCompatActivity {
                             }
                         });
             }
-
-
 
             startActivity(intent);
             finish();
