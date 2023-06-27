@@ -67,7 +67,7 @@ public class ViewItem extends AppCompatActivity {
         plus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drug_num.setText(Integer.parseInt(drug_num.getText()+"") + 1);
+                drug_num.setText((Integer.parseInt(drug_num.getText()+"") + 1) +"" );
             }
         });
         minus_btn.setOnClickListener(new View.OnClickListener() {

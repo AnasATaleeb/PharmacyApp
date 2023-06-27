@@ -46,33 +46,26 @@ public class Shipment extends AppCompatActivity {
         btn.setOnClickListener(v -> {
             if (spinner.getText().toString().isEmpty()){
                 spinner.setError("الرجاء ادخال عنوان التوصيل");
-                return;
-            }
-
-            if(address.getText().toString().isEmpty()) {
+            }else if(address.getText().toString().isEmpty()) {
                 address.setError("الرجاء ادخال الرمز البريدي");
-                return;
+            }else{
+                Intent intent = new Intent(Shipment.this, Payment.class);
+
+                String itemJson1 = getIntent().getStringExtra("items_order");
+
+                Type itemType = new TypeToken<ArrayList<Item>>() {}.getType();
+                ArrayList<Item> itemList = new Gson().fromJson(itemJson1, itemType);
+
+                double fprice =0.0;
+                for (int i = 0; i <itemList.size() ; i++) {
+                    fprice += Double.parseDouble(itemList.get(i).getPrice());
+                }
+
+                Order order = new Order(itemList, fprice,"طلب", spinner.getText().toString(),Integer.parseInt(address.getText().toString()),"تم الطلب");
+                String orderJson = new Gson().toJson(order);
+                intent.putExtra("order", orderJson);
+                startActivity(intent);
             }
-//Order(ArrayList<Item> items, double totalPrice, String name, String location, int postalCode, String status) {
-//
-
-
-            Intent intent = new Intent(Shipment.this, Payment.class);
-
-            String itemJson1 = getIntent().getStringExtra("items_order");
-
-            Type itemType = new TypeToken<ArrayList<Item>>() {}.getType();
-            ArrayList<Item> itemList = new Gson().fromJson(itemJson1, itemType);
-
-            double fprice =0.0;
-            for (int i = 0; i <itemList.size() ; i++) {
-                fprice += Double.parseDouble(itemList.get(i).getPrice());
-            }
-
-            Order order = new Order(itemList, fprice,"طلب", spinner.getText().toString(),Integer.parseInt(address.getText().toString()),"تم الطلب");
-            String orderJson = new Gson().toJson(order);
-            intent.putExtra("order", orderJson);
-            startActivity(intent);
 
         });
     }

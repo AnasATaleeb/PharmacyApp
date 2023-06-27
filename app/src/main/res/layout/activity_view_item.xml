@@ -6,18 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ViewItem">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bac_main"
+        android:elevation="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/backview_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/btn_view_back"
         android:elevation="50dp"
         app:cardCornerRadius="360dp"
         app:flow_verticalAlign="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:foregroundGravity="center">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,13 +54,13 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/btn_view_back"
         android:elevation="50dp"
         app:cardCornerRadius="360dp"
         app:flow_verticalAlign="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:foregroundGravity="center">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,8 +131,7 @@
         android:textColor="@color/green1"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/number_pics"
-        app:layout_constraintEnd_toStartOf="@+id/number_pics"
-        app:layout_constraintTop_toTopOf="@+id/number_pics" />
+        app:layout_constraintEnd_toStartOf="@+id/number_pics" />
 
     <TextView
         android:id="@+id/textView15"

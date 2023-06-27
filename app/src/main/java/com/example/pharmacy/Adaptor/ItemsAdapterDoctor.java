@@ -15,9 +15,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.pharmacy.Activity.DoctorActivities.ViewItemDoctor;
 import com.example.pharmacy.R;
 import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.databinding.ItemBinding;
+import com.example.pharmacy.databinding.ItemDoctorBinding;
 import com.example.pharmacy.model.Item;
 import com.google.gson.Gson;
 
@@ -57,7 +59,7 @@ public class ItemsAdapterDoctor extends RecyclerView.Adapter<ItemsAdapterDoctor.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewItem.class);
+                Intent intent = new Intent(context, ViewItemDoctor.class);
 
                 Item model = list.get(holder.getAdapterPosition());
                 if (model != null) {
@@ -77,10 +79,10 @@ public class ItemsAdapterDoctor extends RecyclerView.Adapter<ItemsAdapterDoctor.
 
     public class viewHolder extends RecyclerView.ViewHolder{
 
-        ItemBinding binding;
+        ItemDoctorBinding binding;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            binding = ItemBinding.bind(itemView);
+            binding = ItemDoctorBinding.bind(itemView);
         }
     }
 }

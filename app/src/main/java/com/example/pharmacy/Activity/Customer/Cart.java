@@ -69,7 +69,6 @@ public class Cart extends AppCompatActivity {
         comfBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: put order in puString json
                 intent = new Intent(Cart.this,Shipment.class);
                 String itemJson = new Gson().toJson(items);
                 intent.putExtra("items_order", itemJson);
