@@ -36,7 +36,11 @@ public class OrderActivity extends AppCompatActivity {
     ListView orderList;
 
     private FirebaseAuth mAuth;
+    ArrayList<Order> arrayList= new ArrayList<>();
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<Item> items = new ArrayList<>();
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -58,7 +62,6 @@ public class OrderActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                ArrayList<Order> arrayList= new ArrayList<>();
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     String Otitle = document.getString("name");
                                     String location = document.getString("location");
@@ -73,7 +76,6 @@ public class OrderActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
                                                     if (subcollectionTask.isSuccessful()) {
-                                                        ArrayList<Item> items = new ArrayList<>();
                                                         for (QueryDocumentSnapshot subdocument : subcollectionTask.getResult()) {
                                                             String title = subdocument.getString("name");
                                                             String description = subdocument.getString("description");
@@ -87,12 +89,13 @@ public class OrderActivity extends AppCompatActivity {
                                                         }
 
                                                         // Add the 'order' object to the ArrayList
-                                                            Order order = new Order(items,price,Otitle, location, postal, status);
-
-                                                            arrayList.add(order);
                                                     }
                                                 }
                                             });
+
+                                    Order order = new Order(items,price,Otitle, location, postal, status);
+
+                                    arrayList.add(order);
                                 }
                                 OrderAdapter adapter = new OrderAdapter(OrderActivity.this, 0, arrayList);
                                 orderList.setAdapter(adapter);
@@ -110,8 +113,6 @@ public class OrderActivity extends AppCompatActivity {
                             }
                         }
                     });
-
-
     }
 
     private void bottomNavigationSetUp() {
