@@ -76,6 +76,7 @@ public class Login extends AppCompatActivity {
         if(!email.isEmpty() || !password.isEmpty()) {
             editEmail.setText(email);
             editPassword.setText(password);
+            swRememberMe.setChecked(true);
         }
 
         // Call setOnClickListeners() function to set all the onClickListeners
@@ -158,7 +159,7 @@ public class Login extends AppCompatActivity {
                                     finish();
                                 }
                             }else
-                                Toast.makeText(getApplicationContext(),"خطأ في جلب المعلومات" , Toast.LENGTH_SHORT);
+                                Toast.makeText(getApplicationContext(),"خطأ في جلب المعلومات" , Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -177,12 +178,11 @@ public class Login extends AppCompatActivity {
 
     // to save the user email and password in the shared preferences
     private void saveUser() {
-        Gson gson = new Gson();
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("myPharmacyEmail", gson.toJson(editEmail.getText().toString()));
-        editor.putString("myPharmacyPassword", gson.toJson(editPassword.getText().toString()));
-        editor.commit();
+        editor.putString("myPharmacyEmail", editEmail.getText().toString());
+        editor.putString("myPharmacyPassword", editPassword.getText().toString());
+        editor.apply();
     }
 
 }
