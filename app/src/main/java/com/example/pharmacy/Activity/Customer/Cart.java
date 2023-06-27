@@ -1,31 +1,20 @@
 package com.example.pharmacy.Activity.Customer;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.Adaptor.ConformationItemAdapter;
-import com.example.pharmacy.Adaptor.ItemsAdapter;
-import com.example.pharmacy.Adaptor.LoveAdapter;
-import com.example.pharmacy.Decorator.GridSpacingItemDecoration;
 import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityCartBinding;
 import com.example.pharmacy.model.Item;
-import com.example.pharmacy.model.Order;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

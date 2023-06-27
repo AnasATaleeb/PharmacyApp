@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.pharmacy.Activity.ViewItem;
+import com.example.pharmacy.Activity.Customer.ViewItem;
 import com.example.pharmacy.Adaptor.OrderAdapter;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Order;

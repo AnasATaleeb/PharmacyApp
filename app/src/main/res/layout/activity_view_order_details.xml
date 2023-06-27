@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/textView46"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/monadi"
@@ -92,15 +92,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/gradient_color"
         android:fontFamily="@font/monadi"
         android:padding="5dp"
         android:text="تم التسليم لموظف التوصيل"
         android:textColor="@color/whitedark"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView48"
         tools:textSize="12sp" />
 
     <TextView
@@ -123,6 +123,7 @@
         android:layout_height="19dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewShip"
         app:srcCompat="@drawable/silver_line_dotted" />
@@ -169,11 +170,11 @@
         android:id="@+id/imageView26"
         android:layout_width="370dp"
         android:layout_height="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="-24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/items_oder"
+        app:layout_constraintTop_toTopOf="@+id/btn_next"
         app:srcCompat="@drawable/silver_line_dotted" />
 
     <TextView
@@ -207,10 +208,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/items_oder"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView26"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView45" />

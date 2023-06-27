@@ -24,15 +24,15 @@
         android:id="@+id/textView46"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/monadi"
         android:text="حالة الطلب :"
         android:textColor="@color/dark"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView26" />
+        app:layout_constraintBottom_toTopOf="@+id/textView48"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView19"
@@ -64,16 +64,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/monadi"
         android:text="تم الطلب"
         android:textColor="@color/silver"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView46" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -145,36 +145,36 @@
         android:id="@+id/imageView25"
         android:layout_width="370dp"
         android:layout_height="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/final_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView48"
         app:srcCompat="@drawable/silver_line_dotted" />
 
     <ImageView
         android:id="@+id/imageView26"
         android:layout_width="370dp"
         android:layout_height="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView46"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/items_oder"
         app:srcCompat="@drawable/silver_line_dotted" />
 
     <TextView
         android:id="@+id/final_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/monadi"
         android:gravity="center"
         android:text=" إجمالي الطلب: 150 شيكل"
         android:textColor="@color/green1"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView25"
-        app:layout_constraintStart_toStartOf="@+id/imageView25"
-        app:layout_constraintTop_toBottomOf="@+id/imageView25" />
+        app:layout_constraintStart_toStartOf="@+id/imageView25" />
 
     <TextView
         android:id="@+id/textView45"
@@ -193,10 +193,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/items_oder"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView26"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView45" />

@@ -14,9 +14,12 @@
         android:theme="@style/Theme.Pharmacy"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Customer.ViewOrderDetailsCus"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DoctorActivities.ViewItemDoctor"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.DoctorActivities.AddItem"
             android:exported="false"
@@ -24,13 +27,9 @@
         <activity
             android:name=".Splash.IntroActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".Activity.Register"
-            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Customer.ViewOrderDetailsCus"
+            android:name=".Activity.Register"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -94,7 +93,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ViewItem"
+            android:name=".Activity.Customer.ViewItem"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.pharmacy.Activity.ViewItem;
 import com.example.pharmacy.Adaptor.LoveAdapter;
 import com.example.pharmacy.R;
 import com.example.pharmacy.model.Item;
