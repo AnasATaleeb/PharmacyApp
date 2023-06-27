@@ -199,10 +199,12 @@ public class MainActivity extends AppCompatActivity {
 
         categories = new ArrayList<>();
         categories.add(new Category("كل المنتجات", R.drawable.all));
-        categories.add(new Category("أدوية برد", R.drawable.drug));
-        categories.add(new Category("ابر وسرنجات", R.drawable.syringe));
-        categories.add(new Category("عناية بالبشرة", R.drawable.skin));
-        categories.add(new Category("حليب أطفال", R.drawable.milkpowder));
+        categories.add(new Category("ادوية", R.drawable.drug));
+        categories.add(new Category("ادوات طبية", R.drawable.syringe));
+        categories.add(new Category("العناية بالوجه", R.drawable.skin));
+        categories.add(new Category("مستلزمات الاطفال", R.drawable.milkpowder));
+        categories.add(new Category("ميك اب", R.drawable.makeup));
+        categories.add(new Category("العناية الشخصية", R.drawable.personalcare4));
 
         CategoryAdapter adapter = new CategoryAdapter(this, categories);
         binding.categoryList.setAdapter(adapter);

@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements Runnable {
     private TextView login_title;
     private EditText editEmail, editPassword;
     private Button btnLogin;
@@ -185,4 +185,8 @@ public class Login extends AppCompatActivity {
         editor.apply();
     }
 
+    @Override
+    public void run() {
+
+    }
 }
