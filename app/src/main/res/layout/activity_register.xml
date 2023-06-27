@@ -49,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/userImg"
         app:layout_constraintStart_toEndOf="@+id/userImg"
         app:layout_constraintTop_toBottomOf="@+id/register_title"
-        app:srcCompat="@drawable/photo_32" />
+        app:srcCompat="@drawable/photo_64" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"

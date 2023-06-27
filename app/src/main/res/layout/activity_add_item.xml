@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/addImg"
         app:layout_constraintStart_toEndOf="@+id/addImg"
         app:layout_constraintTop_toTopOf="@+id/addImg"
-        app:srcCompat="@drawable/photo_32" />
+        app:srcCompat="@drawable/photo_64" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
