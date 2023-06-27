@@ -105,6 +105,9 @@ public class Login extends AppCompatActivity {
 
     private void setOnClickListeners() {
         btnLogin.setOnClickListener(v -> {
+            // to hide the keyboard when the user clicks on the login button
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(btnLogin.getWindowToken(), 0);
             login();
         });
     }

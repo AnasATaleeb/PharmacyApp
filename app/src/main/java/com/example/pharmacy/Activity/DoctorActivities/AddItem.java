@@ -1,9 +1,5 @@
 package com.example.pharmacy.Activity.DoctorActivities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pharmacy.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,11 +28,11 @@ import java.util.Map;
 
 public class AddItem extends AppCompatActivity {
 
-    private static final int CHOOSE_IMAGE =101;
+    private static final int CHOOSE_IMAGE = 101;
     Uri uriImg;
-    String profileUrl ="";
-    private TextInputEditText itemName,itemDes,itemPrice,itemSize,itemCat;
-    private ImageView itemImg,add_img;
+    String profileUrl = "";
+    private TextInputEditText itemName, itemDes, itemPrice, itemSize, itemCat;
+    private ImageView itemImg, add_img;
     Button btnAdd;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -40,8 +40,11 @@ public class AddItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        // Hide the action bar
         getSupportActionBar().hide();
 
+        // initialize views
         initialization();
 
         add_img.setOnClickListener(new View.OnClickListener() {
@@ -54,49 +57,22 @@ public class AddItem extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImg();
+                if (isInputComplete()) {
+                    uploadImg();
+                }
             }
         });
     }
 
     private void insertItem() {
-        if(itemName.getText().toString().isEmpty()){
-            Toast toast = Toast.makeText(AddItem.this, "ادخل اسم المنتج 😥", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        if(itemCat.getText().toString().isEmpty()){
-            Toast toast = Toast.makeText(AddItem.this, "ادخل نوع المنتج 😥", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        if(itemDes.getText().toString().isEmpty()){
-            Toast toast = Toast.makeText(AddItem.this, "ادخل وصف المنتج 😥", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        if(itemPrice.getText().toString().isEmpty()){
-            Toast toast = Toast.makeText(AddItem.this, "ادخل سعر المنتج 😥", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        if(itemSize.getText().toString().isEmpty()){
-            Toast toast = Toast.makeText(AddItem.this, "ادخل حجم المنتج 😥", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        if(profileUrl.isEmpty()){
-            Toast toast = Toast.makeText(AddItem.this, "اختر صورة المنتج 😥", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
+        // insert item to database
         Map<String, String> dataToSave = new HashMap<>();
-        dataToSave.put("name",itemName.getText().toString());
+        dataToSave.put("name", itemName.getText().toString());
         dataToSave.put("category", itemCat.getText().toString());
-        dataToSave.put("description",itemDes.getText().toString());
-        dataToSave.put("price",itemPrice.getText().toString());
-        dataToSave.put("size",itemSize.getText().toString());
-        dataToSave.put("image",profileUrl);
+        dataToSave.put("description", itemDes.getText().toString());
+        dataToSave.put("price", itemPrice.getText().toString());
+        dataToSave.put("size", itemSize.getText().toString());
+        dataToSave.put("image", profileUrl);
 
         db.collection("Items").
                 add(dataToSave).addOnSuccessListener(new OnSuccessListener() {
@@ -120,15 +96,16 @@ public class AddItem extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uriImg = data.getData();
-            try{
+            try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriImg);
                 itemImg.setImageBitmap(bitmap);
-            }catch (Exception e){
+            } catch (Exception e) {
             }
         }
     }
+
     private void getImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -136,18 +113,18 @@ public class AddItem extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
     }
 
-    private void uploadImg(){
-        StorageReference imgRef = FirebaseStorage.getInstance().getReference("itemPic/"+ System.currentTimeMillis() +".jpg");
+    private void uploadImg() {
+        StorageReference imgRef = FirebaseStorage.getInstance().getReference("itemPic/" + System.currentTimeMillis() + ".jpg");
         imgRef.putFile(uriImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                Toast.makeText(getApplicationContext(), "تم رقع الصورة", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "تم رفع الصورة", Toast.LENGTH_SHORT).show();
                 //profileUrl= taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                 taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Toast.makeText(getApplicationContext(),"تم جلب url",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "تم جلب url", Toast.LENGTH_SHORT).show();
                         profileUrl = uri.toString();
                         insertItem();
                     }
@@ -170,4 +147,45 @@ public class AddItem extends AppCompatActivity {
         add_img = findViewById(R.id.add_img);
         itemCat = findViewById(R.id.itemCat);
     }
+
+    private boolean isInputComplete() {
+
+        // check if name is not null
+        if (itemName.getText().toString().isEmpty()) {
+            itemName.setError("الرجاء ادخال اسم المنتج");
+            itemName.requestFocus();
+            return false;
+        }
+
+        // check if category is not null
+        if (itemCat.getText().toString().isEmpty()) {
+            itemCat.setError("الرجاء ادخال نوع المنتج");
+            itemCat.requestFocus();
+            return false;
+        }
+
+        // check if description is not null
+        if (itemDes.getText().toString().isEmpty()) {
+            itemDes.setError("الرجاء ادخال وصف المنتج");
+            itemDes.requestFocus();
+            return false;
+        }
+
+        // check if price is not null
+        if (itemPrice.getText().toString().isEmpty()) {
+            itemPrice.setError("الرجاء ادخال سعر المنتج");
+            itemPrice.requestFocus();
+            return false;
+        }
+
+        // check if size is not null
+        if (itemSize.getText().toString().isEmpty()) {
+            itemSize.setError("الرجاء ادخال حجم المنتج");
+            itemSize.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+
 }
