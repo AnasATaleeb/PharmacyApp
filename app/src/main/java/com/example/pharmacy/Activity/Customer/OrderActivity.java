@@ -18,6 +18,7 @@ import com.example.pharmacy.model.Order;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -57,49 +58,50 @@ public class OrderActivity extends AppCompatActivity {
 
     private void setUpList() {
             //TODO: get orders from data base
-            db.collection("Orders").document("Order").collection(mAuth.getUid())
+            db.collection("Orders").document(mAuth.getUid())
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    String Otitle = document.getString("name");
-                                    String location = document.getString("location");
-                                    double price = Double.parseDouble(document.getString("price"));
-                                    String status = document.getString("status");
-                                    int postal = Integer.parseInt(document.getString("postal"));
-                                    //get collection "items" into this doc
-                                    db.collection("Orders").document("Order").collection(mAuth.getUid())
-                                            .document(document.getId()).collection("items")
-                                            .get()
-                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
-                                                    if (subcollectionTask.isSuccessful()) {
-                                                        for (QueryDocumentSnapshot subdocument : subcollectionTask.getResult()) {
-                                                            String title = subdocument.getString("name");
-                                                            String description = subdocument.getString("description");
-                                                            String pic = subdocument.getString("image");
-                                                            String price = subdocument.getString("price");
-                                                            int quantity = Integer.parseInt(subdocument.getString("size"));
-                                                            String category = subdocument.getString("category");
-                                                            int numberOfItem = Integer.parseInt(subdocument.getString("numberOfItem"));
-                                                            Item item = new Item(title, description, pic, price, quantity, category,numberOfItem);
-                                                            items.add(item);
-                                                        }
+                                DocumentSnapshot document = task.getResult();
 
-                                                        // Add the 'order' object to the ArrayList
+                                String Otitle = document.getString("name");
+                                String location = document.getString("location");
+                                if(document.getString("price") == null)
+                                    return;
+                                double price = Double.parseDouble(document.getString("price"));
+                                String status = document.getString("status");
+                                int postal = Integer.parseInt(document.getString("postal"));
+                                String key = document.getString("key");
+                                //get collection "items" into this doc
+                                db.collection("Orders").document(mAuth.getUid())
+                                        .collection(key)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
+                                                if (subcollectionTask.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot subdocument : subcollectionTask.getResult()) {
+                                                        String title = subdocument.getString("name");
+                                                        String description = subdocument.getString("description");
+                                                        String pic = subdocument.getString("image");
+                                                        String price = subdocument.getString("price");
+                                                        int quantity = Integer.parseInt(subdocument.getString("size"));
+                                                        String category = subdocument.getString("category");
+                                                        int numberOfItem = Integer.parseInt(subdocument.getString("numberOfItem"));
+                                                        Item item = new Item(title, description, pic, price, quantity, category,numberOfItem);
+                                                        items.add(item);
                                                     }
                                                 }
-                                            });
-
+                                            }
+                                        });
                                     Order order = new Order(items,price,Otitle, location, postal, status);
-
                                     arrayList.add(order);
+                                    OrderAdapter adapter = new OrderAdapter(OrderActivity.this, 0, arrayList);
+                                    orderList.setAdapter(adapter);
                                 }
-                                OrderAdapter adapter = new OrderAdapter(OrderActivity.this, 0, arrayList);
-                                orderList.setAdapter(adapter);
+
                                 orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,7 +114,7 @@ public class OrderActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-                        }
+
                     });
     }
 

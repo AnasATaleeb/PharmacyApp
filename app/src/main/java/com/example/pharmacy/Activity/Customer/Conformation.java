@@ -100,10 +100,11 @@ public class Conformation extends AppCompatActivity {
             dataToSave.put("status", order.getStatus());
             dataToSave.put("price", order.getTotalPrice() + "");
             dataToSave.put("postal", order.getPostalCode() + "");
+            dataToSave.put("key",order.getKey());
 
 
-            db.collection("Orders").document("Order").collection(mAuth.getUid()).document(order.getKey())
-                    .set(dataToSave, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
+            db.collection("Orders").document(mAuth.getUid())
+                    .set(dataToSave,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
                             Toast toast = Toast.makeText(Conformation.this, "تم ارسال طلبك 🥳", Toast.LENGTH_LONG);
@@ -129,7 +130,7 @@ public class Conformation extends AppCompatActivity {
                 data.put("size", item.getQuantity() + "");
                 data.put("image", item.getPic());
                 data.put("numberOfItem", item.getNumberOfItem() + "");
-                db.collection("Orders").document("Order").collection(mAuth.getUid()).document(order.getKey()).collection("items")
+                db.collection("Orders").document(mAuth.getUid()).collection(order.getKey())
                         .add(data).addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
