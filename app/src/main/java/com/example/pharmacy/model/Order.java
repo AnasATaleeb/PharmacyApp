@@ -89,4 +89,17 @@ public class Order {
     public void setPostalCode(int postalCode) {
         this.postalCode = postalCode;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "key='" + key + '\'' +
+                ", items=" + items +
+                ", totalPrice=" + totalPrice +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", postalCode=" + postalCode +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

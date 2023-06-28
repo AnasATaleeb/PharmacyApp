@@ -103,7 +103,7 @@ public class Conformation extends AppCompatActivity {
             dataToSave.put("key",order.getKey());
 
 
-            db.collection("Orders").document(mAuth.getUid())
+            db.collection("Orders").document(mAuth.getUid()).collection(order.getKey()).document("detail")
                     .set(dataToSave,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
