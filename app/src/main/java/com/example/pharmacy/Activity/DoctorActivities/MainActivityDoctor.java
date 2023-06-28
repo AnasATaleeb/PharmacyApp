@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -103,6 +105,9 @@ public class MainActivityDoctor extends AppCompatActivity {
             }
         });
 
+        add_Item.setAlpha(0f);
+        add_Item.setTranslationY(50);
+        add_Item.animate().alpha(1f).translationYBy(-60).setDuration(1500);
         add_Item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

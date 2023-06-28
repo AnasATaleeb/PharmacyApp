@@ -3,8 +3,10 @@ package com.example.pharmacy.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +16,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -67,6 +70,7 @@ public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private ProgressBar progressBar;
+    private ConstraintLayout con;
 
     DocumentReference mDocRef = FirebaseFirestore.getInstance().document("pharmacy/patient");
 
@@ -76,9 +80,17 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // hide action bar
         getSupportActionBar().hide();
+
+        //connect to firebase
         mAuth = FirebaseAuth.getInstance();
         initializeData();
+        
+        register.setAlpha(0f);
+        register.setTranslationY(50);
+        register.animate().alpha(1f).translationYBy(-60).setDuration(1500);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +102,15 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getImage();
+            }
+        });
+
+        con.setOnClickListener(v ->{
+            // to hide the keyboard when the user clicks on the login button'
+            View view = this.getCurrentFocus();
+            if (view != null) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         });
     }
@@ -394,6 +415,7 @@ public class Register extends AppCompatActivity {
         userImg = findViewById(R.id.userImg);
         userEmail = findViewById(R.id.userEmail);
         userPhone = findViewById(R.id.userPhone);
+        con = findViewById(R.id.con);
         userLocation = findViewById(R.id.userLocation);
         userName = findViewById(R.id.userName);
         userPassword = findViewById(R.id.userPassword);

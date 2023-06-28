@@ -1,6 +1,7 @@
 package com.example.pharmacy.Activity.DoctorActivities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.pharmacy.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,6 +37,7 @@ public class AddItem extends AppCompatActivity {
     Uri uriImg;
     String profileUrl = "";
     private TextInputEditText itemName, itemDes, itemPrice, itemSize, itemCat;
+    private ConstraintLayout constraintLayoutmain;
     private ImageView itemImg, add_img;
     Button btnAdd;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -62,6 +66,15 @@ public class AddItem extends AppCompatActivity {
                 if (isInputComplete()) {
                     uploadImg();
                 }
+            }
+        });
+
+        constraintLayoutmain.setOnClickListener(v -> {
+            // to hide the keyboard when the user clicks on the login button'
+            View view = this.getCurrentFocus();
+            if (view != null) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         });
     }
@@ -153,6 +166,7 @@ public class AddItem extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAdd);
         add_img = findViewById(R.id.add_img);
         itemCat = findViewById(R.id.itemCat);
+        constraintLayoutmain = findViewById(R.id.constraintLayoutmain);
     }
 
     private boolean isInputComplete() {

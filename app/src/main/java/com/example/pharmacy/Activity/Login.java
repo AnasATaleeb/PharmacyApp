@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.pharmacy.Activity.Customer.MainActivity;
@@ -47,6 +49,7 @@ public class Login extends AppCompatActivity implements Runnable {
     private Button btnLogin;
     private Switch swRememberMe;
     SharedPreferences sharedPreferences;
+    private ConstraintLayout constraintLayout;
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -102,6 +105,10 @@ public class Login extends AppCompatActivity implements Runnable {
         editPassword = findViewById(R.id.editPassword);
         btnLogin = findViewById(R.id.btnLogin);
         swRememberMe = findViewById(R.id.swRememberMe);
+        constraintLayout = findViewById(R.id.constraintLayout);
+        btnLogin.setAlpha(0f);
+        btnLogin.setTranslationY(50);
+        btnLogin.animate().alpha(1f).translationYBy(-60).setDuration(1500);
     }
 
     private void setOnClickListeners() {
@@ -110,6 +117,11 @@ public class Login extends AppCompatActivity implements Runnable {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(btnLogin.getWindowToken(), 0);
             login();
+        });
+
+        constraintLayout.setOnClickListener(v -> {
+            // to hide the keyboard when the user clicks on the login button'
+            hideKeyboard();
         });
     }
 
@@ -183,6 +195,14 @@ public class Login extends AppCompatActivity implements Runnable {
         editor.putString("myPharmacyEmail", editEmail.getText().toString());
         editor.putString("myPharmacyPassword", editPassword.getText().toString());
         editor.apply();
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override

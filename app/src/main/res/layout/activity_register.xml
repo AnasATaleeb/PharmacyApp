@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/monadi"
         android:text="إنشاء حساب"
@@ -227,7 +228,8 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
+        >
 
         <RadioButton
             android:id="@+id/rdDelivary"
@@ -235,15 +237,21 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/monadi"
             android:padding="2dp"
+            android:layoutDirection="rtl"
+            android:layout_gravity="right"
             android:text="موظف توصيل"
+            android:layout_marginHorizontal="7dp"
             android:textColor="@color/green2" />
 
         <RadioButton
             android:id="@+id/rdPatient"
+            android:layout_marginHorizontal="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/monadi"
             android:padding="2dp"
+            android:layoutDirection="rtl"
+            android:layout_gravity="right"
             android:text="عميل"
             android:textColor="@color/green2" />
 
@@ -251,7 +259,10 @@
             android:id="@+id/rdDoctor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="7dp"
+            android:layout_gravity="right"
             android:fontFamily="@font/monadi"
+            android:layoutDirection="rtl"
             android:padding="2dp"
             android:text="دكتور"
             android:textColor="@color/green2" />
