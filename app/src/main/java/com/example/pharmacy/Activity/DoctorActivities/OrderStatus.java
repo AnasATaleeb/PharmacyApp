@@ -9,8 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.pharmacy.Activity.Customer.OrderActivity;
-import com.example.pharmacy.Activity.Customer.ViewOrderDetailsCus;
 import com.example.pharmacy.Adaptor.OrderAdapter;
 import com.example.pharmacy.Adaptor.OrderStateAdapter;
 import com.example.pharmacy.R;
@@ -19,8 +17,6 @@ import com.example.pharmacy.model.Order;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -56,36 +52,27 @@ public class OrderStatus extends AppCompatActivity {
     }
 
     private void setUpList() {
-        //TODO: get orders from database
-        db.collection("Orders")
+        //TODO: get orders from data base
+        db.collection("Orders").document("Order").collection(mAuth.getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            ArrayList<Order> orders = new ArrayList<>();
-
-                            for (QueryDocumentSnapshot orderDocument : task.getResult()) {
-                                String Otitle = orderDocument.getString("name");
-                                String location = orderDocument.getString("location");
-                                if (orderDocument.getString("price") == null)
-                                    continue;
-                                double price = Double.parseDouble(orderDocument.getString("price"));
-                                String status = orderDocument.getString("status");
-                                int postal = Integer.parseInt(orderDocument.getString("postal"));
-                                String key = orderDocument.getString("key");
-
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String Otitle = document.getString("name");
+                                String location = document.getString("location");
+                                double price = Double.parseDouble(document.getString("price"));
+                                String status = document.getString("status");
+                                int postal = Integer.parseInt(document.getString("postal"));
                                 //get collection "items" into this doc
-                                db.collection("Orders")
-                                        .document(orderDocument.getId())
-                                        .collection(key)
+                                db.collection("Orders").document("Order").collection(mAuth.getUid())
+                                        .document(document.getId()).collection("items")
                                         .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
                                                 if (subcollectionTask.isSuccessful()) {
-                                                    ArrayList<Item> items = new ArrayList<>();
-
                                                     for (QueryDocumentSnapshot subdocument : subcollectionTask.getResult()) {
                                                         String title = subdocument.getString("name");
                                                         String description = subdocument.getString("description");
@@ -94,38 +81,34 @@ public class OrderStatus extends AppCompatActivity {
                                                         int quantity = Integer.parseInt(subdocument.getString("size"));
                                                         String category = subdocument.getString("category");
                                                         int numberOfItem = Integer.parseInt(subdocument.getString("numberOfItem"));
-                                                        Item item = new Item(title, description, pic, price, quantity, category, numberOfItem);
+                                                        Item item = new Item(title, description, pic, price, quantity, category,numberOfItem);
                                                         items.add(item);
-                                                    }
-
-                                                    Order order = new Order(items, price, Otitle, location, postal, status);
-                                                    orders.add(order);
-
-                                                    if (orders.size() == task.getResult().size()) {
-                                                        OrderAdapter adapter = new OrderAdapter(OrderStatus.this, 0, orders);
-                                                        orderList.setAdapter(adapter);
                                                     }
                                                 }
                                             }
                                         });
-                                orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        // code to execute when a list item is clicked
-                                        // position indicates the position of the clicked item in the list
-                                        Intent intent = new Intent(OrderStatus.this, ViewOrderDetails.class);
-                                        Gson gson = new Gson();
-                                        intent.putExtra("order", gson.toJson(orders.get(position)));
-                                        intent.putExtra("order_path","/Orders/"+orderDocument.getId()+"/"+ (key));
-                                        startActivity(intent);
-                                    }
-                                });
+
+                                Order order = new Order(items,price,Otitle, location, postal, status);
+                                arrayList.add(order);
                             }
+                            OrderStateAdapter adapter = new OrderStateAdapter(OrderStatus.this, 0,arrayList);
+                            orderList.setAdapter(adapter);
+
+                            orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    // code to execute when a list item is clicked
+                                    // position indicates the position of the clicked item in the list
+                                    intent = new Intent(OrderStatus.this, ViewOrderDetails.class);
+                                    Gson gson = new Gson();
+                                    intent.putExtra("order",gson.toJson(arrayList.get(position)));
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
                 });
     }
-
 
     private void bottomNavigationSetUp() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
