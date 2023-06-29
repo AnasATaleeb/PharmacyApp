@@ -1,21 +1,31 @@
 package com.example.pharmacy.Activity.Customer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.cardview.widget.CardView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
+
+import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.Login;
 import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -24,70 +34,37 @@ public class Setting extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
     Intent intent;
 
-    CardView user,setting,love,cart;
+    CardView user, setting, love, cart;
+    private TextView profNameSettings;
+    private ImageView userImg;
+
     Button logout;
-    Switch nightModeSwitch ;
+    Switch nightModeSwitch;
     private boolean isUserInteracting = false;
     private static final String STATE_USER_INTERACTING = "userInteracting";
+    private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        // Hide the action bar
         getSupportActionBar().hide();
+
         bottomNavigationSetUp();
 
-        setting = findViewById(R.id.setting_card);
-        user = findViewById(R.id.user_card);
-        love = findViewById(R.id.love_card);
-        cart = findViewById(R.id.cart_card);
-        logout = findViewById(R.id.logout);
+        // initializeUI
+        initializeUI();
 
+        loadProfileInformation();
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(Setting.this, Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(Setting.this,Setting.class);
-                startActivity(intent);
-            }
-        });
+        // setListeners
+        setListeners();
 
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(Setting.this, Profile.class);
-                startActivity(intent);
-            }
-        });
-
-        love.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(Setting.this, Love.class);
-                startActivity(intent);
-            }
-        });
-
-        cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(Setting.this, Cart.class);
-                startActivity(intent);
-            }
-        });
-
-
-        nightModeSwitch = findViewById(R.id.switch2);
-
+        // nightModeSwitch
         SharedPreferences sharedPref = getSharedPreferences("nightModePref", MODE_PRIVATE);
         boolean isNightModeOn = sharedPref.getBoolean("NightMode", false);
 
@@ -115,6 +92,60 @@ public class Setting extends AppCompatActivity {
         });
     }
 
+    private void initializeUI() {
+        mAuth = FirebaseAuth.getInstance();
+        setting = findViewById(R.id.setting_card);
+        user = findViewById(R.id.user_card);
+        love = findViewById(R.id.love_card);
+        cart = findViewById(R.id.cart_card);
+        logout = findViewById(R.id.logout);
+        profNameSettings = findViewById(R.id.profNameSettings);
+        userImg = findViewById(R.id.userImg);
+        nightModeSwitch = findViewById(R.id.switch2);
+
+    }
+
+    private void setListeners() {
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this, Setting.class);
+                startActivity(intent);
+            }
+        });
+
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this, Profile.class);
+                startActivity(intent);
+            }
+        });
+
+        love.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this, Love.class);
+                startActivity(intent);
+            }
+        });
+
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Setting.this, Cart.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     private void bottomNavigationSetUp() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -134,26 +165,31 @@ public class Setting extends AppCompatActivity {
                     case 1:
                         intent = new Intent(Setting.this, Cart.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 2:
                         intent = new Intent(Setting.this, Love.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 3:
                         intent = new Intent(Setting.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 4:
                         intent = new Intent(Setting.this, OrderActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 5:
                         Intent intent = new Intent(Setting.this, Setting.class);
                         startActivity(intent);
+                        finish();
                         break;
                 }
                 return null;
@@ -167,5 +203,21 @@ public class Setting extends AppCompatActivity {
                 return null;
             }
         });
+    }
+
+    private void loadProfileInformation(){
+        DocumentReference docRef = db.collection("Users").document(mAuth.getUid());
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!= null){
+            if(user.getPhotoUrl() != null){
+                Glide.with(this)
+                        .load(user.getPhotoUrl())
+                        .into(userImg);
+            }
+            if (user.getDisplayName() != null){
+                profNameSettings.setText( user.getDisplayName());
+            }
+        }
     }
 }

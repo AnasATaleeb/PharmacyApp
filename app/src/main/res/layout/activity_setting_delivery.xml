@@ -104,7 +104,7 @@
         app:mbn_shadowColor="#1f212121" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/profNameSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

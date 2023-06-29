@@ -69,6 +69,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
+        // initialize views
+        initializeUI();
+
+        // set up items
+        threadGetItemsFromFireStore.start();
+
+        // set on listeners
+        setOnListeners();
+
+        // set up bottom navigation
+        bottomNavigationSetUp();
+
+        // set up categories
+        categoriesSetUp();
+
+        // set up items no thread
+       // getItemsFromFireStore();
+    }
+
+    private void initializeUI() {
         allCategory = findViewById(R.id.all_cat);
         allitms = findViewById(R.id.all_itms);
         pofile = findViewById(R.id.userImg);
@@ -77,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
         search = findViewById(R.id.search);
         mAuth = FirebaseAuth.getInstance();
         loadProfileInformation();
+    }
+
+    private void setOnListeners() {
         pofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,10 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        bottomNavigationSetUp();
-        categoriesSetUp();
-        getItemsFromFireStore();
     }
 
     private void loadProfileInformation() {
@@ -256,4 +275,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    Thread threadGetItemsFromFireStore = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            getItemsFromFireStore();
+        }
+    });
 }

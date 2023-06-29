@@ -27,13 +27,10 @@ public class MainSign extends AppCompatActivity {
         login.setTranslationY(50);
         login.animate().alpha(1f).translationYBy(-50).setDuration(1500);
 
-
         signup = findViewById(R.id.signup_btn);
         signup.setAlpha(0f);
         signup.setTranslationY(50);
         signup.animate().alpha(1f).translationYBy(-60).setDuration(1500);
-
-
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

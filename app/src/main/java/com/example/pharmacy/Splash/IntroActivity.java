@@ -1,12 +1,8 @@
 package com.example.pharmacy.Splash;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,7 +10,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.pharmacy.Activity.Login;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.pharmacy.Activity.MainSign;
 import com.example.pharmacy.R;
 
@@ -33,7 +31,10 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_activity);
+
+        // Hide the action bar
         getSupportActionBar().hide();
+
         //Hooks
         viewPager = findViewById(R.id.slider);
         viewPager.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
@@ -48,6 +49,12 @@ public class IntroActivity extends AppCompatActivity {
         //Dots
         addDots(0);
         viewPager.addOnPageChangeListener(changeListener);
+
+        letsGetStarted.setOnClickListener(view ->
+        {
+            startActivity(new Intent(IntroActivity.this, MainSign.class));
+            finish();
+        });
     }
 
     public void skip(View view) {

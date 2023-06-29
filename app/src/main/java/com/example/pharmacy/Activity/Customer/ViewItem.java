@@ -1,9 +1,5 @@
 package com.example.pharmacy.Activity.Customer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.example.pharmacy.R;
@@ -28,63 +28,51 @@ import java.util.Map;
 public class ViewItem extends AppCompatActivity {
 
     CardView back_btn;
-    CardView love_btn,plus_btn,minus_btn;
+    CardView love_btn, plus_btn, minus_btn;
     ImageView img;
-
-    Button add_tocart;
-
+    Button add_toCart;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    TextView view_dis,price_view,item_name,number_pics,drug_num;
+    TextView view_dis, price_view, item_name, number_pics, drug_num;
     ImageView item_img;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
-        back_btn=findViewById(R.id.backview_btn);
-        love_btn = findViewById(R.id.loveview_btn);
-        add_tocart = findViewById(R.id.add_tocart);
 
-        view_dis = findViewById(R.id.view_dis);
-        price_view = findViewById(R.id.price_view);
-        item_img = findViewById(R.id.item_img);
-        item_name = findViewById(R.id.item_name);
-        number_pics = findViewById(R.id.number_pics);
-        img = findViewById(R.id.love_img);
-        drug_num = findViewById(R.id.drug_num);
-        plus_btn = findViewById(R.id.plus_btn);
-        minus_btn = findViewById(R.id.minus_btn);
+        // 1. Initialize the UI components
+        initializeUI();
 
         plus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drug_num.setText((Integer.parseInt(drug_num.getText()+"") + 1) +"" );
+                drug_num.setText((Integer.parseInt(drug_num.getText() + "") + 1) + "");
             }
         });
         minus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drug_num.setText(Integer.parseInt(drug_num.getText()+"") - 1);
+                drug_num.setText(Integer.parseInt(drug_num.getText() + "") - 1);
             }
         });
 
         String itemJson = getIntent().getStringExtra("item_to_view");
 
-        add_tocart.setOnClickListener(new View.OnClickListener() {
+        add_toCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Item item = new Gson().fromJson(itemJson, Item.class);
                 Map<String, String> dataToSave = new HashMap<>();
-                dataToSave.put("name",item.getTitle());
+                dataToSave.put("name", item.getTitle());
                 dataToSave.put("category", item.getCategory());
-                dataToSave.put("description",item.getDiscreption());
-                dataToSave.put("price",item.getPrice());
-                dataToSave.put("size",item.getQuantity()+"");
-                dataToSave.put("image",item.getPic());
-                dataToSave.put("numberOfItem",drug_num.getText()+"");
+                dataToSave.put("description", item.getDiscreption());
+                dataToSave.put("price", item.getPrice());
+                dataToSave.put("size", item.getQuantity() + "");
+                dataToSave.put("image", item.getPic());
+                dataToSave.put("numberOfItem", drug_num.getText() + "");
 
                 db.collection("Users").document(mAuth.getUid()).collection("Cart")
                         .add(dataToSave).addOnSuccessListener(new OnSuccessListener() {
@@ -108,12 +96,12 @@ public class ViewItem extends AppCompatActivity {
         if (itemJson != null && !itemJson.isEmpty()) {
             Item item = new Gson().fromJson(itemJson, Item.class);
 
-            if(item != null){
+            if (item != null) {
 
                 view_dis.setText(item.getDiscreption());
-                price_view.setText(item.getPrice()+" شيكل");
+                price_view.setText(item.getPrice() + " شيكل");
                 item_name.setText(item.getTitle());
-                number_pics.setText(item.getQuantity()+"");
+                number_pics.setText(item.getQuantity() + "");
                 Glide.with(this)
                         .load(item.getPic())
                         .into(item_img);
@@ -156,12 +144,12 @@ public class ViewItem extends AppCompatActivity {
                 //TODO: add to love list
                 Item item = new Gson().fromJson(itemJson, Item.class);
                 Map<String, String> dataToSave = new HashMap<>();
-                dataToSave.put("name",item.getTitle());
+                dataToSave.put("name", item.getTitle());
                 dataToSave.put("category", item.getCategory());
-                dataToSave.put("description",item.getDiscreption());
-                dataToSave.put("price",item.getPrice());
-                dataToSave.put("size",item.getQuantity()+"");
-                dataToSave.put("image",item.getPic());
+                dataToSave.put("description", item.getDiscreption());
+                dataToSave.put("price", item.getPrice());
+                dataToSave.put("size", item.getQuantity() + "");
+                dataToSave.put("image", item.getPic());
 
                 db.collection("Users").document(mAuth.getUid()).collection("Favorite")
                         .add(dataToSave).addOnSuccessListener(new OnSuccessListener() {
@@ -179,13 +167,27 @@ public class ViewItem extends AppCompatActivity {
                             }
                         });
 
-                    img.setImageDrawable(getDrawable(R.drawable.fill_heart));
-                  //  img.setImageDrawable(getDrawable(R.drawable.unfilled_heart));
+                img.setImageDrawable(getDrawable(R.drawable.fill_heart));
+                //  img.setImageDrawable(getDrawable(R.drawable.unfilled_heart));
 
             }
         });
 
 
+    }
 
+    private void initializeUI() {
+        back_btn = findViewById(R.id.backview_btn);
+        love_btn = findViewById(R.id.loveview_btn);
+        add_toCart = findViewById(R.id.add_tocart);
+        view_dis = findViewById(R.id.view_dis);
+        price_view = findViewById(R.id.price_view);
+        item_img = findViewById(R.id.item_img);
+        item_name = findViewById(R.id.item_name);
+        number_pics = findViewById(R.id.number_pics);
+        img = findViewById(R.id.love_img);
+        drug_num = findViewById(R.id.drug_num);
+        plus_btn = findViewById(R.id.plus_btn);
+        minus_btn = findViewById(R.id.minus_btn);
     }
 }
