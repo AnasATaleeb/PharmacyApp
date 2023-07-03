@@ -1,4 +1,4 @@
-package com.example.pharmacy.Activity.DoctorActivities;
+package com.example.pharmacy.Activity.DeliveryActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +16,7 @@ import com.example.pharmacy.Adaptor.ConformationItemAdapter;
 import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityPayConfirmationBinding;
 import com.example.pharmacy.databinding.ActivityViewOrderDetailsBinding;
+import com.example.pharmacy.databinding.DelivaryStateBinding;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,8 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ViewOrderDetails extends AppCompatActivity {
-    ActivityViewOrderDetailsBinding binding;
+public class DelivaryStateActivity extends AppCompatActivity {
+    DelivaryStateBinding binding;
     TextView textView48, final_price,textViewShip;
     Button btn_next;
     private FirebaseAuth mAuth;
@@ -39,7 +40,7 @@ public class ViewOrderDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityViewOrderDetailsBinding.inflate(getLayoutInflater());
+        binding = DelivaryStateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
@@ -60,7 +61,7 @@ public class ViewOrderDetails extends AppCompatActivity {
 
         // Create a map to specify the field and its updated value
         Map<String, Object> updates = new HashMap<>();
-        updates.put("status", "تم ارسال الطلب");
+        updates.put("status", "تم التوصيل");
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             String collectionPath = getIntent().getStringExtra("path");
@@ -73,8 +74,8 @@ public class ViewOrderDetails extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                textView48.setText("تم ارسال الطلب");
-                                Toast toast = Toast.makeText(ViewOrderDetails.this, "تم تحديث حالة الطلب", Toast.LENGTH_LONG);
+                                textView48.setText("تم التوصيل🤗");
+                                Toast toast = Toast.makeText(DelivaryStateActivity.this, "تم تحديث حالة الطلب", Toast.LENGTH_LONG);
                                 toast.show();
                             }
                         });

@@ -38,6 +38,7 @@ public class OrderStatus extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ArrayList<Item> items = new ArrayList<>();
     ArrayList<Order> arrayList= new ArrayList<>();
+    String path="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,8 @@ public class OrderStatus extends AppCompatActivity {
 
     private void setUpList() {
         //TODO: get orders from data base
-        db.collection("Orders").document("Order").collection(mAuth.getUid())
+
+        db.collection("Orders")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -66,8 +68,7 @@ public class OrderStatus extends AppCompatActivity {
                                 String status = document.getString("status");
                                 int postal = Integer.parseInt(document.getString("postal"));
                                 //get collection "items" into this doc
-                                db.collection("Orders").document("Order").collection(mAuth.getUid())
-                                        .document(document.getId()).collection("items")
+                                db.collection("Orders").document(document.getId()).collection(document.getString("key"))
                                         .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
@@ -89,6 +90,7 @@ public class OrderStatus extends AppCompatActivity {
                                         });
 
                                 Order order = new Order(items,price,Otitle, location, postal, status);
+                                path = "Orders/"+document.getId();
                                 arrayList.add(order);
                             }
                             OrderStateAdapter adapter = new OrderStateAdapter(OrderStatus.this, 0,arrayList);
@@ -102,7 +104,9 @@ public class OrderStatus extends AppCompatActivity {
                                     intent = new Intent(OrderStatus.this, ViewOrderDetails.class);
                                     Gson gson = new Gson();
                                     intent.putExtra("order",gson.toJson(arrayList.get(position)));
+                                    intent.putExtra("path",path);
                                     startActivity(intent);
+
                                 }
                             });
                         }

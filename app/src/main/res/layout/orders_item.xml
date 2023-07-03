@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="65dp"
                     android:fontFamily="@font/monadi"
-                    android:text="طلب رقم #1"
+                    android:text="طلب"
                     android:textColor="@color/green2"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -58,6 +58,8 @@ public class ViewOrderDetailsCus extends AppCompatActivity {
 
         textViewShip.setText(o.getLocation());
         final_price.setText(" إجمالي الطلب: " + o.getTotalPrice() + " شيكل");
+        textView48.setText(o.getStatus());
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.itemsOder.setLayoutManager(linearLayoutManager);
@@ -71,26 +73,5 @@ public class ViewOrderDetailsCus extends AppCompatActivity {
         textView48 = findViewById(R.id.textView48);
         final_price = findViewById(R.id.final_price);
         textViewShip = findViewById(R.id.textViewShip);
-    }
-
-    private void updateOrderStatus(String id) {
-        Map<String, Object> order = new HashMap<>();
-        order.put("status", "تم الشحن");
-
-        db.collection("orders").document(id)
-                .update(order)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("TAG", "Order status updated successfully!");
-                        finish();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error updating order status", e);
-                    }
-                });
     }
 }

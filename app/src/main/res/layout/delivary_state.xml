@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Customer.Conformation">
+    tools:context=".Activity.DeliveryActivities.DelivaryStateActivity">
 
     <TextView
         android:id="@+id/textView41"
@@ -94,7 +94,7 @@
         android:background="@drawable/gradient_color"
         android:fontFamily="@font/monadi"
         android:padding="5dp"
-        android:text="تم التسليم لموظف التوصيل"
+        android:text="تم التوصيل"
         android:textColor="@color/whitedark"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView25"

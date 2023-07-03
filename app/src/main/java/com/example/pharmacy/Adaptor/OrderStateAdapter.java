@@ -34,11 +34,10 @@ public class OrderStateAdapter extends ArrayAdapter<Order> {
     public View getView (int position, @NonNull View convertView, @NonNull ViewGroup parent){
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.love_item,null);
+            convertView = inflater.inflate(R.layout.orders_item,null);
         }
         if (arr.size()>0){
             Order item = arr.get(position);
-
         }
         return convertView;
     }
