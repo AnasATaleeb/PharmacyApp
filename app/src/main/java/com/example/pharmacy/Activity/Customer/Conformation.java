@@ -16,10 +16,15 @@ import com.example.pharmacy.R;
 import com.example.pharmacy.databinding.ActivityPayConfirmationBinding;
 import com.example.pharmacy.model.Item;
 import com.example.pharmacy.model.Order;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.gson.Gson;
 
@@ -102,8 +107,14 @@ public class Conformation extends AppCompatActivity {
             dataToSave.put("postal", order.getPostalCode() + "");
             dataToSave.put("key",order.getKey());
 
+            db.collection("Order").document(mAuth.getUid())
+                    .set(dataToSave,SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 
-            db.collection("Orders").document(mAuth.getUid())
+                        }
+                    });
+            db.collection("Orders").document(mAuth.getUid()).collection("order").document(order.getKey())
                     .set(dataToSave,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
@@ -130,7 +141,7 @@ public class Conformation extends AppCompatActivity {
                 data.put("size", item.getQuantity() + "");
                 data.put("image", item.getPic());
                 data.put("numberOfItem", item.getNumberOfItem() + "");
-                db.collection("Orders").document(mAuth.getUid()).collection(order.getKey())
+                db.collection("Orders").document(mAuth.getUid()).collection("order").document(order.getKey()).collection("items")
                         .add(data).addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
@@ -145,6 +156,17 @@ public class Conformation extends AppCompatActivity {
                             }
                         });
             }
+
+            CollectionReference cartRef = db.collection("Users").document(mAuth.getUid()).collection("Cart");
+            cartRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        document.getReference().delete();
+                    }
+                } else {
+                    Log.d("DeleteCart", "Error getting documents: ", task.getException());
+                }
+            });
 
             startActivity(intent);
             finish();

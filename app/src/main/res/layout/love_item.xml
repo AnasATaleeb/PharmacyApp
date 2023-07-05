@@ -20,7 +20,7 @@
             android:layout_height="100dp"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="70dp"
             android:layout_marginBottom="5dp"
             android:elevation="10dp"
             app:cardCornerRadius="20dp"
@@ -43,15 +43,17 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/love_pic"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="42dp"
         android:elevation="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/relativeLayout_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,4 +89,14 @@
                 app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/remove"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="-35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout_view"
+        app:layout_constraintStart_toEndOf="@+id/relativeLayout_view"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout_view"
+        app:srcCompat="@drawable/remove" />
 </androidx.constraintlayout.widget.ConstraintLayout>

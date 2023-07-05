@@ -58,25 +58,23 @@ public class OrderActivity extends AppCompatActivity {
 
     private void setUpList() {
             //TODO: get orders from data base
-            db.collection("Orders").document(mAuth.getUid())
+            db.collection("Orders").document(mAuth.getUid()).collection("order")
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-
-                                String Otitle = document.getString("name");
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    String Otitle = document.getString("name");
                                 String location = document.getString("location");
-                                if(document.getString("price") == null)
+                                if (document.getString("price") == null)
                                     return;
                                 double price = Double.parseDouble(document.getString("price"));
                                 String status = document.getString("status");
                                 int postal = Integer.parseInt(document.getString("postal"));
                                 String key = document.getString("key");
                                 //get collection "items" into this doc
-                                db.collection("Orders").document(mAuth.getUid())
-                                        .collection(key)
+                                db.collection("Orders").document(mAuth.getUid()).collection("order").document(document.getId()).collection("items")
                                         .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
@@ -90,17 +88,18 @@ public class OrderActivity extends AppCompatActivity {
                                                         int quantity = Integer.parseInt(subdocument.getString("size"));
                                                         String category = subdocument.getString("category");
                                                         int numberOfItem = Integer.parseInt(subdocument.getString("numberOfItem"));
-                                                        Item item = new Item(title, description, pic, price, quantity, category,numberOfItem);
+                                                        Item item = new Item(title, description, pic, price, quantity, category, numberOfItem);
                                                         items.add(item);
                                                     }
                                                 }
                                             }
                                         });
-                                    Order order = new Order(items,price,Otitle, location, postal, status);
-                                    arrayList.add(order);
-                                    OrderAdapter adapter = new OrderAdapter(OrderActivity.this, 0, arrayList);
-                                    orderList.setAdapter(adapter);
-                                }
+                                Order order = new Order(items, price, Otitle, location, postal, status);
+                                arrayList.add(order);
+                                OrderAdapter adapter = new OrderAdapter(OrderActivity.this, 0, arrayList);
+                                orderList.setAdapter(adapter);
+                            }
+                        }
 
                                 orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override

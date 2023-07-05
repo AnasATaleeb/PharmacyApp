@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -71,63 +72,92 @@ public class MainDelivery extends AppCompatActivity {
         orderList = findViewById(R.id.delivary_order_list);
         setUpList();
     }
-
     private void setUpList() {
-        //TODO: get orders from data base
-
-        db.collection("Orders")
+        db.collection("Order")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            Log.v("YAhooo","done");
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String Otitle = document.getString("name");
-                                String location = document.getString("location");
-                                double price = Double.parseDouble(document.getString("price"));
-                                String status = document.getString("status");
-                                int postal = Integer.parseInt(document.getString("postal"));
-                                //get collection "items" into this doc
-                                db.collection("Orders").document(document.getId()).collection(document.getString("key"))
+                                Log.v("YAhooo-------","done-----");
+                                db.collection("Orders").document(document.getId()).collection("order")
                                         .get()
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
-                                                if (subcollectionTask.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot subdocument : subcollectionTask.getResult()) {
-                                                        String title = subdocument.getString("name");
-                                                        String description = subdocument.getString("description");
-                                                        String pic = subdocument.getString("image");
-                                                        String price = subdocument.getString("price");
-                                                        int quantity = Integer.parseInt(subdocument.getString("size"));
-                                                        String category = subdocument.getString("category");
-                                                        int numberOfItem = Integer.parseInt(subdocument.getString("numberOfItem"));
-                                                        Item item = new Item(title, description, pic, price, quantity, category,numberOfItem);
-                                                        items.add(item);
+                                            public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.v("YAhooo1","done1");
+                                                    for (QueryDocumentSnapshot document1 : task.getResult()) {
+                                                        db.collection("Orders").document(document.getId()).collection("order").document(document1.getId())
+                                                                .get()
+                                                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<DocumentSnapshot> subcollectionTask) {
+                                                                        if (subcollectionTask.isSuccessful()) {
+                                                                            Log.v("YAhooo1", "done1");
+
+                                                                            DocumentSnapshot subdocument = subcollectionTask.getResult();
+                                                                            String Otitle = subdocument.getString("name");
+                                                                            String location = subdocument.getString("location");
+                                                                            double price = Double.parseDouble(subdocument.getString("price"));
+                                                                            String status = subdocument.getString("status");
+                                                                            int postal = Integer.parseInt(subdocument.getString("postal"));
+                                                                            if (status.equals("تم ارسال الطلب")) {
+                                                                                db.collection("Orders").document(document.getId()).collection("order").document(document1.getId()).collection("items")
+                                                                                        .get()
+                                                                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                                            @Override
+                                                                                            public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
+                                                                                                if (subcollectionTask.isSuccessful()) {
+                                                                                                    Log.v("YAhooo3", "done3");
+
+                                                                                                    for (QueryDocumentSnapshot subdocument1 : subcollectionTask.getResult()) {
+                                                                                                        String title = subdocument1.getString("name");
+                                                                                                        String description = subdocument1.getString("description");
+                                                                                                        String pic = subdocument1.getString("image");
+                                                                                                        String price = subdocument1.getString("price");
+                                                                                                        int quantity = Integer.parseInt(subdocument1.getString("size"));
+                                                                                                        String category = subdocument1.getString("category");
+                                                                                                        int numberOfItem = Integer.parseInt(subdocument1.getString("numberOfItem"));
+                                                                                                        Item item = new Item(title, description, pic, price, quantity, category, numberOfItem);
+                                                                                                        items.add(item);
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        });
+
+                                                                                Order order = new Order(items, price, Otitle, location, postal, status);
+                                                                                path = "Orders/" + document.getId() + "/" + "order" + "/" + document1.getId();
+                                                                                arrayList.add(order);
+                                                                            }
+                                                                        }
+                                                                        OrderAdapter adapter = new OrderAdapter(MainDelivery.this, 0,arrayList);
+                                                                        orderList.setAdapter(adapter);
+
+                                                                        orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                                            @Override
+                                                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                                                // code to execute when a list item is clicked
+                                                                                // position indicates the position of the clicked item in the list
+                                                                                intent = new Intent(MainDelivery.this, DelivaryStateActivity.class);
+                                                                                Gson gson = new Gson();
+                                                                                intent.putExtra("order",gson.toJson(arrayList.get(position)));
+                                                                                intent.putExtra("path",path);
+                                                                                startActivity(intent);
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                });
                                                     }
+                                                }else {
+                                                    Log.v("sadsadsadas","Noooo");
                                                 }
                                             }
                                         });
-
-                                Order order = new Order(items,price,Otitle, location, postal, status);
-                                path = "Orders/"+document.getId();
-                                arrayList.add(order);
                             }
-                            OrderAdapter adapter = new OrderAdapter(MainDelivery.this, 0,arrayList);
-                            orderList.setAdapter(adapter);
-
-                            orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    // code to execute when a list item is clicked
-                                    // position indicates the position of the clicked item in the list
-                                    intent = new Intent(MainDelivery.this, DelivaryStateActivity.class);
-                                    Gson gson = new Gson();
-                                    intent.putExtra("order",gson.toJson(arrayList.get(position)));
-                                    intent.putExtra("path",path);
-                                    startActivity(intent);
-                                }
-                            });
                         }
                     }
                 });
