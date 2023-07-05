@@ -77,6 +77,8 @@ public class Conformation extends AppCompatActivity {
 
         ConformationItemAdapter adapter = new ConformationItemAdapter(this, order.getItems());
         binding.itemsOder.setAdapter(adapter);
+
+
     }
 
     // intilize the button

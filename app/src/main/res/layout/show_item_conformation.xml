@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="330dp"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
@@ -23,7 +23,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:background="@drawable/border_item_cardview"
@@ -39,21 +39,17 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/order_img"
             app:layout_constraintEnd_toStartOf="@+id/order_img"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/tv_price"
             app:layout_constraintTop_toTopOf="@+id/order_img" />
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="62dp"
             android:layout_height="22dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="136dp"
             android:fontFamily="@font/monadi"
             android:text="50 شيكل"
             android:textColor="@color/green2"
-            app:layout_constraintEnd_toStartOf="@+id/order_img"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,7 +72,7 @@
             android:id="@+id/tv_quantity2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/monadi"
