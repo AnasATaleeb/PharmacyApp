@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.pharmacy.Activity.AllCategories;
 import com.example.pharmacy.Activity.AllItems;
-import com.example.pharmacy.Activity.Categories;
 import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.Adaptor.CategoryAdapter;
 import com.example.pharmacy.Adaptor.ItemsAdapter;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this, Categories.class);
+                intent = new Intent(MainActivity.this, AllCategories.class);
                 startActivity(intent);
             }
         });
