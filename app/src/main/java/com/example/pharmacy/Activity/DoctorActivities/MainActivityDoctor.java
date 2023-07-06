@@ -23,6 +23,8 @@ import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.AllItems;
 import com.example.pharmacy.Activity.Categories;
+import com.example.pharmacy.Activity.Customer.MainActivity;
+import com.example.pharmacy.Activity.Customer.searchItem;
 import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.Adaptor.CategoryAdapter;
 import com.example.pharmacy.Adaptor.ItemsAdapterDoctor;
@@ -63,7 +65,7 @@ public class MainActivityDoctor extends AppCompatActivity {
     private TextView profileHello;
     private FirebaseAuth mAuth;
 
-    SearchView searchView;
+    SearchView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,15 @@ public class MainActivityDoctor extends AppCompatActivity {
                 finish();
             }
         });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivityDoctor.this, searchItem.class);
+                startActivity(intent);
+            }
+        });
+
 
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,39 +127,10 @@ public class MainActivityDoctor extends AppCompatActivity {
             }
         });
 
-       /* searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                filterList(s);
-                return false;
-            }
-        });*/
-
         loadProfileInformation();
         bottomNavigationSetUp();
 
     }
-
-/*    private void filterList(String text) {
-        List<Item> filteredList = new ArrayList<>();
-        for (Item item : items) {
-            if (item.getTitle().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            }
-        }
-
-        if (filteredList.isEmpty()){
-            Toast.makeText(this, "العنصر غير موجود", Toast.LENGTH_LONG).show();
-        }else {
-
-        }
-    }
-    */
 
     private void initialize() {
         pofile = findViewById(R.id.userImg);
@@ -159,8 +141,7 @@ public class MainActivityDoctor extends AppCompatActivity {
         pofile = findViewById(R.id.userImg);
         add_Item = findViewById(R.id.add_Item);
         profileLoc = findViewById(R.id.userLoc);
-        /*searchView = findViewById(R.id.search);
-        searchView.clearFocus();*/
+        search = findViewById(R.id.search);
     }
 
     private void loadProfileInformation() {

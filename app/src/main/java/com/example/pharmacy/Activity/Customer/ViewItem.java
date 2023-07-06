@@ -78,14 +78,14 @@ public class ViewItem extends AppCompatActivity {
                         .add(dataToSave).addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
-                                Toast toast = Toast.makeText(ViewItem.this, "تم اضافة المنتج الى المفضلة 🥳", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(ViewItem.this, "تم اضافة المنتج الى العربة", Toast.LENGTH_LONG);
                                 toast.show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.v("خطأ :", e.toString());
-                                Toast toast = Toast.makeText(ViewItem.this, "خطأ في اضافة المنتج الى المفضلة 😥", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(ViewItem.this, "خطأ في اضافة المنتج الى العربة", Toast.LENGTH_LONG);
                                 toast.show();
                             }
                         });

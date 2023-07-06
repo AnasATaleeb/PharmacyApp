@@ -14,8 +14,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.pharmacy.Activity.Customer.ViewItem;
+import com.example.pharmacy.Activity.DoctorActivities.MainActivityDoctor;
 import com.example.pharmacy.Activity.DoctorActivities.OrderStatus;
 import com.example.pharmacy.Activity.DoctorActivities.ViewOrderDetails;
+import com.example.pharmacy.Activity.Profile;
 import com.example.pharmacy.Adaptor.OrderAdapter;
 import com.example.pharmacy.Adaptor.OrderStateAdapter;
 import com.example.pharmacy.R;
@@ -70,6 +72,16 @@ public class MainDelivery extends AppCompatActivity {
         bottomNavigationSetUp();
         loadProfileInformation();
         orderList = findViewById(R.id.delivary_order_list);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainDelivery.this, Profile.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         setUpList();
     }
     private void setUpList() {
