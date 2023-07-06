@@ -63,30 +63,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.collection("Items").get()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    String name = document.getString("name");
-                                    String description = document.getString("description");
-                                    String pic = document.getString("image");
-                                    String price = document.getString("price");
-                                    int quantity = Integer.parseInt(document.getString("size"));
-                                    String cat = document.getString("category");
-                                    if (cat.equals(list.get(position).getTitle()) ||list.get(position).getTitle().equals("كل المنتجات") ) {
-                                        Item item = new Item(name, description, pic, price, quantity, cat);
-                                        items.add(item);
-                                    }
-                                    Intent intent = new Intent(context, Categories.class);
-                                    Gson gson = new Gson();
-                                    String json = gson.toJson(items);
-                                    intent.putExtra("itemsJson", json);
-                                    context.startActivity(intent);
-                                }
-                            } else {
-                                Log.d(TAG, "Error getting documents: ", task.getException());
-                            }
-                        });
+                pos= position;
+                threadGetItemsFromFireStore.start();
             }
         });
     }
@@ -104,4 +82,61 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
             binding = CategoryBinding.bind(itemView);
         }
     }
+
+    Thread threadGetItemsFromFireStore = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            if (list.get(pos).getTitle().equals("كل المنتجات") ) {
+                db.collection("Items")
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String name = document.getString("name");
+                                    String description = document.getString("description");
+                                    String pic = document.getString("image");
+                                    String price = document.getString("price");
+                                    int quantity = Integer.parseInt(document.getString("size"));
+                                    String cat = document.getString("category");
+                                    Item item = new Item(name, description, pic, price, quantity, cat);
+                                    items.add(item);
+                                    Intent intent = new Intent(context, Categories.class);
+                                    Gson gson = new Gson();
+                                    String json = gson.toJson(items);
+                                    intent.putExtra("itemsJson", json);
+                                    context.startActivity(intent);
+                                }
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        });
+            }else {
+
+                db.collection("Items")
+                        .whereEqualTo("category", (list.get(pos).getTitle()))
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String name = document.getString("name");
+                                    String description = document.getString("description");
+                                    String pic = document.getString("image");
+                                    String price = document.getString("price");
+                                    int quantity = Integer.parseInt(document.getString("size"));
+                                    String cat = document.getString("category");
+                                    Item item = new Item(name, description, pic, price, quantity, cat);
+                                    items.add(item);
+                                    Intent intent = new Intent(context, Categories.class);
+                                    Gson gson = new Gson();
+                                    String json = gson.toJson(items);
+                                    intent.putExtra("itemsJson", json);
+                                    context.startActivity(intent);
+                                }
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        });
+            }
+        }
+    });
 }
