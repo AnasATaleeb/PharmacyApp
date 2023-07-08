@@ -117,7 +117,7 @@ public class MainDelivery extends AppCompatActivity {
                                                                             double price = Double.parseDouble(subdocument.getString("price"));
                                                                             String status = subdocument.getString("status");
                                                                             int postal = Integer.parseInt(subdocument.getString("postal"));
-                                                                            if (status.equals("تم التوصيل")) {
+                                                                            if (status.equals("تم ارسال الطلب")) {
                                                                                 db.collection("Orders").document(document.getId()).collection("order").document(document1.getId()).collection("items")
                                                                                         .get()
                                                                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

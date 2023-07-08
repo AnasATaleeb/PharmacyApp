@@ -53,6 +53,55 @@ public class OrderStatus extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         orderList = findViewById(R.id.list_order_state);
         setUpList();
+        //setUpList1();
+    }
+
+    private void setUpList1() {
+        db.collection("Orders")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null) {
+                                Log.v("YAhooo", "Number of order documents: " + querySnapshot.size());
+
+                                for (QueryDocumentSnapshot orderDocument : querySnapshot) {
+                                    Log.v("YAhooo", "Order document ID: " + orderDocument.getId());
+
+                                    db.collection("Orders").document(orderDocument.getId())
+                                            .collection(orderDocument.getId())
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> subcollectionTask) {
+                                                    if (subcollectionTask.isSuccessful()) {
+                                                        QuerySnapshot subcollectionQuerySnapshot = subcollectionTask.getResult();
+                                                        if (subcollectionQuerySnapshot != null) {
+                                                            Log.v("YAhooo1", "Number of subdocuments: " + subcollectionQuerySnapshot.size());
+
+                                                            for (QueryDocumentSnapshot subdocument : subcollectionQuerySnapshot) {
+                                                                Log.v("YAhooo1", "Subdocument ID: " + subdocument.getId());
+                                                                // Process the subdocument data here
+                                                            }
+                                                        } else {
+                                                            Log.v("Noooooooooo", "Subcollection query snapshot is null");
+                                                        }
+                                                    } else {
+                                                        Log.v("Noooooooooo", "Failed to retrieve subcollection documents");
+                                                    }
+                                                }
+                                            });
+                                }
+                            } else {
+                                Log.v("Noooooooooo", "Query snapshot is null");
+                            }
+                        } else {
+                            Log.v("Noooooooooo", "Failed to retrieve order documents");
+                        }
+                    }
+                });
     }
 
     private void setUpList() {
@@ -88,7 +137,7 @@ public class OrderStatus extends AppCompatActivity {
                                                                             double price = Double.parseDouble(subdocument.getString("price"));
                                                                             String status = subdocument.getString("status");
                                                                             int postal = Integer.parseInt(subdocument.getString("postal"));
-                                                                            if (status.equals("تم ارسال الطلب")) {
+                                                                            if (status.equals("تم الطلب")) {
                                                                                 db.collection("Orders").document(document.getId()).collection("order").document(document1.getId()).collection("items")
                                                                                         .get()
                                                                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
