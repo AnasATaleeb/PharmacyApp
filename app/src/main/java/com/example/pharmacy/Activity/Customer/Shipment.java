@@ -58,7 +58,7 @@ public class Shipment extends AppCompatActivity {
 
                 double fprice =0.0;
                 for (int i = 0; i <itemList.size() ; i++) {
-                    fprice += Double.parseDouble(itemList.get(i).getPrice());
+                    fprice += Double.parseDouble(itemList.get(i).getPrice()) * itemList.get(i).getNumberOfItem();
                 }
 
                 Order order = new Order(itemList, fprice,"طلب", spinner.getText().toString(),Integer.parseInt(address.getText().toString()),"تم الطلب");

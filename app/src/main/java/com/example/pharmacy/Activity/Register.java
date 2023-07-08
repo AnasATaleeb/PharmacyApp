@@ -91,6 +91,7 @@ public class Register extends AppCompatActivity {
         register.setAlpha(0f);
         register.setTranslationY(50);
         register.animate().alpha(1f).translationYBy(-60).setDuration(1500);
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -88,8 +88,7 @@ public class Cart extends AppCompatActivity {
                                 int numberOfItem = Integer.parseInt(document.getString("numberOfItem"));
                                 Item item = new Item(title, description, pic, price, quantity, category, numberOfItem);
 
-
-                                fprice += Double.parseDouble(item.getPrice());
+                                fprice += Double.parseDouble(item.getPrice()) * numberOfItem;
                                 final_price.setText("اجمالي الطلب : " + fprice + " شيكل");
                                 items.add(item);
                             }
