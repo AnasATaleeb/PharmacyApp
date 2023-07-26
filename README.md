@@ -27,9 +27,5 @@ We present an innovative mobile application designed to assist individuals in lo
 **2- Change order status** <br>
 
 ## Screen Record
-https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/dddf0c15-e191-4fc9-b5a4-1abd9710ee29
 
-## Database Design
-<p align="center">
-   <img src="https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/17e4bea5-7a86-41a2-b5a0-a120fec8e3d5" alt="5"><br>
-</p>
+https://github.com/AnasATaleeb/PharmacyApp/assets/102483320/2b52804a-c7bb-4f5e-93c5-f8cbf1a3f03c
